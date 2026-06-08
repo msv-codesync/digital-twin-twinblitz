@@ -113,7 +113,7 @@ export default async function HomePage() {
       </section>
 
       <section className="px-5 mb-6">
-        <h2 className="font-semibold mb-3">3-Day Map</h2>
+        <h2 className="font-semibold mb-3">3-Day Map · 42 Tasks</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {CAMP_DAYS.map((d) => {
             const dTasks = d.blocks.flatMap((b) => b.tasks);

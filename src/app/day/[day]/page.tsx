@@ -25,7 +25,7 @@ export default async function DayPage({ params }: { params: Promise<{ day: strin
         <h1 className="text-xl font-bold mt-2">Day {plan.day}: {plan.title}</h1>
         <p className="text-sm text-[var(--muted)]">{plan.date} · {plan.subtitle}</p>
         <p className="text-xs text-indigo-300 mt-2 italic">{plan.theme}</p>
-        <p className="text-sm mt-3">{done}/{allTasks.length} complete · 18hr schedule</p>
+        <p className="text-sm mt-3">{done}/{allTasks.length} complete · 18hr · 7 blocks</p>
       </header>
 
       <div className="px-5 space-y-6">

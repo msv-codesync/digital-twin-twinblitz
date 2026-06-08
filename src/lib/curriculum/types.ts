@@ -8,7 +8,9 @@ export type Category =
   | "Surrogate"
   | "Functional"
   | "Project"
-  | "Tools";
+  | "Tools"
+  | "FEA"
+  | "ML";
 
 export type Resource = { title: string; url: string; type: "video" | "doc" | "tool" | "paper" };
 

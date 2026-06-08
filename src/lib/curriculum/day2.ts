@@ -2,40 +2,40 @@ import type { DayPlan } from "./types";
 
 export const day2: DayPlan = 
 {
-  day: 2,
-  date: "2026-06-09",
-  "title": "DoE, Optimization & HEEDS Mastery",
-  "subtitle": "Class notes p.3–5 + Prof's lecture slides 102–120 — she loves Pareto questions",
-  "theme": "Design space exploration, sensitivity, and the HEEDS workflow",
+  "day": 2,
+  "date": "2026-06-09",
+  "title": "DoE, Optimisation & HEEDS Mastery",
+  "subtitle": "Exercises 4–6 + lecture topics Prof. Nasti drills on Pareto and HEEDS",
+  "theme": "Design space exploration, UQ, process automation, then hands-on HEEDS/MATLAB",
   "blocks": [
     {
       "block": 1,
-      "slot": "05:00–08:00",
-      "label": "🧪 Design of Experiments — Theory (handwritten p.3)",
+      "slot": "05:00–07:30",
+      "label": "🧪 DoE — Four Types & Sensitivity",
       "tasks": [
         {
           "id": "d2-b1-t1",
-          day: 2,
+          "day": 2,
           "block": 1,
-          "slot": "05:00–06:30",
+          "slot": "05:00–06:15",
           "title": "DoE Definition & Four Types",
           "emoji": "🧪",
           "category": "DoE",
-          "learn": "DESIGN OF EXPERIMENTS (DoE): tool to explore design space and understand sensitivity of inputs on outputs — run multiple configurations of a model, gather data. Your notes list 4 types: (1) FULL FACTORIAL — all combinations of all parameter levels; estimates all main effects AND interactions; computationally expensive. (2) FRACTIONAL FACTORIAL — derivative of full factorial; less info, more efficient. (3) SCREENING EXPERIMENTS — many parameters, few runs, low cost, identifies key variables. (4) LATIN HYPERCUBE — optimised choice of runs; captures non-linear effects with fewer runs. Design matrix: columns = inputs (in1, in2, in3), column = output (out1). Prof's injection molding example: inputs = temperature, injection pressure, cooling time; outputs = part weight, dimensional deviation, surface quality, cycle time.",
-          "practice": "Build a design matrix on paper for injection molding with 3 inputs at 2 levels each (2³=8 runs). Identify which DoE type you'd use for: (a) 2 factors, budget for 16 runs → full factorial, (b) 20 factors, budget for 30 runs → screening. Your antenna project uses FULL FACTORIAL: 4 wind × 10 temp = 40 runs.",
+          "learn": "DESIGN OF EXPERIMENTS (DoE): tool to explore design space and understand sensitivity of inputs on outputs — run multiple configurations, gather data. Four types from Prof's notes: (1) FULL FACTORIAL — all combinations of all parameter levels; estimates all main effects AND interactions; computationally expensive. (2) FRACTIONAL FACTORIAL — subset of full factorial; less info, more efficient. (3) SCREENING EXPERIMENTS — many parameters, few runs, identifies key variables. (4) LATIN HYPERCUBE — optimised space-filling sampling; captures non-linear effects with fewer runs. Design matrix: columns = inputs (in1, in2), column = output. Injection molding example: inputs = temperature, injection pressure, cooling time; outputs = part weight, dimensional deviation, surface quality, cycle time. Your antenna: 4 wind × 10 temp = 40 runs = full factorial.",
+          "practice": "Build 2³ design matrix on paper for injection molding (3 inputs, 2 levels). Justify DoE type for: (a) 2 factors, 16-run budget → full factorial; (b) 20 factors, 30 runs → screening. Recreate antenna 40-run header.",
           "exercises": [
             "Define DoE in Prof's words",
-            "List all 4 DoE types with trade-offs",
+            "List 4 DoE types with trade-offs",
             "What is a design matrix?",
-            "Injection molding example — 3 inputs, 4 outputs",
-            "Why did you pick full factorial for antenna?"
+            "Injection molding — 3 inputs, 4 outputs",
+            "Why full factorial for antenna (4×10)?"
           ],
           "checklist": [
-            "Can define DoE clearly",
-            "Listed all 4 types with pros/cons",
-            "Built design matrix on paper",
-            "Know injection molding example",
-            "Justified full factorial for 40-run DoE"
+            "4 types memorised",
+            "Design matrix on paper",
+            "Injection molding example ready",
+            "Antenna 40-run justified",
+            "Watched DoE intro videos"
           ],
           "youtube": [
             {
@@ -49,106 +49,8 @@ export const day2: DayPlan =
           ],
           "resources": [
             {
-              "title": "Montgomery — Design and Analysis of Experiments",
-              "url": "https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+9th+Edition-p-9781119493918",
-              "type": "doc"
-            }
-          ],
-          "xp": 50
-        },
-        {
-          "id": "d2-b1-t2",
-          day: 2,
-          "block": 1,
-          "slot": "06:30–08:00",
-          "title": "Sensitivity Analysis & Pareto Charts",
-          "emoji": "📊",
-          "category": "DoE",
-          "learn": "SENSITIVITY ANALYSIS: studies how changes in input parameters affect model output. Method from your antenna notebook: sweep one factor across full range while holding other at midpoint — larger Δoutput = more sensitive factor. PARETO CHART (from notes + lecture): ranks factors by impact on output — 'sensitivity towards output.' In your project: wind sweep (5→35 m/s at temp=42.5°C) gave larger RUL reduction than temp sweep (20→65°C at wind=20 m/s) — wind is DOMINANT (~3.5× impact). Pareto chart shows this visually. Also know: main effects plots, interaction plots, parallel axes plots (from lecture slide 106).",
-          "practice": "Recalculate sensitivity from your notebook: Δwind and Δtemp. Draw a Pareto bar chart on paper. Explain in 2 sentences why Pareto matters for robust design: 'Understanding sensitivity is crucial to design robust products.'",
-          "exercises": [
-            "Define sensitivity analysis",
-            "What does a Pareto chart show?",
-            "Which factor dominates in your antenna project?",
-            "What is a main effects plot?",
-            "Recalculate Δwind and Δtemp from RUL formula"
-          ],
-          "checklist": [
-            "Recalculated sensitivity deltas",
-            "Drew Pareto chart on paper",
-            "Wind identified as dominant factor",
-            "Watched DoE post-processing videos",
-            "Can explain Pareto to Prof"
-          ],
-          "youtube": [
-            {
-              "id": "9x9LYvErnwk",
-              "title": "DoE with FEA — Abaqus/Isight Example"
-            },
-            {
-              "id": "V_yaMyLeJ1I",
-              "title": "Isight Plugin within Abaqus CAE"
-            }
-          ],
-          "resources": [
-            {
-              "title": "Abaqus DoE Results Graphs",
-              "url": "https://abaqus-docs.mit.edu/2017/English/IhrUserMap/ihr-c-Results-GraphSpecialized.htm",
-              "type": "doc"
-            }
-          ],
-          "xp": 55
-        }
-      ]
-    },
-    {
-      "block": 2,
-      "slot": "08:00–11:00",
-      "label": "⚙️ HEEDS & Process Automation Deep Dive",
-      "tasks": [
-        {
-          "id": "d2-b2-t1",
-          day: 2,
-          "block": 2,
-          "slot": "08:00–09:30",
-          "title": "HEEDS Workflow — MDAO in Practice",
-          "emoji": "⚙️",
-          "category": "HEEDS",
-          "learn": "HEEDS = Siemens Simcenter solution for Multi-Disciplinary Design Exploration. Automates: Design Space definition → DoE execution → Response surface → Optimisation. Same workflow you did manually in Python for antenna RUL. HEEDS connects to: Ansys, Abaqus, NX, Nastran, Excel, Python scripts, etc. Process automation = linking tools with automated data transfer (your notes: HEEDS + iSight). Prof's industrial case (slide 110): design optimisation of BOP for fatigue in HPHT environment using Isight + fe-safe. Your notebook IS the exam demo — you wrote the code, ran the DoE, produced Pareto + response surface + operating envelope.",
-          "practice": "Open your DigitalTwin_Antenna_RUL.ipynb. For each HEEDS step, point to the equivalent notebook cell: (1) Design space = WIND_LEVELS × TEMP_LEVELS, (2) DoE execution = nested for loop, (3) Response surface = 3D plot_surface, (4) Optimisation/envelope = contour plot at 10yr RUL. Practice saying: 'I replicated the HEEDS workflow in Python because...'",
-          "exercises": [
-            "What does HEEDS automate?",
-            "Map 4 HEEDS steps to your notebook cells",
-            "What is MDAO?",
-            "Prof's industrial case slide 110 topic",
-            "Why Python instead of HEEDS GUI?"
-          ],
-          "checklist": [
-            "Opened and reviewed full notebook",
-            "Mapped HEEDS steps to notebook",
-            "Watched HEEDS overview video",
-            "Read HEEDS getting started guide",
-            "Can present workflow to Prof"
-          ],
-          "youtube": [
-            {
-              "id": "HvF_3Rok8RY",
-              "title": "HEEDS — Multi-Disciplinary Design Exploration"
-            },
-            {
-              "id": "SwgtZp4Jcjs",
-              "title": "Isight — Process Automation"
-            }
-          ],
-          "resources": [
-            {
-              "title": "HEEDS — Siemens Simcenter",
-              "url": "https://www.plm.automation.siemens.com/global/en/products/simcenter/HEEDS.html",
-              "type": "doc"
-            },
-            {
-              "title": "Simulia Isight Brochure",
-              "url": "https://www.3ds.com/fileadmin/PRODUCTS-SERVICES/SIMULIA/RESOURCES/simulia-isight-brochure.pdf",
+              "title": "DigitalTwin Lectures PDF — DoE",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             },
             {
@@ -157,81 +59,81 @@ export const day2: DayPlan =
               "type": "tool"
             }
           ],
-          "xp": 60
+          "xp": 52
         },
         {
-          "id": "d2-b2-t2",
-          day: 2,
-          "block": 2,
-          "slot": "09:30–11:00",
-          "title": "Mesh Convergence & FEA Tools (handwritten p.5)",
-          "emoji": "🔧",
-          "category": "Tools",
-          "learn": "MESH CONVERGENCE STUDY (your notes): progressively refine mesh to find sensitivity towards solution. Steps: (1) coarse mesh, (2) systematic refinement, (3) simulation iterations, (4) check convergence. Software from notes: CAD=NX, Dynamic=NX/MSC Nastran, General FEA=Ansys/Abaqus, Contact friction=LS-Dyna, Mesh-free=Simsolid, Automation=HyperWorks/HyperMesh, Optimisation=HEEDS+iSight. FMEA table structure from notes: Process, Failure Mode, Failure Effect, SEVERITY, Cause, OCCURRENCE, Current controls, DETECTION, TOTAL. Line-on-line interference → almost no wear (from notes).",
-          "practice": "Write the 4 mesh convergence steps from memory. For your antenna project: you used an analytical model (no mesh) — explain to Prof WHY and when you'd need FEA instead. Fill one FMEA row for 'antenna structural failure due to wind fatigue'.",
+          "id": "d2-b1-t2",
+          "day": 2,
+          "block": 1,
+          "slot": "06:15–07:30",
+          "title": "Sensitivity Analysis & Pareto Charts",
+          "emoji": "📊",
+          "category": "DoE",
+          "learn": "SENSITIVITY ANALYSIS: studies how input parameter changes affect model output. Antenna method: sweep one factor across full range, hold other at midpoint — larger Δoutput = more sensitive factor. PARETO CHART ranks factors by impact on output. Antenna result: wind sweep (5→35 m/s at temp=42.5°C) gives larger RUL reduction than temp sweep (20→65°C at wind=20 m/s) — wind DOMINANT (~3.5× impact). Also know: main effects plots, interaction plots, parallel axes plots from lecture slide 106. Prof: 'Understanding sensitivity is crucial to design robust products.'",
+          "practice": "Recalculate ΔRUL_wind and ΔRUL_temp from notebook. Draw Pareto bar chart on paper. Explain in two sentences why wind dominance is counterintuitive for electronics-focused engineers.",
           "exercises": [
-            "List 4 mesh convergence steps",
-            "Name 6 simulation software tools from notes",
-            "When is analytical model enough vs FEA needed?",
-            "Fill one FMEA table row for antenna",
-            "What is Simsolid (mesh-free FEA)?"
+            "Define sensitivity analysis",
+            "What does Pareto chart show?",
+            "Dominant factor in antenna project?",
+            "Main effects plot — purpose?",
+            "Recalculate Δwind and Δtemp"
           ],
           "checklist": [
-            "Memorised mesh convergence steps",
-            "Listed all software tools",
-            "Prepared FEA vs analytical justification",
-            "Completed FMEA example row",
-            "Understand Simsolid concept"
+            "Deltas recalculated",
+            "Pareto chart drawn",
+            "Wind = dominant (~3.5×)",
+            "Counterintuitive argument ready",
+            "Notebook cells 12–14 reviewed"
           ],
           "youtube": [
             {
-              "id": "8u6dYTuBymA",
-              "title": "Ansys Simulation Example"
+              "id": "9x9LYvErnwk",
+              "title": "DoE with FEA — Post-Processing"
             },
             {
-              "id": "z_g-ov61DNw",
-              "title": "CFD Simulation — Convergence Context"
+              "id": "V_yaMyLeJ1I",
+              "title": "Isight Plugin within Abaqus CAE"
             }
           ],
           "resources": [
             {
-              "title": "Ansys Meshing Best Practices",
-              "url": "https://www.ansys.com/resource-center/body-of-knowledge/meshing",
-              "type": "doc"
+              "title": "Your Antenna RUL Notebook",
+              "url": "file:///Users/msv/Desktop/Desktop%20Wizzz/digital%20twin1/DigitalTwin_Antenna_RUL.ipynb",
+              "type": "tool"
             }
           ],
-          "xp": 45
+          "xp": 55
         }
       ]
     },
     {
-      "block": 3,
-      "slot": "11:00–14:00",
-      "label": "🎯 Design Optimization & Pareto Front",
+      "block": 2,
+      "slot": "07:30–10:00",
+      "label": "🎯 Design Optimisation & Pareto Front",
       "tasks": [
         {
-          "id": "d2-b3-t1",
-          day: 2,
-          "block": 3,
-          "slot": "11:00–12:30",
-          "title": "Design Optimization — Objectives, Constraints, Variables",
+          "id": "d2-b2-t1",
+          "day": 2,
+          "block": 2,
+          "slot": "07:30–08:45",
+          "title": "Design Optimisation — Objectives, Constraints, Variables",
           "emoji": "🎯",
           "category": "Optimization",
-          "learn": "DESIGN OPTIMISATION: computational technique to find best design given objectives and constraints through iterative search. Your notes: 'Swapping inputs & outputs — give target and ask model for inputs.' Can be component or system level. MULTI-OBJECTIVE: often conflicting objectives. Examples from notes: (1) Seal — lowest leakage, mass ≤ x kg. (2) Mug — max insulation, cost constraint. (3) Engine — min specific fuel consumption within safety margins. (4) Leaf seal — lowest leakage AND min heat at interface. Logistics example from notes: minimise delivery time + fuel cost; variables=routes/order; constraints=visit each customer once, fuel capacity, working hours.",
-          "practice": "Write the optimisation problem statement for your antenna: OBJECTIVE = maximise RUL (or minimise degradation rate). VARIABLES = wind speed exposure, operating temperature. CONSTRAINTS = structural safety, data rate requirements. Compare to logistics example structure.",
+          "learn": "DESIGN OPTIMISATION: computational technique to find best design given objectives and constraints through iterative search. Prof's phrase: 'Swapping inputs & outputs — give target and ask model for inputs.' Component or system level. MULTI-OBJECTIVE: often conflicting objectives. Examples: (1) Seal — lowest leakage, mass ≤ x kg (Rolls-Royce). (2) Mug — max insulation, cost constraint. (3) Engine — min specific fuel consumption within safety margins. (4) Leaf seal — lowest leakage AND min heat at interface. Logistics: minimise delivery time + fuel cost; variables = routes/order; constraints = visit each customer once, fuel capacity, working hours. Antenna: OBJECTIVE = maximise RUL; VARIABLES = wind exposure, temperature; CONSTRAINTS = structural safety, data rate.",
+          "practice": "Write optimisation problem statement for antenna project: objective, variables, constraints. Compare structure to logistics example from notes. Explain 'swap inputs and outputs' with one sentence example.",
           "exercises": [
             "Define design optimisation",
-            "Optimization vs DoE — what's the difference?",
-            "Write optimisation problem for antenna project",
-            "Logistics example — objectives, variables, constraints",
+            "DoE vs optimisation — difference?",
+            "Antenna optimisation problem written",
+            "Logistics example — obj/var/constraints",
             "What is multi-objective optimisation?"
           ],
           "checklist": [
-            "Defined optimisation clearly",
-            "Wrote antenna optimisation problem",
-            "Know logistics example from notes",
-            "Understand objectives vs constraints",
-            "Can explain 'swap inputs and outputs'"
+            "Optimisation defined clearly",
+            "Antenna problem written",
+            "Logistics example known",
+            "Objectives vs constraints distinguished",
+            "HEEDS optim workflow previewed"
           ],
           "youtube": [
             {
@@ -241,38 +143,42 @@ export const day2: DayPlan =
           ],
           "resources": [
             {
-              "title": "Kreyszig Ch.22 — Gradient Method / Optimization",
-              "url": "https://www.bau.edu.jo/UserPortal/UserProfile/PostsAttach/59003_3812_1.pdf",
+              "title": "DigitalTwin Lectures PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
           "xp": 50
         },
         {
-          "id": "d2-b3-t2",
-          day: 2,
-          "block": 3,
-          "slot": "12:30–14:00",
-          "title": "Pareto Front, Global vs Local Minimum",
+          "id": "d2-b2-t2",
+          "day": 2,
+          "block": 2,
+          "slot": "08:45–10:00",
+          "title": "Pareto Front & Global vs Local Minimum",
           "emoji": "📉",
           "category": "Optimization",
-          "learn": "PARETO FRONT (your notes p.3): collection of optimal solutions between CONFLICTING objectives — feasible vs unfeasible designs, boundary = Pareto front. Example: stress vs mass — you cannot minimise both simultaneously; Pareto front shows trade-off curve. GLOBAL MINIMUM vs LOCAL MINIMUM: the challenge of optimisation is finding the GLOBAL minimum (absolute best). Local minimum may be 'good enough' in some engineering problems. Method of steepest descent (gradient method) from Kreyszig Ch.22. CATEGORICAL VARIABLE (notes): discrete values. UNCERTAINTY QUANTIFICATION (notes): nominal value + distribution variation.",
-          "practice": "Sketch stress-vs-mass Pareto front with feasible cloud and boundary line. Mark a local minimum and global minimum on a 1D curve. For antenna: is wind-vs-temp a Pareto trade-off? (No — they're degradation drivers, not conflicting design objectives. But operating envelope IS a constraint boundary.)",
+          "learn": "PARETO FRONT: collection of optimal solutions between CONFLICTING objectives — feasible vs unfeasible designs; boundary = Pareto front. Example: stress vs mass — cannot minimise both; Pareto front shows trade-off curve. GLOBAL MINIMUM vs LOCAL MINIMUM: optimisation challenge is finding GLOBAL minimum (absolute best). Local minimum may suffice in some engineering problems. Method of steepest descent (gradient method). CATEGORICAL VARIABLE: discrete values. Exam trap: Pareto CHART (factor ranking from DoE) ≠ Pareto FRONT (multi-objective trade-off) — Prof tests both.",
+          "practice": "Sketch stress-vs-mass Pareto front with feasible cloud. Mark local and global minimum on 1D curve. Answer: antenna wind vs temp — Pareto trade-off? (No — degradation drivers; operating envelope IS constraint boundary.)",
           "exercises": [
-            "Define Pareto front with 'conflicting objectives'",
-            "Global vs local minimum — explain",
-            "Sketch Pareto front stress vs mass",
-            "Define categorical variable",
-            "Define uncertainty quantification from notes"
+            "Define Pareto front — 'conflicting objectives'",
+            "Global vs local minimum",
+            "Sketch stress vs mass Pareto front",
+            "Pareto chart vs Pareto front?",
+            "Define categorical variable"
           ],
           "checklist": [
-            "Drew Pareto front sketch",
-            "Explained global vs local minimum",
-            "Know categorical variable definition",
-            "Understand UQ definition",
-            "Can distinguish DoE from optimisation"
+            "Pareto front sketched",
+            "Global vs local explained",
+            "Chart vs front distinguished",
+            "Antenna nuance understood",
+            "Oral answer practiced"
           ],
           "youtube": [
+            {
+              "id": "HvF_3Rok8RY",
+              "title": "HEEDS — Multi-Objective Optimization"
+            },
             {
               "id": "9x9LYvErnwk",
               "title": "Optimization + DoE in Simulation"
@@ -280,8 +186,8 @@ export const day2: DayPlan =
           ],
           "resources": [
             {
-              "title": "Computational Approaches for Aerospace Design — Keane",
-              "url": "https://books.google.de/books?id=dMeitxe-ilgC",
+              "title": "DigitalTwin Lectures PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
@@ -290,251 +196,478 @@ export const day2: DayPlan =
       ]
     },
     {
-      "block": 4,
-      "slot": "14:00–17:00",
-      "label": "🎲 Uncertainty, Monte Carlo & Pugh Matrix",
+      "block": 3,
+      "slot": "10:00–12:30",
+      "label": "🎲 Monte Carlo & Uncertainty Quantification",
       "tasks": [
         {
-          "id": "d2-b4-t1",
-          day: 2,
-          "block": 4,
-          "slot": "14:00–15:30",
-          "title": "Monte Carlo & Uncertainty Propagation",
+          "id": "d2-b3-t1",
+          "day": 2,
+          "block": 3,
+          "slot": "10:00–11:15",
+          "title": "Monte Carlo Simulation",
           "emoji": "🎲",
           "category": "DoE",
-          "learn": "MONTE CARLO (your notes p.7): computational technique using RANDOM SAMPLING for complex deterministic problems (e.g. multi-objective optimisation). Each input gets a PROBABILITY DISTRIBUTION (Gaussian or rectangular) → stochastic set of inputs → many deterministic runs. Useful for highly coupled physics or many input uncertainties. UNCERTAINTY QUANTIFICATION: identify sources, estimate input uncertainties, propagate to output uncertainties. Types: statistical (random noise) vs systematic (bias/offset from test setup). Propagation: x₁±δx₁ → effect on R; combined via ROOT SUM SQUARE (RSS). Robust design = low sensitivity of outputs to input variation.",
-          "practice": "Explain Monte Carlo in 3 sentences. Give example: wind speed follows Weibull distribution at tower site → sample 1000 values → run RUL model 1000 times → get RUL distribution. Define 'stochastic set of inputs' from your notes.",
+          "learn": "MONTE CARLO: computational technique using RANDOM SAMPLING for complex deterministic problems (e.g. multi-objective optimisation with uncertainty). Each input gets PROBABILITY DISTRIBUTION (Gaussian or rectangular) → stochastic set of inputs → many deterministic runs. Useful for highly coupled physics or many input uncertainties. Swiss cheese model (lecture): layered defences — failures must align through every hole to cause incident; Monte Carlo samples many failure combinations. Example: wind speed Weibull at tower site → sample 1000 values → run RUL model 1000 times → RUL distribution.",
+          "practice": "Explain Monte Carlo in three sentences. Describe stochastic set of inputs. Connect Swiss cheese: each layer = defence; Monte Carlo samples whether holes align.",
           "exercises": [
             "Define Monte Carlo method",
-            "What is a stochastic set of inputs?",
-            "Statistical vs systematic uncertainty",
-            "What is root sum square combination?",
-            "What makes a design 'robust'?"
+            "What is stochastic set of inputs?",
+            "Gaussian vs rectangular distribution?",
+            "Swiss cheese model — 2 sentences",
+            "Antenna wind variability example"
           ],
           "checklist": [
-            "Defined Monte Carlo clearly",
-            "Explained stochastic inputs",
-            "Know UQ types",
-            "Understand RSS combination",
-            "Connected to antenna wind variability"
+            "Monte Carlo defined",
+            "Stochastic inputs explained",
+            "Swiss cheese understood",
+            "1000-run example sketched",
+            "Connected to robust design"
           ],
           "youtube": [
             {
               "id": "PD_0QjEyQJk",
-              "title": "Statistical Methods — Minitab Context"
+              "title": "Statistical Methods — Monte Carlo Context"
             }
           ],
           "resources": [
             {
-              "title": "Moffat — Experimental Uncertainty Paper",
-              "url": "http://fluidos-lfa.usuarios.rdc.puc-rio.br/metexp-pos/Paper_Moffat.pdf",
-              "type": "paper"
+              "title": "DigitalTwin Lectures PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
             }
           ],
           "xp": 50
         },
         {
-          "id": "d2-b4-t2",
-          day: 2,
-          "block": 4,
-          "slot": "15:30–17:00",
-          "title": "Pugh Matrix & Data Matching",
-          "emoji": "📋",
-          "category": "Functional",
-          "learn": "PUGH MATRIX (your notes p.5): decision-making tool to compare multiple concepts against criteria by scoring them. Use when choosing between design alternatives early in conceptual design. DATA MATCHING = MODEL CALIBRATION (your notes p.3) — tuning parameters to match experimental data. Example from lecture: calibrate simulation models using experimental test results. For your project: calibrating f_wind exponent (1.6) and Arrhenius coefficient (15°C doubling) would require field failure data — acknowledge this as limitation/future work in presentation.",
-          "practice": "Create a 3-concept × 5-criteria Pugh matrix for antenna monitoring approaches: (A) periodic climber inspection, (B) drone photogrammetry only, (C) full digital twin with RUL. Score +/−/S (same). Identify winner. Write 2 sentences on calibration limitations of your RUL model.",
+          "id": "d2-b3-t2",
+          "day": 2,
+          "block": 3,
+          "slot": "11:15–12:30",
+          "title": "Uncertainty Quantification (UQ)",
+          "emoji": "📏",
+          "category": "DoE",
+          "learn": "UNCERTAINTY QUANTIFICATION: identify uncertainty sources, estimate input uncertainties, propagate to output uncertainties. Types: STATISTICAL (random noise) vs SYSTEMATIC (bias/offset from test setup). Propagation: x₁±δx₁ → effect on R; combined via ROOT SUM SQUARE (RSS). UNCERTAINTY QUANTIFICATION from notes: nominal value + distribution variation. Robust design = low sensitivity of outputs to input variation. ASME PTC 19.1 governs test uncertainty — links to Quiz Q4 measurement ±0.1 and Exercise 1 ±0.5 mm displacement.",
+          "practice": "List three uncertainty sources for antenna RUL model (wind measurement, temperature sensor, material aging coefficients). Show RSS combination concept. Distinguish statistical vs systematic with one example each.",
           "exercises": [
-            "Define Pugh matrix purpose",
-            "Data matching = what?",
-            "Create Pugh matrix for 3 monitoring concepts",
-            "What parameters would you calibrate in RUL model?",
-            "Acknowledge model limitations for Prof"
+            "Define UQ from notes",
+            "Statistical vs systematic uncertainty",
+            "Root sum square combination",
+            "What makes design 'robust'?",
+            "Link to ASME PTC 19.1"
           ],
           "checklist": [
-            "Defined Pugh matrix",
-            "Created 3×5 Pugh matrix",
-            "Know data matching = calibration",
-            "Identified RUL calibration limits",
-            "Prepared honest limitation statement"
+            "UQ types memorised",
+            "3 antenna uncertainty sources",
+            "RSS concept explained",
+            "ASME link noted",
+            "Robust design defined"
           ],
-          "youtube": [],
+          "youtube": [
+            {
+              "id": "9x9LYvErnwk",
+              "title": "Simulation Uncertainty Context"
+            }
+          ],
           "resources": [
             {
-              "title": "Pugh Matrix — Concept Selection",
-              "url": "https://www.designsociety.org/publication/28700/design_studies",
+              "title": "ASME PTC 19.1 — Test Uncertainty",
+              "url": "https://www.asme.org/codes-standards/find-codes-standards/ptc-19-1-test-uncertainty",
               "type": "paper"
             }
           ],
+          "xp": 52
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "slot": "12:30–15:00",
+      "label": "📋 Pugh, FMEA & Swiss Cheese",
+      "tasks": [
+        {
+          "id": "d2-b4-t1",
+          "day": 2,
+          "block": 4,
+          "slot": "12:30–13:45",
+          "title": "Pugh Matrix — Concept Selection",
+          "emoji": "📋",
+          "category": "Functional",
+          "learn": "PUGH MATRIX: decision-making tool comparing multiple concepts against criteria by scoring (+/−/S same). Use early in conceptual design when choosing between alternatives. DATA MATCHING = MODEL CALIBRATION — tuning parameters to match experimental data (Prof notes p.3). For antenna: Pugh compare (A) periodic climber inspection, (B) drone photogrammetry only, (C) full digital twin with RUL. Criteria: cost, safety, accuracy, scalability, maintenance interval.",
+          "practice": "Create 3-concept × 5-criteria Pugh matrix for antenna monitoring approaches. Score +/−/S. Identify winner. Write two sentences: data matching = calibration for RUL f_wind exponent and Arrhenius coefficient.",
+          "exercises": [
+            "Define Pugh matrix purpose",
+            "Data matching = what?",
+            "Build 3×5 Pugh matrix",
+            "Which concept wins?",
+            "RUL parameters to calibrate?"
+          ],
+          "checklist": [
+            "Pugh matrix completed",
+            "Winner identified",
+            "Data matching = calibration",
+            "Calibration limits acknowledged",
+            "Honest limitation for presentation"
+          ],
+          "youtube": [
+            {
+              "id": "SwgtZp4Jcjs",
+              "title": "Isight — Decision Support Context"
+            }
+          ],
+          "resources": [
+            {
+              "title": "BHW Functional Modelling Handbook",
+              "url": "https://www.burgehugheswalsh.co.uk/downloads/Functional-Modelling-Handbook.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "DigitalTwin Lectures PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            }
+          ],
           "xp": 45
+        },
+        {
+          "id": "d2-b4-t2",
+          "day": 2,
+          "block": 4,
+          "slot": "13:45–15:00",
+          "title": "FMEA & Swiss Cheese Model",
+          "emoji": "🧀",
+          "category": "Functional",
+          "learn": "FMEA table structure from Prof's notes: Process, Failure Mode, Failure Effect, SEVERITY, Cause, OCCURRENCE, Current controls, DETECTION, RPN/TOTAL. Line-on-line interference → almost no wear (class example). SWISS CHEESE MODEL: multiple defensive layers (design review, simulation V&V, testing, maintenance); failure requires holes to align through ALL layers — connects to Monte Carlo sampling of failure combinations. For antenna: FMEA row — 'Structural failure due to wind fatigue' with S/O/D scores.",
+          "practice": "Fill one complete FMEA row for antenna structural wind fatigue failure. Draw Swiss cheese with 4 layers labelled for digital twin workflow (CAD, simulation, drone inspection, RUL monitoring).",
+          "exercises": [
+            "FMEA column headers from memory",
+            "One antenna FMEA row complete",
+            "Swiss cheese — 2 sentence definition",
+            "Line-on-line interference example",
+            "Link FMEA to digital twin layers"
+          ],
+          "checklist": [
+            "FMEA row filled",
+            "Swiss cheese diagram drawn",
+            "S/O/D scales understood",
+            "Class example recalled",
+            "Connected to Monte Carlo task"
+          ],
+          "youtube": [
+            {
+              "id": "HftDI09LVI0",
+              "title": "Systems Safety — Layered Defences"
+            }
+          ],
+          "resources": [
+            {
+              "title": "DigitalTwin Lectures PDF — FMEA",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            }
+          ],
+          "xp": 48
         }
       ]
     },
     {
       "block": 5,
-      "slot": "17:00–20:00",
-      "label": "🤖 Surrogate Models & AI in Engineering",
+      "slot": "15:00–17:30",
+      "label": "⚙️ Process Automation, Integrated Design & Agile",
       "tasks": [
         {
           "id": "d2-b5-t1",
-          day: 2,
+          "day": 2,
           "block": 5,
-          "slot": "17:00–18:30",
-          "title": "Surrogate Models & Surrogate-Based Optimization",
-          "emoji": "🤖",
-          "category": "Surrogate",
-          "learn": "SURROGATE MODEL (notes p.2 & p.4): dataset from high-fidelity model, approximated for faster runs. SURROGATE-BASED OPTIMISATION: optimise on surrogate (cheap), then validate on high-fidelity model. AI IN ENGINEERING (notes p.7): Wing aerodynamics — inputs=wing geometry, outputs=lift/drag coefficients; AI predicts CFD results faster with acceptable accuracy. ML as surrogate on simulation datasets — particularly for optimisation loops needing thousands of runs. Your analytical RUL model is already a low-fidelity surrogate of full FEA fatigue analysis — explain this hierarchy to Prof.",
-          "practice": "Draw surrogate hierarchy: FEA (high-fidelity, slow) → analytical RUL (medium) → response surface (fast). Explain when you'd add ML on top. Answer: 'Could you replace your RUL model with ML?' — Yes but need training data from FEA/experiments, lose physics interpretability.",
+          "slot": "15:00–16:15",
+          "title": "Process Automation — Four Pillars",
+          "emoji": "⚙️",
+          "category": "HEEDS",
+          "learn": "PROCESS AUTOMATION (Prof notes): brings the design process into software — links multiple simulation tools via automated data transfers = INTEGRATED DESIGN SYSTEMS (simulation framework). Four pillars from lecture: (1) CAD integration (NX), (2) simulation tools (Simcenter/Ansys), (3) DoE & optimisation (HEEDS/iSight), (4) data management & workflow orchestration. Benefits: speed up process, improve product attributes, repeatability. HEEDS + iSight = Siemens/Simulia automation stack. This is exactly what your Python notebook replicates manually for antenna RUL.",
+          "practice": "List four pillars with tool example each. Explain process automation in one sentence. Map notebook cells to HEEDS workflow: Design Space → DoE → Response Surface → Optimisation/envelope.",
           "exercises": [
-            "Define surrogate model",
-            "Define surrogate-based optimisation",
-            "Wing aerodynamics AI example — inputs/outputs",
-            "Is your RUL model a surrogate? Of what?",
-            "ML surrogate pros and cons"
+            "Define process automation",
+            "What are Integrated Design Systems?",
+            "Name 4 pillars with tools",
+            "HEEDS + iSight purpose",
+            "Notebook ↔ HEEDS mapping"
           ],
           "checklist": [
-            "Defined surrogate model clearly",
-            "Drew fidelity hierarchy",
-            "Know wing aerodynamics example",
-            "Justified analytical model choice",
-            "Can answer ML replacement question"
-          ],
-          "youtube": [
-            {
-              "id": "64N2BY747Cw",
-              "title": "CFD Simulation — High-Fidelity Base Model"
-            }
-          ],
-          "resources": [
-            {
-              "title": "Tao et al. 2019 — Digital Twin in Industry (IEEE)",
-              "url": "https://ieeexplore.ieee.org/document/8477107",
-              "type": "paper"
-            }
-          ],
-          "xp": 50
-        },
-        {
-          "id": "d2-b5-t2",
-          day: 2,
-          "block": 5,
-          "slot": "18:30–20:00",
-          "title": "Agile & Software Development Cycle",
-          "emoji": "🔄",
-          "category": "Tools",
-          "learn": "AGILE (notes p.7): iterative and incremental project management — flexibility, customer collaboration, rapid value delivery. Key contrast to waterfall. SOFTWARE DEV CYCLE (notes p.5): (1) Planning, (2) Analysis, (3) Design, (4) Implementation, (5) Testing & integration, (6) Maintenance. Homework reference: Paper slide 204. For simulation software: VERIFICATION happens in Testing phase. Connect: your Jupyter notebook development followed stages — Planning (objective), Analysis (RUL physics), Design (DoE matrix), Implementation (Python code), Testing (sanity checks at 5/15/35 m/s), Maintenance (extend with real sensor data).",
-          "practice": "List 6 software dev cycle stages from memory. Map your notebook development to each stage. Define Agile in one sentence. Prof may ask: 'How is simulation software development different from app development?' — Answer: verification against analytical solutions is critical.",
-          "exercises": [
-            "List 6 software development stages",
-            "Define Agile from notes",
-            "Map notebook to 6 stages",
-            "Where does verification fit in dev cycle?",
-            "Agile vs waterfall — one difference"
-          ],
-          "checklist": [
-            "Memorised 6 dev cycle stages",
-            "Mapped notebook to stages",
-            "Defined Agile",
-            "Know verification in testing phase",
-            "Prepared Agile answer"
-          ],
-          "youtube": [],
-          "resources": [
-            {
-              "title": "Agile Manifesto",
-              "url": "https://agilemanifesto.org/",
-              "type": "doc"
-            }
-          ],
-          "xp": 40
-        }
-      ]
-    },
-    {
-      "block": 6,
-      "slot": "20:00–23:00",
-      "label": "🎯 Day 2 Boss — DoE + HEEDS Oral Exam",
-      "tasks": [
-        {
-          "id": "d2-b6-t1",
-          day: 2,
-          "block": 6,
-          "slot": "20:00–21:30",
-          "title": "DoE & HEEDS Oral Drill — Professor Trap Questions",
-          "emoji": "🎤",
-          "category": "ALL",
-          "learn": "High-probability Prof questions Day 2: 'What is a full factorial DoE?' 'Why not screening for your antenna?' 'What is a Pareto chart?' 'Explain HEEDS workflow.' 'What is the dominant factor in your project?' 'Global vs local minimum?' 'Monte Carlo — when do you use it?' Practice PERFECT answers: Full factorial = all combinations, 4×10=40 runs. Screening = when many factors, few runs. Pareto = ranks factor impact. Dominant = wind speed (~3.5× temperature). HEEDS = automates DoE+optimisation across tools.",
-          "practice": "30-minute oral drill with timer. Answer each question in ≤45 seconds with NO filler words. Record and review. Write backup answers for: 'Why full factorial?' → Only 2 factors, 40 runs is cheap for analytical model, captures all interactions.",
-          "exercises": [
-            "Answer: What is full factorial DoE?",
-            "Answer: Dominant factor in antenna project?",
-            "Answer: HEEDS vs manual Python workflow?",
-            "Answer: Pareto front vs Pareto chart?",
-            "Answer: When to use Monte Carlo?"
-          ],
-          "checklist": [
-            "Completed 30-min oral drill",
-            "Recorded and reviewed answers",
-            "Wrote perfect answer sheet",
-            "No filler words in definitions",
-            "Ready for DoE/HEEDS questions"
+            "4 pillars memorised",
+            "HEEDS workflow mapped to notebook",
+            "Process automation defined",
+            "Watched HEEDS overview",
+            "Read HEEDS getting started intro"
           ],
           "youtube": [
             {
               "id": "HvF_3Rok8RY",
-              "title": "HEEDS Review"
+              "title": "HEEDS — Multi-Disciplinary Design Exploration"
             },
             {
-              "id": "_Rgue-7KDww",
-              "title": "DoE Process Review"
+              "id": "SwgtZp4Jcjs",
+              "title": "Isight — Process Automation Overview"
             }
           ],
           "resources": [
+            {
+              "title": "HEEDS Getting Started Guide",
+              "url": "file:///Users/msv/Downloads/HEEDSGettingStartedGuide.pdf",
+              "type": "doc"
+            }
+          ],
+          "xp": 55
+        },
+        {
+          "id": "d2-b5-t2",
+          "day": 2,
+          "block": 5,
+          "slot": "16:15–17:30",
+          "title": "Integrated Design & Agile Development",
+          "emoji": "🔄",
+          "category": "Tools",
+          "learn": "INTEGRATED DESIGN: multidisciplinary, multi-fidelity, simulation-driven — risk level drives accuracy/fidelity needed. AGILE: iterative incremental project management — flexibility, customer collaboration, rapid value delivery; contrast to waterfall. SOFTWARE DEV CYCLE (notes p.5): (1) Planning, (2) Analysis, (3) Design, (4) Implementation, (5) Testing & integration, (6) Maintenance. VERIFICATION happens in Testing phase. Your Jupyter notebook: Planning (objective) → Analysis (RUL physics) → Design (DoE matrix) → Implementation (Python) → Testing (sanity checks 5/15/35 m/s) → Maintenance (extend with sensor data).",
+          "practice": "List 6 software dev cycle stages. Map notebook to each. Define Agile in one sentence. Answer: 'How is simulation software development different from app development?' — verification against analytical solutions is critical.",
+          "exercises": [
+            "List 6 software development stages",
+            "Define Agile from notes",
+            "Map notebook to 6 stages",
+            "Where does verification fit?",
+            "Agile vs waterfall — one difference"
+          ],
+          "checklist": [
+            "6 stages memorised",
+            "Notebook mapped",
+            "Agile defined",
+            "Verification in testing phase",
+            "Simulation vs app dev answer ready"
+          ],
+          "youtube": [
+            {
+              "id": "SwgtZp4Jcjs",
+              "title": "Isight — Agile Workflow Integration"
+            }
+          ],
+          "resources": [
+            {
+              "title": "DigitalTwin Lectures PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
             {
               "title": "Your Antenna RUL Notebook",
               "url": "file:///Users/msv/Desktop/Desktop%20Wizzz/digital%20twin1/DigitalTwin_Antenna_RUL.ipynb",
               "type": "tool"
             }
           ],
-          "xp": 60
-        },
+          "xp": 48
+        }
+      ]
+    },
+    {
+      "block": 6,
+      "slot": "17:30–20:00",
+      "label": "🔧 TRL, Mesh Convergence & Toolchain",
+      "tasks": [
         {
-          "id": "d2-b6-t2",
-          day: 2,
+          "id": "d2-b6-t1",
+          "day": 2,
           "block": 6,
-          "slot": "21:30–23:00",
-          "title": "Re-run Antenna Notebook + Annotate Every Cell",
-          "emoji": "💻",
-          "category": "Project",
-          "learn": "Open DigitalTwin_Antenna_RUL.ipynb. Run ALL cells. Annotate in your notes what EACH cell proves: Cell 4 = RUL formula, Cell 6 = 40-run design matrix, Cell 8 = RUL vs temp curves, Cell 10 = 3D response surface, Cell 12 = sensitivity deltas, Cell 14 = Pareto bar chart, Cell 16 = operating envelope contours. Know exact numbers: RUL at (5m/s, 20°C)=7300 days=20 years. RUL at (35m/s, 65°C)=41 days. Wind/temp ratio≈3.5×. Recommended ops: wind≤12 m/s, temp≤30°C → RUL>10 years.",
-          "practice": "Run notebook end-to-end. Write a 1-sentence explanation per cell. Memorise the 3 RUL sanity-check numbers. Be able to derive RUL formula from scratch on paper: RUL = L_nom / (f_wind × f_temp × 24).",
+          "slot": "17:30–18:45",
+          "title": "Technology Readiness Levels (TRL)",
+          "emoji": "🚀",
+          "category": "Tools",
+          "learn": "NASA TRL 1–9 scale: TRL 1 basic principles, TRL 4 component validation in lab, TRL 5 validation in relevant environment, TRL 6 system prototype demonstration, TRL 7 operational prototype, TRL 9 deployed system. Your antenna project ≈ TRL 4–5: validated RUL model in simulation/lab, drone photogrammetry demonstrated industrially (~€220K contract) but full tower-scale predictive maintenance not deployed at scale. Prof asks TRL in Q&A — justify with evidence, not aspiration.",
+          "practice": "Read NASA TRL page. Write 3 sentences placing antenna project at TRL 4–5 with evidence. List what would be needed to reach TRL 7 (field sensors, live twin feed, maintenance action closure).",
           "exercises": [
-            "Run all notebook cells successfully",
-            "RUL at (5,20) = ? days",
-            "RUL at (35,65) = ? days",
-            "Wind/temp impact ratio = ?",
-            "Recommended operating point = ?"
+            "Define TRL scale (1–9 overview)",
+            "Where is antenna project?",
+            "Evidence for TRL 4–5",
+            "Gap to TRL 7?",
+            "TRL vs technology maturity — oral answer"
           ],
           "checklist": [
-            "Ran full notebook",
-            "Annotated every cell",
-            "Memorised 3 key RUL numbers",
-            "Can derive formula on paper",
-            "Know operating envelope recommendation"
+            "NASA TRL page read",
+            "TRL 4–5 justified in writing",
+            "Gap analysis done",
+            "Oral answer ≤30 sec",
+            "No inflated TRL claim"
           ],
-          "youtube": [],
+          "youtube": [
+            {
+              "id": "9UpMeDO0A04",
+              "title": "Digital Twin Maturity Context"
+            }
+          ],
           "resources": [
             {
-              "title": "DigitalTwin_Antenna_RUL.ipynb",
-              "url": "file:///Users/msv/Desktop/Desktop%20Wizzz/digital%20twin1/DigitalTwin_Antenna_RUL.ipynb",
-              "type": "tool"
-            },
-            {
-              "title": "DigitalTwin_Antenna_RUL.pptx",
-              "url": "file:///Users/msv/Desktop/Desktop%20Wizzz/digital%20twin1/DigitalTwin_Antenna_RUL.pptx",
+              "title": "NASA TRL Scale",
+              "url": "https://www.nasa.gov/directorates/heo/scan/engineering/technology/technology_readiness_level",
               "type": "doc"
             }
           ],
-          "xp": 60
+          "xp": 45
+        },
+        {
+          "id": "d2-b6-t2",
+          "day": 2,
+          "block": 6,
+          "slot": "18:45–20:00",
+          "title": "Mesh Convergence & NX/Simcenter/HEEDS Tools",
+          "emoji": "🔧",
+          "category": "Tools",
+          "learn": "MESH CONVERGENCE STUDY: (1) coarse mesh, (2) systematic refinement, (3) simulation iterations, (4) check convergence. Software toolchain from notes: CAD=NX, Dynamic=NX/MSC Nastran, General FEA=Ansys/Abaqus, Contact=LS-Dyna, Mesh-free=Simsolid, Automation=HyperWorks/HyperMesh, Optimisation=HEEDS+iSight, Simcenter 3D for integrated FEA/thermal/response dynamics (Exercises 7–9). Antenna uses analytical model — explain WHEN you'd need Simcenter FEA instead (stress concentrations, nonlinear material, validation correlation).",
+          "practice": "Write 4 mesh convergence steps from memory. List 8 tools with purpose. Prepare one sentence: 'Analytical RUL sufficient for system-level DoE; FEA needed for local stress validation.'",
+          "exercises": [
+            "4 mesh convergence steps",
+            "8 software tools from notes",
+            "When analytical vs FEA?",
+            "What is Simsolid?",
+            "Simcenter role in Exercises 7–9"
+          ],
+          "checklist": [
+            "Convergence steps memorised",
+            "Toolchain listed",
+            "Analytical vs FEA answer ready",
+            "Simcenter tutorial bookmarked",
+            "Rolls-Royce seal context noted"
+          ],
+          "youtube": [
+            {
+              "id": "8u6dYTuBymA",
+              "title": "FEA Simulation Example"
+            },
+            {
+              "id": "V_yaMyLeJ1I",
+              "title": "Simcenter/Abaqus Integration"
+            }
+          ],
+          "resources": [
+            {
+              "title": "Simcenter 3D Tutorials",
+              "url": "https://docs.plm.automation.siemens.com/tdoc/nx/1872/simcenter_3d_tutorials.html#uid:index_advanced_sim_tutorial",
+              "type": "doc"
+            },
+            {
+              "title": "HEEDS Getting Started Guide",
+              "url": "file:///Users/msv/Downloads/HEEDSGettingStartedGuide.pdf",
+              "type": "doc"
+            }
+          ],
+          "xp": 50
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "slot": "20:00–23:00",
+      "label": "📊 Exercises 4–6 — P-diagram, HEEDS, MATLAB",
+      "tasks": [
+        {
+          "id": "d2-b7-t1",
+          "day": 2,
+          "block": 7,
+          "slot": "20:00–21:30",
+          "title": "Exercise 4 — P-Diagram, Context & FFD Antenna Tower",
+          "emoji": "📡",
+          "category": "Functional",
+          "learn": "Exercise 4: Create P-diagram, context diagram, and functional flow diagram for a product — complex or simple; may become final assignment. YOUR PRODUCT: 5G/6G telecom antenna tower digital twin. P-DIAGRAM centre: 'Maintain antenna structural integrity & predict RUL.' INPUTS: wind speed, ambient temperature, drone-derived geometry, load history. NOISE: weather variability, material batch variation, unmeasured vibration. CONTROLS: inspection interval, operating envelope limits, maintenance threshold. IDEAL RESPONSE: accurate RUL, minimal outages. ERROR STATE: RUL underestimate → late maintenance; overestimate → unsafe operation. FFD: Monitor (sensors/drone) → Compare (RUL vs threshold) → Adjust (maintenance schedule) → Predict (degradation trend) → Feedback. Context diagram: tower, drone, cloud analytics, maintenance crew.",
+          "practice": "Draw P-diagram, context diagram, and FFD for antenna tower from memory. Use BHW Functional Modelling Handbook structure. Prof trap: FFD ≠ software architecture — abstraction of real problem. Connect to motorcycle traction FFD from Day 1 notes.",
+          "exercises": [
+            "P-diagram — all 5 zones for antenna",
+            "Context diagram — 4+ entities",
+            "FFD — 4-step flow with feedback",
+            "FFD ≠ software architecture",
+            "Noise vs control factors — 3 each"
+          ],
+          "checklist": [
+            "All three diagrams drawn",
+            "BHW handbook consulted",
+            "Motorcycle FFD compared",
+            "Oral explanation practiced",
+            "Ready for Exercise 4 submission"
+          ],
+          "youtube": [
+            {
+              "id": "ObGhB9CCHP8",
+              "title": "Siemens — Smart Infrastructure Context"
+            }
+          ],
+          "resources": [
+            {
+              "title": "BHW Functional Modelling Handbook",
+              "url": "https://www.burgehugheswalsh.co.uk/downloads/Functional-Modelling-Handbook.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "DigitalTwin Lectures PDF — Exercise 4",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "ASME GT2020 Nasti Seal Paper",
+              "url": "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2020/84188/V07CT14A023/1095072",
+              "type": "paper"
+            }
+          ],
+          "xp": 58
+        },
+        {
+          "id": "d2-b7-t2",
+          "day": 2,
+          "block": 7,
+          "slot": "21:30–23:00",
+          "title": "Exercise 5 HEEDS Coil Spring & Exercise 6 MATLAB optimproblem",
+          "emoji": "⚙️",
+          "category": "HEEDS",
+          "learn": "Exercise 5: HEEDS Training — install per campusnet guidelines. Examples: Example 5 DoE Study of Coil Spring; Example 10 Multi-objective optimisation. Read HEEDS Getting Started Guide. Exercise 6: MATLAB Optimisation Toolbox — optimproblem, optimvar, optimconstr, optimexpr; tutorial on MathWorks; optional optimal path video. Map HEEDS coil spring DoE to your antenna factorial: both define design space, run experiments, analyse responses. Multi-objective in HEEDS Example 10 parallels Pareto front lecture — conflicting objectives, trade-off curve.",
+          "practice": "Open HEEDS guide — identify Design Space, Response Surface, Optimisation workflow steps. If HEEDS unavailable: document equivalent notebook workflow. In MATLAB (or read docs): write pseudocode for optimproblem with one objective and one constraint. Compare coil spring DoE to antenna 40-run matrix.",
+          "exercises": [
+            "HEEDS Example 5 — coil spring DoE steps",
+            "HEEDS Example 10 — multi-objective goal",
+            "MATLAB optimproblem pseudocode",
+            "optimvar / optimconstr roles",
+            "Map HEEDS workflow to notebook"
+          ],
+          "checklist": [
+            "HEEDS guide sections identified",
+            "Coil spring ↔ antenna DoE compared",
+            "MATLAB functions listed",
+            "Multi-objective linked to Pareto",
+            "Process automation demonstrated"
+          ],
+          "youtube": [
+            {
+              "id": "HvF_3Rok8RY",
+              "title": "HEEDS — DoE & Optimization"
+            },
+            {
+              "id": "SwgtZp4Jcjs",
+              "title": "Isight — MATLAB Integration"
+            },
+            {
+              "id": "_Rgue-7KDww",
+              "title": "DoE Process — Coil Spring Analog"
+            }
+          ],
+          "resources": [
+            {
+              "title": "HEEDS Getting Started Guide",
+              "url": "file:///Users/msv/Downloads/HEEDSGettingStartedGuide.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "DigitalTwin Lectures PDF — Exercises 5–6",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "Your Antenna RUL Notebook",
+              "url": "file:///Users/msv/Desktop/Desktop%20Wizzz/digital%20twin1/DigitalTwin_Antenna_RUL.ipynb",
+              "type": "tool"
+            }
+          ],
+          "xp": 62
         }
       ]
     }

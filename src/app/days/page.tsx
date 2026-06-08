@@ -16,7 +16,7 @@ export default async function DaysPage() {
     <main className="min-h-dvh pb-24 max-w-lg mx-auto">
       <header className="px-5 pt-12 pb-4">
         <h1 className="text-xl font-bold">📅 3-Day Exam Sprint</h1>
-        <p className="text-sm text-[var(--muted)] mt-1">54 hours · Theory → DoE/HEEDS → Project + Presentation</p>
+        <p className="text-sm text-[var(--muted)] mt-1">54 hours · All 12 quiz Qs + Exercises 1–12 → Exam ready</p>
       </header>
 
       <div className="px-5 space-y-4">

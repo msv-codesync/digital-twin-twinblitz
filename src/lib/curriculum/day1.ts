@@ -2,40 +2,40 @@ import type { DayPlan } from "./types";
 
 export const day1: DayPlan = 
 {
-  day: 1,
-  date: "2026-06-08",
-  "title": "Digital Twin Theory Foundations",
-  "subtitle": "Prof. Nasti class notes pages 1–2 — definitions she will grill you on",
-  "theme": "Master every definition before touching HEEDS or your project",
+  "day": 1,
+  "date": "2026-06-08",
+  "title": "Digital Twin Foundations — Quiz Q1–12",
+  "subtitle": "Prof. Nasti Exercises PDF — every definition she will trap you on",
+  "theme": "Master Quiz Q1–12 verbatim before Hooke's law lab and AIAA paper",
   "blocks": [
     {
       "block": 1,
-      "slot": "05:00–08:00",
-      "label": "📘 Digital Twin Core (your handwritten p.1)",
+      "slot": "05:00–07:30",
+      "label": "📘 Quiz Q1–Q2 — Digital Twin & Lifecycle",
       "tasks": [
         {
           "id": "d1-b1-t1",
-          day: 1,
+          "day": 1,
           "block": 1,
-          "slot": "05:00–06:30",
-          "title": "Digital Twin Definition & 5-Stage Lifecycle",
+          "slot": "05:00–06:15",
+          "title": "Quiz Q1 — What Is the Digital Twin?",
           "emoji": "🔄",
           "category": "Theory",
-          "learn": "Prof. Nasti's exact definition: 'The digital twin is the digital representation of a physical product throughout its lifecycle — the virtual product.' The engineering product lifecycle has FIVE stages connected in order: (1) Design & Analysis, (2) Manufacture, (3) Build & Assembly, (4) Experimental Testing, (5) Service. At EACH stage the digital twin lets you optimise and de-risk the real product by simulating behaviour for specific operating conditions. Feeding real operational data into a system-level simulation creates a unique virtual model per real product. CRITICAL exam trap: 'The digital twin does NOT replace experimental testing.' Simulation cost << experimental cost, but both are needed. The core is a fully coupled multi-disciplinary, multi-fidelity PARAMETRIC simulation model.",
-          "practice": "Draw the 5-stage lifecycle arrow diagram from memory. Under each stage write ONE digital-twin use case (as-designed calibration, as-built factory simulation, as-used health monitoring). Say the definition aloud 3× without reading. Open AIAA position paper — find the three lifecycle stages they use (as-designed, as-built, as-used/maintained) and map them to Prof's 5 stages.",
+          "learn": "Prof. Nasti's exact exam answer for Quiz Q1: 'The digital twin is the digital representation of a physical product throughout its lifecycle — the virtual product.' CRITICAL trap: students say 'a copy of the product' or 'a 3D model' — both are WRONG. The twin spans the ENTIRE lifecycle, not just design. The core is a fully coupled multi-disciplinary, multi-fidelity PARAMETRIC simulation model. Feeding real operational data into a system-level simulation creates a unique virtual model per real product. AIAA (Dec 2020) aligns: digital twin = virtual representation sufficient to meet lifecycle use cases. Prof fails anyone who says the digital twin REPLACES experimental testing — simulation cost << experimental cost, but BOTH are needed. Rolls-Royce Intelligent Engine is the canonical industrial example she cites.",
+          "practice": "Write the definition on paper without looking — three attempts until word-perfect. Open the AIAA position paper executive summary and highlight every sentence containing 'lifecycle'. Record a 30-second oral answer. Compare your wording to Prof's: if you omitted 'throughout its lifecycle' or 'parametric', rewrite.",
           "exercises": [
-            "Recite the digital twin definition verbatim",
-            "List all 5 lifecycle stages in order",
-            "Name 3 as-designed / as-built / as-used use cases from AIAA paper",
+            "Recite digital twin definition verbatim (Prof's wording)",
+            "State why '3D CAD model alone' is NOT a digital twin",
+            "Name the core of every digital twin (coupled parametric simulation)",
             "Explain why DT does NOT replace experimental testing",
-            "What sits at the core of every digital twin?"
+            "Give one Rolls-Royce / AIAA lifecycle use case"
           ],
           "checklist": [
-            "Watch Rolls-Royce Intelligent Engine video",
-            "Watch Siemens digital twin video",
-            "Draw 5-stage lifecycle from memory",
-            "Read AIAA Definition & Value paper intro",
-            "Can explain DT to a non-expert in 60 seconds"
+            "Watched Rolls-Royce Intelligent Engine video",
+            "Read AIAA paper introduction",
+            "Definition written from memory 3×",
+            "Oral 30-sec answer recorded",
+            "Can explain to non-expert in 60 seconds"
           ],
           "youtube": [
             {
@@ -45,10 +45,6 @@ export const day1: DayPlan =
             {
               "id": "ObGhB9CCHP8",
               "title": "Siemens — Digital Twin"
-            },
-            {
-              "id": "HftDI09LVI0",
-              "title": "ASME — Digital Twin Cities"
             },
             {
               "id": "9UpMeDO0A04",
@@ -62,8 +58,8 @@ export const day1: DayPlan =
               "type": "paper"
             },
             {
-              "title": "ISO/IEC 30173 Digital Twin Terminology",
-              "url": "https://www.iso.org/standard/77808.html",
+              "title": "DigitalTwin Lectures & Exercises PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
@@ -71,135 +67,140 @@ export const day1: DayPlan =
         },
         {
           "id": "d1-b1-t2",
-          day: 1,
+          "day": 1,
           "block": 1,
-          "slot": "06:30–08:00",
-          "title": "Virtual vs Real Product + Fidelity vs Accuracy",
-          "emoji": "⚖️",
+          "slot": "06:15–07:30",
+          "title": "Quiz Q2 — Product Lifecycle Key Steps",
+          "emoji": "🔁",
           "category": "Theory",
-          "learn": "Your notes circle 'Accuracy VS Fidelity' — know the difference cold. FIDELITY = level of detail/realism in mirroring physical assets (can mean geometry fidelity OR model accuracy depending on context). ACCURACY = how close predictions are to reality (geometry, behaviour, dynamics). Trade-off: RUN TIME vs ACCURACY — higher fidelity models take longer. The product lifecycle introduces variations the twin must capture: manufacturing variations, assembly/build tolerances, product as-designed vs as-built, real operating conditions, aspects of physics NOT captured by simulation. Parametric geometry (CAD) lets you simulate as-designed AND as-manufactured. Geometry idealisation is always needed before simulation.",
-          "practice": "Make a 2-column table: Fidelity vs Accuracy with 3 examples each. Draw virtual product ↔ real product diagram with arrows showing manufacturing variations, operating conditions, and missed physics. Explain the runtime-accuracy trade-off with a concrete example (coarse mesh = fast but less accurate).",
+          "learn": "Quiz Q2 asks: 'What are the key steps of a product lifecycle?' Prof. Nasti lists FIVE stages in order: (1) Design & Analysis, (2) Manufacture, (3) Build & Assembly, (4) Experimental Testing, (5) Service. At EACH stage the digital twin lets you optimise and de-risk the real product by simulating behaviour for specific operating conditions. AIAA maps three twin stages onto this: AS-DESIGNED (before physical object — 3D CAD, material properties), AS-BUILT (after manufacturing — QC records, BOM), AS-USED/MAINTAINED (during operation — live sensor data). Exam trap: do NOT confuse lifecycle stages with software development stages (Planning→Maintenance) — those come on Day 2. Another trap: 'Release for Manufacture' is a design-process milestone, not a lifecycle stage in Prof's five.",
+          "practice": "Draw the five-stage arrow diagram from memory. Under each stage write one digital-twin use case. Map AIAA as-designed / as-built / as-used onto Prof's five stages in a second column. Time yourself: list all five stages in ≤10 seconds.",
           "exercises": [
-            "Define fidelity in YOUR words (2 meanings)",
-            "Define accuracy in YOUR words",
-            "Draw virtual↔real product diagram with 4 variation sources",
-            "Give example of runtime vs accuracy trade-off",
-            "Why is parametric geometry essential?"
+            "List all 5 lifecycle stages in correct order",
+            "One DT use case per stage",
+            "Map AIAA 3 stages to Prof's 5 stages",
+            "Distinguish lifecycle vs design process",
+            "Why is 'Service' the as-used stage?"
           ],
           "checklist": [
-            "Understand fidelity vs accuracy distinction",
-            "Draw virtual vs real diagram from notes",
-            "Explain runtime-accuracy trade-off aloud",
-            "Read lecture slide on geometry idealisation",
-            "Can answer: 'What is fidelity?' without hesitation"
+            "Drew 5-stage diagram from memory",
+            "Mapped AIAA stages",
+            "Listed stages in ≤10 seconds",
+            "Watched Siemens lifecycle video",
+            "No confusion with software dev cycle"
           ],
           "youtube": [
             {
-              "id": "8u6dYTuBymA",
-              "title": "Ansys — Car Crash Simulation (fidelity example)"
+              "id": "ObGhB9CCHP8",
+              "title": "Siemens Digital Twin — Lifecycle"
             },
             {
-              "id": "z_g-ov61DNw",
-              "title": "Building Ventilation CFD Simulation"
-            },
-            {
-              "id": "cHThndE20oI",
-              "title": "Heat Transfer Simulation — Cup of Tea"
+              "id": "HftDI09LVI0",
+              "title": "ASME — Digital Twin Cities"
             }
           ],
           "resources": [
             {
-              "title": "NASA Systems Engineering Handbook",
-              "url": "https://www.nasa.gov/connect/ebooks/nasa-systems-engineering-handbook",
+              "title": "AIAA Digital Twin Definition & Value",
+              "url": "https://www.aiaa.org/docs/default-source/uploadedfiles/issues-and-advocacy/policy-papers/digital-twin-institute-position-paper-(december-2020).pdf",
+              "type": "paper"
+            },
+            {
+              "title": "NASA TRL Scale",
+              "url": "https://www.nasa.gov/directorates/heo/scan/engineering/technology/technology_readiness_level",
               "type": "doc"
             }
           ],
-          "xp": 50
+          "xp": 48
         }
       ]
     },
     {
       "block": 2,
-      "slot": "08:00–11:00",
-      "label": "🔬 Modelling Approaches & I/O (handwritten p.2)",
+      "slot": "07:30–10:00",
+      "label": "📐 Quiz Q3–Q4 — Parametric Geometry & Accuracy",
       "tasks": [
         {
           "id": "d1-b2-t1",
-          day: 1,
+          "day": 1,
           "block": 2,
-          "slot": "08:00–09:30",
-          "title": "Physics-Based vs Empirical Modelling",
-          "emoji": "🧮",
+          "slot": "07:30–08:45",
+          "title": "Quiz Q3 — Parametric Geometry Modelling",
+          "emoji": "📐",
           "category": "Theory",
-          "learn": "Two fundamental approaches: (1) PHYSICS-BASED — exploits laws of physics, starts from first principles, defines mathematical relationships governing system behaviour. (2) EMPIRICAL — starts from real-world observations/experimental data, uses statistical methods to extract behaviour. Physics-based suits simple/fully-understood physics. Empirical/data-driven suits data-rich problems (ML). In practice BOTH matter — even physics models need experimental validation. A model is a REPRESENTATION of reality; some physics may be missed or unknown → calibration fixes this. Models are characterised by INPUT-OUTPUT relationships. Typical INPUTS: geometric parameters (dimensions), operating conditions/constraints (ambient temperature), operating envelope. Typical OUTPUTS: measurable attributes (metal temperature), derived attributes (efficiency requiring post-processing).",
-          "practice": "For the 5G antenna from your project: list 3 inputs and 3 outputs. For motorcycle traction control from class notes: list inputs (front/rear wheel speed, throttle, lean angle) and ideal responses. Classify each as physics-based or empirical: CFD, curve fitting, Arrhenius aging, neural network surrogate.",
+          "learn": "Quiz Q3: 'Why is parametric geometry modelling important to develop the concept of digital twin?' Answer: parametric CAD lets you simulate BOTH as-designed AND as-manufactured configurations from ONE master model — change a dimension parameter and the entire geometry, mesh, and boundary conditions update automatically. Without parametric geometry you cannot efficiently explore design space (DoE), run optimisation, or capture manufacturing variations (tolerances d = 35.0 ± 0.1 mm). The digital twin must stay synchronised with the real product across lifecycle stages; parametric models are the backbone. Geometry idealisation (simplified 3D, 2D slice, 1D beam) still derives from the parametric master — never a disconnected sketch. Prof trap: parametric ≠ just '3D CAD' — it means design variables drive geometry AND downstream simulation automatically.",
+          "practice": "Open NX or any parametric CAD mental model: list 5 parameters for a telecom antenna mount (bracket thickness, bolt spacing, material). Explain how changing one parameter propagates to FEA mesh. Write 3 sentences answering Q3 for the oral exam.",
           "exercises": [
-            "Define physics-based modelling",
-            "Define empirical modelling",
-            "List 3 typical inputs and 3 outputs for any model",
-            "What is an operating envelope?",
-            "When would you pick empirical over physics-based?"
+            "Define parametric geometry in exam-ready prose",
+            "Why needed for as-designed AND as-manufactured?",
+            "Link parametric geometry to DoE/optimisation",
+            "Give antenna project parameter example",
+            "Parametric vs static CAD — difference?"
           ],
           "checklist": [
-            "Can define both modelling types",
-            "Listed I/O for antenna project",
-            "Listed I/O for traction control P-diagram",
-            "Understand operating envelope concept",
-            "Read physics vs empirical lecture slide"
+            "Answered Q3 in complete sentences",
+            "Listed 5 antenna parameters",
+            "Linked to design space exploration",
+            "Understand geometry idealisation hierarchy",
+            "No 'just 3D CAD' trap answer"
           ],
           "youtube": [
             {
-              "id": "64N2BY747Cw",
-              "title": "Rocket CFD Simulation"
+              "id": "8u6dYTuBymA",
+              "title": "Ansys — Simulation-Driven Design"
             },
             {
-              "id": "pcLg6C_WlHg",
-              "title": "Bridge Aeroelastic Flutter Simulation"
+              "id": "z_g-ov61DNw",
+              "title": "Building Ventilation CFD — Geometry Context"
             }
           ],
           "resources": [
             {
-              "title": "Advanced Engineering Mathematics — Kreyszig",
-              "url": "https://www.bau.edu.jo/UserPortal/UserProfile/PostsAttach/59003_3812_1.pdf",
+              "title": "DigitalTwin Lectures PDF — Quiz Q3",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
-          "xp": 45
+          "xp": 52
         },
         {
           "id": "d1-b2-t2",
-          day: 1,
+          "day": 1,
           "block": 2,
-          "slot": "09:30–11:00",
-          "title": "Engineering Design Process + Model Coupling",
-          "emoji": "🔗",
+          "slot": "08:45–10:00",
+          "title": "Quiz Q4 — What Is Model Accuracy?",
+          "emoji": "⚖️",
           "category": "Theory",
-          "learn": "Design process is ITERATIVE: Idea → Conceptual Design → Preliminary Design → Detailed Design → Release for Manufacture. At each level: System → Subsystems → Components. Process automation & simulation-driven design are multidisciplinary, integrated, multi-fidelity. Risk level drives accuracy and fidelity needed. MODEL COUPLING (your notes): 'Solving two or more models together in an iterative loop, because one's outputs are others' inputs — INTERDEPENDENT, cannot be solved independently.' Example from notes — Smart Building HVAC: Occupancy↑ → Heat generation↑ → HVAC cooling demand↑ → Energy consumption↑. Models: Thermal, Occupancy, Airflow, Energy — coupled causal chain. Rolls-Royce seal example: seals sit at intersection of air system, thermal physics, flight loads.",
-          "practice": "Draw the design process funnel (idea → release). Draw the HVAC coupling chain with 4 models and arrows. Explain in 3 sentences why coupled models need iterative loops. From your antenna project: what models would couple in a full tower digital twin (structural FEA + thermal + wind load + RUL prognostics)?",
+          "learn": "Quiz Q4: 'What is the accuracy of a model?' Prof. Nasti: ACCURACY = how close model predictions are to reality — covering geometry accuracy, behavioural accuracy, and dynamic accuracy. This is DISTINCT from FIDELITY (level of detail/realism in mirroring physical assets). Trade-off: RUN TIME vs ACCURACY — higher fidelity models take longer. The product lifecycle introduces variations the twin must capture: manufacturing variations, assembly tolerances, as-designed vs as-built differences, real operating conditions, aspects of physics NOT captured by simulation. Measurement uncertainty (e.g. d = 35.0 ± 0.1) reflects manufacturing tolerance — governed by ASME PTC 19.1 for test uncertainty. Exam trap: students define accuracy as 'how detailed the model is' — that is fidelity, not accuracy.",
+          "practice": "Make a two-column table: Fidelity vs Accuracy with 3 examples each. Draw virtual product ↔ real product with four variation sources. Give concrete runtime-accuracy example: coarse FEA mesh = fast but less accurate stress prediction.",
           "exercises": [
-            "List 4 design process stages after 'idea'",
-            "Define model coupling with the word 'interdependent'",
-            "Draw HVAC coupling chain from class notes",
-            "Why can't coupled models be solved independently?",
-            "Give one coupling example from your antenna project"
+            "Define accuracy (Prof's three aspects)",
+            "Define fidelity — two meanings from notes",
+            "Runtime vs accuracy trade-off example",
+            "What does d = 35.0 (±0.1) mean?",
+            "Accuracy vs fidelity — exam trap?"
           ],
           "checklist": [
-            "Drew design process stages from memory",
-            "Drew HVAC coupling diagram",
-            "Can define model coupling verbatim",
-            "Connected coupling to antenna project",
-            "Watched coupled systems video"
+            "Table drawn from memory",
+            "Virtual↔real diagram complete",
+            "Oral answer ≤30 seconds",
+            "Read ASME PTC 19.1 overview",
+            "Never confuse fidelity with accuracy"
           ],
           "youtube": [
             {
-              "id": "9CcbYQ5QA70",
-              "title": "Rolls-Royce — Multi-disciplinary Engine (coupling context)"
+              "id": "8u6dYTuBymA",
+              "title": "Ansys — Car Crash Simulation (fidelity)"
+            },
+            {
+              "id": "cHThndE20oI",
+              "title": "Heat Transfer Simulation — Accuracy Context"
             }
           ],
           "resources": [
             {
-              "title": "ASME GT2020 — Adele Nasti Seal Design Paper",
-              "url": "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2020/84188/V07CT14A023/1095072",
+              "title": "ASME PTC 19.1 — Test Uncertainty",
+              "url": "https://www.asme.org/codes-standards/find-codes-standards/ptc-19-1-test-uncertainty",
               "type": "paper"
             }
           ],
@@ -209,32 +210,125 @@ export const day1: DayPlan =
     },
     {
       "block": 3,
-      "slot": "11:00–14:00",
-      "label": "✅ Verification & Validation Deep Dive (exam traps)",
+      "slot": "10:00–12:30",
+      "label": "🔗 Quiz Q5–Q6 — Coupling & Empirical Modelling",
       "tasks": [
         {
           "id": "d1-b3-t1",
-          day: 1,
+          "day": 1,
           "block": 3,
-          "slot": "11:00–12:30",
-          "title": "Verification vs Validation — Know the Exact Wording",
-          "emoji": "✅",
-          "category": "V&V",
-          "learn": "This is Prof. Nasti's favourite trap question. VERIFICATION: 'Have I done the maths right?' — checks software implementation against expected results from the algorithm. Aims for ZERO error in code. Applies to simulation software development. VALIDATION: 'Have I done the right maths?' — checks model predictions against real-world behaviour. Aims for ACCEPTABLE delta (subjective). Most common validation: against experimental test data OR against higher-fidelity model. Model CALIBRATION: adjusting internal model parameters to match experimental data — incorporates missed physics. DATA MATCHING = model calibration (your notes). Measurement uncertainty: e.g. d = 35.0 (±0.1) → manufacturing tolerance. ASME PTC 19.1 governs test uncertainty.",
-          "practice": "Write on paper: Verification = ___ / Validation = ___. Create 3 exam-style Q&A cards. Example: 'You compare CFD to wind tunnel — is that V or V?' (Validation). 'You check FEA code against analytical beam solution — V or V?' (Verification). Practice saying answers in complete sentences — Prof fails vague answers.",
+          "slot": "10:00–11:15",
+          "title": "Quiz Q5 — Coupling in Physics-Based Models",
+          "emoji": "🔗",
+          "category": "Theory",
+          "learn": "Quiz Q5: 'What does coupling mean in the context of physics-based models?' Prof. Nasti: MODEL COUPLING = 'Solving two or more models together in an iterative loop, because one's outputs are others' inputs — INTERDEPENDENT, cannot be solved independently.' Example — Smart Building HVAC: Occupancy↑ → Heat generation↑ → HVAC cooling demand↑ → Energy consumption↑. Models: Thermal, Occupancy, Airflow, Energy — coupled causal chain. Rolls-Royce seal case: seals sit at intersection of air system, thermal physics, flight loads — Prof's own ASME GT2020 paper. Exam trap: coupling ≠ simply 'connecting two software tools' (that is process automation). Coupling means physics interdependence requiring iterative solution.",
+          "practice": "Draw the HVAC coupling chain with four models and directed arrows. Explain in three sentences why coupled models need iterative loops. For antenna tower digital twin: list four models that would couple (structural FEA + thermal + wind load + RUL prognostics).",
           "exercises": [
-            "State verification question ('Have I done the maths right?')",
-            "State validation question ('Have I done the right maths?')",
-            "Define model calibration",
-            "What is data matching?",
-            "What does ±0.1 mean in d=35.0(±0.1)?"
+            "Define coupling with word 'interdependent'",
+            "Draw HVAC coupling chain",
+            "Why can't coupled models be solved independently?",
+            "Coupling vs process automation — difference?",
+            "Antenna project coupling example"
           ],
           "checklist": [
-            "Memorised V vs V definitions word-for-word",
-            "Created 5 V/V practice questions",
-            "Can explain calibration vs validation",
-            "Read ASME PTC 19.1 overview",
-            "Practiced oral answers aloud"
+            "HVAC diagram from memory",
+            "Definition verbatim",
+            "Distinguished coupling from automation",
+            "Rolls-Royce seal context noted",
+            "Oral answer practiced"
+          ],
+          "youtube": [
+            {
+              "id": "9CcbYQ5QA70",
+              "title": "Rolls-Royce — Multi-disciplinary Engine"
+            },
+            {
+              "id": "z_g-ov61DNw",
+              "title": "Building HVAC Simulation Context"
+            }
+          ],
+          "resources": [
+            {
+              "title": "ASME GT2020 — Adele Nasti Seal Design Paper",
+              "url": "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2020/84188/V07CT14A023/1095072",
+              "type": "paper"
+            }
+          ],
+          "xp": 55
+        },
+        {
+          "id": "d1-b3-t2",
+          "day": 1,
+          "block": 3,
+          "slot": "11:15–12:30",
+          "title": "Quiz Q6 — What Is an Empirical Model?",
+          "emoji": "📊",
+          "category": "Theory",
+          "learn": "Quiz Q6: 'What is an empirical model?' Prof. Nasti: EMPIRICAL modelling starts from real-world observations and experimental data, using statistical methods to extract behaviour — curve fitting, regression, ML surrogates. Contrast PHYSICS-BASED: exploits laws of physics from first principles. Physics-based suits simple/fully-understood physics; empirical suits data-rich problems. In practice BOTH matter — even physics models need experimental validation. A model is a REPRESENTATION of reality; missed physics → calibration fixes this. Typical INPUTS: geometric parameters, operating conditions, operating envelope. Typical OUTPUTS: measurable attributes (temperature) or derived attributes (efficiency). Exam trap: empirical ≠ 'wrong' or 'less scientific' — it is the correct choice when physics is too complex or data is abundant.",
+          "practice": "Classify each as physics-based or empirical: CFD, curve fitting, Arrhenius aging, neural network surrogate, Hooke's law spring. For 5G antenna project: list 3 inputs and 3 outputs. Define operating envelope.",
+          "exercises": [
+            "Define empirical modelling (Prof's words)",
+            "Define physics-based modelling",
+            "3 inputs + 3 outputs for any model",
+            "What is an operating envelope?",
+            "When pick empirical over physics-based?"
+          ],
+          "checklist": [
+            "Both definitions memorised",
+            "Classification exercise done",
+            "Antenna I/O listed",
+            "Operating envelope explained",
+            "Physics vs empirical — no value judgement"
+          ],
+          "youtube": [
+            {
+              "id": "64N2BY747Cw",
+              "title": "Rocket CFD — Physics-Based"
+            },
+            {
+              "id": "_UVHneBUBW0",
+              "title": "StatQuest — Data-Driven Foundations"
+            }
+          ],
+          "resources": [
+            {
+              "title": "DigitalTwin Lectures PDF — Quiz Q6",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            }
+          ],
+          "xp": 48
+        }
+      ]
+    },
+    {
+      "block": 4,
+      "slot": "12:30–15:00",
+      "label": "✅ Quiz Q7–Q8 — Validation, Calibration & V&V",
+      "tasks": [
+        {
+          "id": "d1-b4-t1",
+          "day": 1,
+          "block": 4,
+          "slot": "12:30–13:45",
+          "title": "Quiz Q7 — Validation vs Calibration",
+          "emoji": "🎯",
+          "category": "V&V",
+          "learn": "Quiz Q7: 'What is the difference between model validation and model calibration?' VALIDATION: checks model predictions against real-world behaviour — 'Have I done the RIGHT maths?' Aims for ACCEPTABLE delta (subjective). Most common: compare to experimental test data OR higher-fidelity model. MODEL CALIBRATION (DATA MATCHING in your notes): adjusting internal model parameters to match experimental data — incorporates missed physics. Sequence trap Prof uses: you may calibrate THEN validate, but calibration is NOT validation. Calibration tunes parameters; validation assesses whether the tuned model agrees with independent reality. Example: calibrate wind exponent 1.6 in RUL model using field failures, then validate against held-out tower data.",
+          "practice": "Write three exam Q&A cards: (1) calibrate then validate — order matters? (2) Is curve fitting calibration? (Yes — parameter estimation.) (3) Can you validate without calibrating? (Yes — physics-first models.) Practice complete-sentence oral answers.",
+          "exercises": [
+            "Define model calibration / data matching",
+            "Define model validation",
+            "Calibration vs validation — key difference",
+            "Can calibration replace validation?",
+            "Antenna RUL calibration example"
+          ],
+          "checklist": [
+            "Q7 answer word-perfect",
+            "5 practice Q&A cards created",
+            "Oral answers aloud",
+            "ASME uncertainty context noted",
+            "No mixing calibration with validation"
           ],
           "youtube": [
             {
@@ -247,322 +341,342 @@ export const day1: DayPlan =
               "title": "ASME PTC 19.1 — Test Uncertainty",
               "url": "https://www.asme.org/codes-standards/find-codes-standards/ptc-19-1-test-uncertainty",
               "type": "paper"
-            }
-          ],
-          "xp": 55
-        },
-        {
-          "id": "d1-b3-t2",
-          day: 1,
-          "block": 3,
-          "slot": "12:30–14:00",
-          "title": "Least Squares, Curve Fitting & Surrogate Intro",
-          "emoji": "📈",
-          "category": "V&V",
-          "learn": "CURVE FITTING: generate curve as close to data as possible — empirical model creation. LEAST SQUARE METHOD: estimates model parameters by MINIMISING Σ(yᵢ − f(xᵢ))² — sum of squared residuals between measured data and model predictions. Used for model calibration/data matching. INTERPOLATION: prediction WITHIN measured boundaries. EXTRAPOLATION: prediction OUTSIDE known range (higher uncertainty). SURROGATE MODEL (your notes p.2 & p.4): dataset generated from high-fidelity model, approximated for faster runs. Surrogate-based OPTIMISATION: run optimisation on surrogate instead of expensive model, then return to main model for accurate solution. Geometry idealisation levels: simplified 3D, 2D slice, 1D vector — all must stay in sync with master CAD model.",
-          "practice": "On paper: write the least-squares formula Σ(yᵢ−f(xᵢ))² and explain each term. Fit a line by hand to 3 data points. Explain when interpolation is safe vs when extrapolation is dangerous. For your antenna RUL model: is it physics-based or surrogate? (Physics-based analytical — but could have surrogate wrapper for full FEA).",
-          "exercises": [
-            "Write least-squares residual formula",
-            "Define interpolation vs extrapolation",
-            "Define surrogate model from your notes",
-            "What is surrogate-based optimisation?",
-            "Name 3 geometry idealisation levels"
-          ],
-          "checklist": [
-            "Wrote least-squares formula from memory",
-            "Can explain interpolation vs extrapolation",
-            "Defined surrogate model clearly",
-            "Linked to antenna RUL model type",
-            "Understand geometry idealisation levels"
-          ],
-          "youtube": [
+            },
             {
-              "id": "_UVHneBUBW0",
-              "title": "StatQuest — PCA Step-by-Step (math foundation)"
-            }
-          ],
-          "resources": [
-            {
-              "title": "Kreyszig Ch.22 — Least Squares / Optimization",
-              "url": "https://www.bau.edu.jo/UserPortal/UserProfile/PostsAttach/59003_3812_1.pdf",
+              "title": "DigitalTwin Lectures PDF",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
-          "xp": 50
-        }
-      ]
-    },
-    {
-      "block": 4,
-      "slot": "14:00–17:00",
-      "label": "🏗️ Digital Twin Stages & Integrated Design",
-      "tasks": [
-        {
-          "id": "d1-b4-t1",
-          day: 1,
-          "block": 4,
-          "slot": "14:00–15:30",
-          "title": "As-Designed / As-Built / As-Used Stages",
-          "emoji": "🏭",
-          "category": "Theory",
-          "learn": "Your handwritten p.6 notes three twin stages: AS-DESIGNED — before physical object exists (3D CAD, material properties). AS-BUILT — after manufacturing (manufacturing records, QC, BOM). AS-USED/MAINTAINED — during operation (live sensor data, temperature, power output). AIAA adds use cases per stage: As-designed → calibration, performance monitoring, design optimisation. As-built → factory simulation, material & process modelling. As-used → health monitoring, condition-based maintenance, failure analysis, anomaly detection, end-of-life decisions. Your antenna project spans: drone photogrammetry (as-built geometry) + RUL model (as-used predictive maintenance).",
-          "practice": "Map your antenna project to all 3 stages with specific data sources. Draw a timeline: design → manufacture → deploy → operate showing what data feeds the twin at each point. Prepare 30-second explanation for Prof: 'Where does my project sit in the lifecycle?'",
-          "exercises": [
-            "Define as-designed, as-built, as-used",
-            "List 3 use cases per stage from AIAA",
-            "Map antenna project to all 3 stages",
-            "What data feeds as-used twin for antenna?",
-            "How does drone 3D scan fit in?"
-          ],
-          "checklist": [
-            "Mapped project to 3 twin stages",
-            "Read AIAA use case table",
-            "Prepared lifecycle explanation",
-            "Understand as-built vs as-designed",
-            "Can explain predictive maintenance"
-          ],
-          "youtube": [
-            {
-              "id": "ObGhB9CCHP8",
-              "title": "Siemens Digital Twin — Lifecycle"
-            },
-            {
-              "id": "HftDI09LVI0",
-              "title": "Digital Twin Cities — ASME"
-            }
-          ],
-          "resources": [
-            {
-              "title": "AIAA Digital Twin Definition & Value",
-              "url": "https://www.aiaa.org/docs/default-source/uploadedfiles/issues-and-advocacy/policy-papers/digital-twin-institute-position-paper-(december-2020).pdf",
-              "type": "paper"
-            },
-            {
-              "title": "Grieves & Vickers 2017 — Digital Twin Springer",
-              "url": "https://link.springer.com/chapter/10.1007/978-3-319-38756-4_36",
-              "type": "paper"
-            }
-          ],
-          "xp": 50
+          "xp": 58
         },
         {
           "id": "d1-b4-t2",
-          day: 1,
+          "day": 1,
           "block": 4,
-          "slot": "15:30–17:00",
-          "title": "Process Automation & Integrated Design Systems",
-          "emoji": "⚙️",
-          "category": "HEEDS",
-          "learn": "PROCESS AUTOMATION (your notes p.2): brings the design process itself into software — links multiple simulation tools via automated data transfers = INTEGRATED DESIGN SYSTEMS (simulation framework). Benefits: speed up process, improve product attributes. This is exactly what HEEDS + iSight do. Software tools from your notes: CAD=NX, FEA=Ansys/Abaqus/Nastran, contact=LS-Dyna, mesh-free=Simsolid, automation=HyperWorks, OPTIMISATION=HEEDS+iSight. HEEDS = Multi-disciplinary design exploration — Design of Experiments + optimisation + process automation in one workflow. Prof connects this to Rolls-Royce seal optimisation (ASME GT2020 paper she authored).",
-          "practice": "List all 8 software tools from your class notes with their purpose. Explain process automation in one sentence. Open HEEDS getting started guide — identify: Design Space, Response Surface, Optimisation workflow. Connect: your antenna DoE notebook IS a manual version of what HEEDS automates.",
+          "slot": "13:45–15:00",
+          "title": "Quiz Q8 — Verification vs Validation",
+          "emoji": "✅",
+          "category": "V&V",
+          "learn": "Quiz Q8: 'What is the difference between verification and validation?' Prof. Nasti's favourite trap. VERIFICATION: 'Have I done the maths right?' — checks software implementation against expected results from the algorithm. Aims for ZERO error in code. Applies to simulation software development. VALIDATION: 'Have I done the right maths?' — checks model predictions against real-world behaviour. Examples: CFD vs wind tunnel = VALIDATION. FEA code vs analytical beam solution = VERIFICATION. Comparing two CFD codes = neither alone — context matters. V&V happens in software Testing phase of dev cycle. Prof fails vague answers — practice complete sentences.",
+          "practice": "Create five V/V exam cards with answers. Record 60-second oral drill. Memory hook: Verification = code/maths correct; Validation = physics/model correct. Never say 'V&V' as one blob — Prof separates them.",
           "exercises": [
-            "Define process automation from notes",
-            "What are Integrated Design Systems?",
-            "List HEEDS + iSight purpose",
-            "Name 4 FEA tools from notes",
-            "How does your notebook relate to HEEDS?"
+            "Verification question verbatim",
+            "Validation question verbatim",
+            "CFD vs wind tunnel — V or V?",
+            "FEA vs analytical beam — V or V?",
+            "What does ±0.1 mean in d=35.0(±0.1)?"
           ],
           "checklist": [
-            "Listed all software tools from notes",
-            "Read HEEDS getting started guide intro",
-            "Can explain process automation",
-            "Connected notebook to HEEDS workflow",
-            "Watched HEEDS overview video"
+            "V vs V memorised word-for-word",
+            "5 exam cards with answers",
+            "Oral drill recorded",
+            "Read ASME PTC 19.1 overview",
+            "Complete sentences only"
           ],
           "youtube": [
             {
-              "id": "HvF_3Rok8RY",
-              "title": "HEEDS — Multi-Disciplinary Design Exploration"
+              "id": "9x9LYvErnwk",
+              "title": "Model Validation in Simulation"
             },
             {
-              "id": "SwgtZp4Jcjs",
-              "title": "Isight — Process Automation Overview"
+              "id": "pcLg6C_WlHg",
+              "title": "Structural Simulation — V&V Context"
             }
           ],
           "resources": [
             {
-              "title": "HEEDS Product Page — Siemens",
-              "url": "https://www.plm.automation.siemens.com/global/en/products/simcenter/HEEDS.html",
-              "type": "doc"
-            },
-            {
-              "title": "HEEDS Getting Started Guide PDF",
-              "url": "/Users/msv/Downloads/HEEDSGettingStartedGuide.pdf",
-              "type": "doc"
-            },
-            {
-              "title": "ASME GT2020 Nasti Seal Paper",
-              "url": "https://asmedigitalcollection.asme.org/GT/proceedings-abstract/GT2020/84188/V07CT14A023/1095072",
+              "title": "ASME PTC 19.1 — Test Uncertainty",
+              "url": "https://www.asme.org/codes-standards/find-codes-standards/ptc-19-1-test-uncertainty",
               "type": "paper"
             }
           ],
-          "xp": 55
+          "xp": 60
         }
       ]
     },
     {
       "block": 5,
-      "slot": "17:00–20:00",
-      "label": "📐 Functional Modeling Preview (motorcycle notes)",
+      "slot": "15:00–17:30",
+      "label": "📈 Quiz Q9–Q10 — Geometry Idealisation & Curve Fitting",
       "tasks": [
         {
           "id": "d1-b5-t1",
-          day: 1,
+          "day": 1,
           "block": 5,
-          "slot": "17:00–18:30",
-          "title": "Functional Modeling + Motorcycle Traction FFD",
-          "emoji": "🏍️",
-          "category": "Functional",
-          "learn": "FUNCTIONAL MODELLING: technique to capture key functionalities of a system and their interactions — abstraction to understand relationships and identify improvements. Your class notes — Racing Motorcycle Traction Control FFD: Goals: protect rider, communicate grip level (maximize grip crossed out!). Section 1.0 Monitor: sliding, lean angle, steering angle, brake pressure, suspension state, track position. Compare user settings: engine braking, allowed lean, interference level, power mode, suspension. Change outputs: throttle, fueling, lean, steering, brakes, suspension behaviour. Make prediction: further track layout, traction level. Feedback loop arrow from prediction back to compare/adjust. This is a FUNCTIONAL FLOW DIAGRAM — NOT software architecture.",
-          "practice": "Redraw the motorcycle FFD from your handwritten notes from memory. For each of the 4 columns write 1 sentence explaining data flow. Prof may ask: 'Is functional modelling the same as software architecture?' Answer: NO — it's an abstraction of the real problem. Prepare this answer.",
+          "slot": "15:00–16:15",
+          "title": "Quiz Q9 — Geometry Idealisation",
+          "emoji": "🏗️",
+          "category": "Theory",
+          "learn": "Quiz Q9: 'What does geometry idealisation mean and why is it useful?' Geometry idealisation = simplifying complex CAD geometry before simulation while preserving physics of interest. Levels from notes: simplified 3D solid, 2D plane strain/stress slice, 1D beam/rod idealisation — ALL must stay synchronised with master parametric CAD. Useful because: (1) reduces mesh count and runtime, (2) removes irrelevant geometric detail (fillets, logos), (3) enables appropriate physics (2D symmetry, 1D thermal rod). Exam trap: idealisation ≠ 'bad model' — it is engineering judgement. Wrong idealisation (3D when 2D sufficient) wastes compute; wrong reduction (1D when stress concentrations matter) loses accuracy. Heated rod in FEM Ch31 is deliberate 1D idealisation.",
+          "practice": "Sketch antenna tower: full 3D CAD → 2D frame slice → 1D beam for deflection check. For each level state what physics is kept vs dropped. Write Q9 answer in 4 sentences for oral exam.",
           "exercises": [
-            "Define functional modelling",
-            "Redraw motorcycle traction FFD from memory",
-            "List all 6 monitored inputs (Section 1.0)",
-            "List all 6 adjustable outputs",
-            "What does the prediction feedback loop do?"
+            "Define geometry idealisation",
+            "Name 3 idealisation levels",
+            "Why useful — 3 reasons",
+            "Must stay synced with master CAD?",
+            "Heated rod — why 1D idealisation OK?"
           ],
           "checklist": [
-            "Redrew FFD from handwritten notes",
-            "Can define functional modelling",
-            "Know exam trap: FFD ≠ software architecture",
-            "Listed all inputs and outputs",
-            "Explained feedback loop"
+            "3-level hierarchy drawn",
+            "Q9 oral answer written",
+            "Antenna idealisation example",
+            "Linked to FEM Ch31 rod",
+            "Idealisation ≠ inaccuracy trap avoided"
           ],
           "youtube": [
             {
               "id": "8u6dYTuBymA",
-              "title": "Simulation-Driven Design Context"
+              "title": "Simulation Geometry Preparation"
+            },
+            {
+              "id": "cHThndE20oI",
+              "title": "1D Heat Transfer — Idealisation"
             }
           ],
           "resources": [
             {
-              "title": "NASA Systems Engineering — Functional Analysis",
-              "url": "https://www.nasa.gov/connect/ebooks/nasa-systems-engineering-handbook",
-              "type": "doc"
-            }
-          ],
-          "xp": 45
-        },
-        {
-          "id": "d1-b5-t2",
-          day: 1,
-          "block": 5,
-          "slot": "18:30–20:00",
-          "title": "P-Diagram — Rear Wheel Traction Control",
-          "emoji": "📊",
-          "category": "Functional",
-          "learn": "P-DIAGRAM (Parameter Diagram) from your notes: Center process = 'Regulate rear wheel traction.' INPUTS (left): front wheel speed, rear wheel speed, throttle position, engine speed, lean angle. NOISE FACTORS (top): road conditions, tire wear/pressure, temperature, load, sudden inputs. CONTROL FACTORS (bottom): allowed slip, TC sensitivity level, torque reduction limits. IDEAL RESPONSE (top-right): traction maintained, smooth torque delivery, stable vehicle, minimal impact on inputs. ERROR STATE (bottom-right): excessive rear slip, jerky throttle, unstable vehicle, TC too late. 4-step operational flow from notes: (1) Sense operating conditions, (2) Evaluate traction level (calculate slip, compare threshold), (3) Control available forces (reduce input, limit power), (4) Provide system feedback (indicator, log data).",
-          "practice": "Draw the complete P-diagram from memory with all 5 zones. Write the 4-step L0-L2 operational flow. Practice explaining: 'What is a noise factor vs control factor?' — Noise = uncontrolled environment; Control = what the system can tune.",
-          "exercises": [
-            "Draw P-diagram with all 5 zones from memory",
-            "List 4-step operational flow L0-L2",
-            "Define noise factors (3 examples)",
-            "Define control factors (3 examples)",
-            "Ideal response vs error state — 2 examples each"
-          ],
-          "checklist": [
-            "Drew P-diagram from handwritten notes",
-            "Memorised 4-step operational flow",
-            "Can explain noise vs control factors",
-            "Practiced oral explanation",
-            "Compared P-diagram to FFD"
-          ],
-          "youtube": [],
-          "resources": [
-            {
-              "title": "AIAG/VDA FMEA Handbook (P-diagram context)",
-              "url": "https://www.aiag.org/quality/automotive-core-tools",
+              "title": "DigitalTwin Lectures PDF — Quiz Q9",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
           "xp": 50
+        },
+        {
+          "id": "d1-b5-t2",
+          "day": 1,
+          "block": 5,
+          "slot": "16:15–17:30",
+          "title": "Quiz Q10 — What Is Curve Fitting?",
+          "emoji": "📈",
+          "category": "V&V",
+          "learn": "Quiz Q10: 'What is curve fitting?' CURVE FITTING = generating a curve as close to experimental data as possible — empirical model creation from observations. Used for model calibration / data matching. Connects to Hooke's law Exercise 1: plot Force vs Displacement, fit line, extract spring constant k. Prof expects you to know fitting is NOT validation — you fit parameters, then validate predictions on new data. Interpolation (within data range) vs extrapolation (outside — Quiz Q12) follows from fitted curve. Surrogate models (Day 2–3) extend curve fitting to multi-dimensional response surfaces.",
+          "practice": "Using Exercise 1 spring data (0.1 N → 7.3 mm through 1.5 N → 99.8 mm, uncertainty ±0.5 mm): plot by hand, identify linear region, state that curve fitting will yield k. Preview least squares for Q11.",
+          "exercises": [
+            "Define curve fitting (Prof's words)",
+            "Link curve fitting to calibration",
+            "Exercise 1 — linear relationship expected?",
+            "Fitting vs validation — difference?",
+            "Connection to surrogate models"
+          ],
+          "checklist": [
+            "Q10 definition memorised",
+            "Spring data plotted on paper",
+            "Linear F vs x relationship identified",
+            "Linked to Exercise 1",
+            "Calibration chain understood"
+          ],
+          "youtube": [
+            {
+              "id": "_UVHneBUBW0",
+              "title": "StatQuest — Fitting a Line to Data"
+            }
+          ],
+          "resources": [
+            {
+              "title": "DigitalTwin Lectures PDF — Exercise 1 Data",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "IIT Data Analysis Using Graphs",
+              "url": "https://www.iit.edu/sites/default/files/2019-12/data_analysis.pdf",
+              "type": "doc"
+            }
+          ],
+          "xp": 48
         }
       ]
     },
     {
       "block": 6,
-      "slot": "20:00–23:00",
-      "label": "🎯 Day 1 Boss — Oral Exam Drill",
+      "slot": "17:30–20:00",
+      "label": "📐 Quiz Q11–Q12 — Least Squares & Extrapolation",
       "tasks": [
         {
           "id": "d1-b6-t1",
-          day: 1,
+          "day": 1,
           "block": 6,
-          "slot": "20:00–21:30",
-          "title": "Day 1 Flashcard Oral Exam — All Definitions",
-          "emoji": "🎤",
-          "category": "ALL",
-          "learn": "Prof. Nasti fails vague answers on the LAST attempt. Drill every Day 1 definition as a complete sentence answer. Key phrases she expects: 'digital representation throughout lifecycle', 'does not replace experimental testing', 'Have I done the maths right?' vs 'Have I done the right maths?', 'iterative loop' for coupling, 'interdependent', 'operating envelope', 'first principles' vs 'observations from real world'. Time yourself: 60 seconds per definition. If you hesitate, restart.",
-          "practice": "Record yourself answering 15 questions aloud. Play back — flag any 'um' or incomplete sentences. Write perfect answers for: What is a digital twin? What is model coupling? Verification vs validation? Physics vs empirical? What is process automation?",
+          "slot": "17:30–18:45",
+          "title": "Quiz Q11 — Least Squares Method",
+          "emoji": "📐",
+          "category": "V&V",
+          "learn": "Quiz Q11: 'What is the least square method and how does it work?' LEAST SQUARES estimates model parameters by MINIMISING Σ(yᵢ − f(xᵢ))² — sum of squared residuals between measured data and model predictions. Each term (yᵢ − f(xᵢ)) is a residual; squaring penalises large errors and makes calculus tractable. Used for curve fitting and model calibration. For Hooke's law: f(x) = kx, minimise Σ(Fᵢ − kxᵢ)² to find spring constant k in SI units (N/m after converting mm→m). Prof trap: least squares ≠ 'make line pass through all points' — overdetermined systems have no exact fit. Measurement uncertainty ±0.5 mm on displacement affects confidence in k.",
+          "practice": "Write formula Σ(yᵢ−f(xᵢ))² and explain each symbol. Fit line by hand to three spring data points. Calculate k roughly from slope. State units conversion mm→m for SI.",
           "exercises": [
-            "Answer 'What is a digital twin?' in 30 seconds",
-            "Answer V vs V without mixing them up",
-            "Define model coupling with 'interdependent'",
-            "Explain fidelity vs accuracy",
-            "List 5 lifecycle stages in order"
+            "Write least-squares residual formula",
+            "Explain why residuals are squared",
+            "Apply to Hooke's law f(x)=kx",
+            "Overdetermined system — meaning?",
+            "Effect of ±0.5 mm uncertainty?"
           ],
           "checklist": [
-            "Recorded 15 oral answers",
-            "Fixed all hesitant definitions",
-            "Wrote perfect answer sheet",
-            "Practiced with timer",
-            "Ready for Prof's definition traps"
+            "Formula from memory",
+            "Hand calculation for k",
+            "Units conversion explicit",
+            "Connected to Exercise 1",
+            "Oral explanation ≤45 sec"
           ],
           "youtube": [
             {
-              "id": "9CcbYQ5QA70",
-              "title": "Rolls-Royce — Review intelligent engine context"
-            },
-            {
-              "id": "ObGhB9CCHP8",
-              "title": "Siemens DT — Review lifecycle"
+              "id": "_UVHneBUBW0",
+              "title": "StatQuest — Linear Regression & Least Squares"
             }
           ],
           "resources": [
             {
-              "title": "DigitalTwin Exam Guidelines PDF",
-              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Exam_Guidelines.pdf",
+              "title": "DigitalTwin Lectures PDF — Exercise 1",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "Hooke's Law Reference",
+              "url": "https://phys.org/news/2015-02-law.html",
               "type": "doc"
             }
           ],
-          "xp": 60
+          "xp": 55
         },
         {
           "id": "d1-b6-t2",
-          day: 1,
+          "day": 1,
           "block": 6,
-          "slot": "21:30–23:00",
-          "title": "Day 1 Written Drill — Exercises from Lecture PDF",
-          "emoji": "📝",
-          "category": "ALL",
-          "learn": "Complete AIAA Exercise 1 from lecture slides: (1) What digital twin use case has value for a company? (2) What products could have a digital twin? (3) Ideas for final exam. Your answer for (1): predictive maintenance of telecom infrastructure using drone-derived geometry + physics-based RUL — saves climber visits, reduces outages. For (2): aero engines, smart buildings, racing motorcycles, centrifuges, injection molding machines. Review Technology Readiness Levels — NASA 1-9 scale. Your project is roughly TRL 4-5 (validated in lab/simulation, not yet deployed at scale).",
-          "practice": "Write full answers to all 3 AIAA exercise questions. Read NASA TRL page and justify TRL 4-5 for your project. Draft your 200-word value proposition paragraph for the presentation.",
+          "slot": "18:45–20:00",
+          "title": "Quiz Q12 — What Does Extrapolation Mean?",
+          "emoji": "⚠️",
+          "category": "V&V",
+          "learn": "Quiz Q12: 'What does extrapolation mean?' EXTRAPOLATION = predicting OUTSIDE the range of measured/calibrated data — higher uncertainty than INTERPOLATION (within range). Dangerous for empirical models: fitted curve may diverge from true physics beyond data. Example: spring data only to 1.5 N — predicting at 5 N is extrapolation; linear Hooke assumption may fail (plastic deformation). For antenna RUL: DoE spans wind 5–35 m/s and temp 20–65°C — predicting at 40 m/s is extrapolation. Prof expects you to recommend staying inside operating envelope (wind≤12, temp≤30) rather than extrapolating.",
+          "practice": "On same spring plot, mark interpolation zone (0.1–1.5 N) vs extrapolation zone (beyond 1.5 N). Write two sentences on risk. For antenna: identify when envelope plot stays inside vs outside DoE bounds.",
           "exercises": [
-            "Answer AIAA Exercise 1 three questions in writing",
-            "Define TRL and place your project on scale",
-            "Write 200-word 'why my use case matters' paragraph",
-            "List 5 references for presentation",
-            "Review exam criteria: depth, breadth, creativity"
+            "Define extrapolation vs interpolation",
+            "Why extrapolation is higher risk",
+            "Spring example — beyond 1.5 N",
+            "Antenna RUL extrapolation example",
+            "Operating envelope avoids extrapolation?"
           ],
           "checklist": [
-            "Completed AIAA exercise answers",
-            "Know TRL level for project",
-            "Wrote use-case value paragraph",
-            "Read exam guidelines completely",
-            "Listed presentation references"
+            "Both definitions memorised",
+            "Zones marked on spring plot",
+            "Antenna bounds identified",
+            "Risk stated in complete sentences",
+            "Linked to Day 3 envelope plot"
+          ],
+          "youtube": [
+            {
+              "id": "9x9LYvErnwk",
+              "title": "Simulation — Stay Within Valid Range"
+            }
+          ],
+          "resources": [
+            {
+              "title": "DigitalTwin Lectures PDF — Quiz Q12",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "Your Antenna RUL Notebook",
+              "url": "file:///Users/msv/Desktop/Desktop%20Wizzz/digital%20twin1/DigitalTwin_Antenna_RUL.ipynb",
+              "type": "tool"
+            }
+          ],
+          "xp": 52
+        }
+      ]
+    },
+    {
+      "block": 7,
+      "slot": "20:00–23:00",
+      "label": "🧪 Exercises 1–2 — Hooke's Law Lab & AIAA Paper",
+      "tasks": [
+        {
+          "id": "d1-b7-t1",
+          "day": 1,
+          "block": 7,
+          "slot": "20:00–21:30",
+          "title": "Exercise 1 — Hooke's Law Spring Data Analysis",
+          "emoji": "🧪",
+          "category": "V&V",
+          "learn": "Exercise 1 from Prof. Nasti's PDF: Physics-based vs empirical modelling — demonstrate physics via experiment, understand trends, fit curve to data. Design experiment validating Hooke's law. Data: Force (N) vs Displacement (mm) with ±0.5 mm uncertainty — 15 points from 0.1 N/7.3 mm to 1.5 N/99.8 mm. Tasks: (1) Plot data — relationship between dependent (displacement) and independent (force) variables. (2) Fit appropriate curve — predict spring constant k in SI units (N/m). Expect near-linear F–x; least squares on f(x)=kx. Convert mm to m before k calculation. This exercise IS Quiz Q10–Q11 in practice — Prof may ask k value in oral exam.",
+          "practice": "Plot all 15 data points with error bars ±0.5 mm (Excel/Python/paper). Fit line via least squares. Compute k in N/m. Sanity check: R² or visual linearity. Write 2 sentences on physics-based (Hooke) vs empirical (fitted line) interpretation.",
+          "exercises": [
+            "Plot Force vs Displacement with uncertainty bars",
+            "Identify relationship (linear expected)",
+            "Fit curve and compute k in SI (N/m)",
+            "Show least squares working",
+            "Physics-based vs empirical — 2 sentences"
+          ],
+          "checklist": [
+            "All 15 points plotted",
+            "k calculated in N/m",
+            "Least squares shown",
+            "Error bars included",
+            "Ready to defend k in oral exam"
+          ],
+          "youtube": [
+            {
+              "id": "_UVHneBUBW0",
+              "title": "StatQuest — Fitting Hooke's Law Data"
+            }
+          ],
+          "resources": [
+            {
+              "title": "DigitalTwin Lectures PDF — Exercise 1",
+              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
+              "type": "doc"
+            },
+            {
+              "title": "Hooke's Law — phys.org",
+              "url": "https://phys.org/news/2015-02-law.html",
+              "type": "doc"
+            },
+            {
+              "title": "IIT Data Analysis Using Graphs",
+              "url": "https://www.iit.edu/sites/default/files/2019-12/data_analysis.pdf",
+              "type": "doc"
+            }
+          ],
+          "xp": 65
+        },
+        {
+          "id": "d1-b7-t2",
+          "day": 1,
+          "block": 7,
+          "slot": "21:30–23:00",
+          "title": "Exercise 2 — AIAA Digital Twin White Paper",
+          "emoji": "📄",
+          "category": "Theory",
+          "learn": "Exercise 2: Read AIAA white paper 'Digital Twin: Definition and Value' (Dec 2020). Answer: (1) What is in YOUR view a digital twin? (2) What use of digital twin could have value for a company? (3) Examples of products that could have a digital twin? Prof says language is technical — understand main ideas, not every sentence. Your exam answer for (1) must align with Quiz Q1 definition. For (2): predictive maintenance of telecom infrastructure using drone geometry + physics RUL — saves climber visits, reduces outages (~€220K industrial context). For (3): aero engines, smart buildings, racing motorcycles, centrifuges, injection molding, 5G antenna towers.",
+          "practice": "Read AIAA executive summary and Section on Definition. Write full answers to all three questions in complete paragraphs. Map AIAA as-designed/as-built/as-used to your antenna project. Prepare for Lecture 2 open discussion format — Prof asks follow-ups.",
+          "exercises": [
+            "Answer Q1 — your view of digital twin (align with Prof)",
+            "Answer Q2 — valuable company use case",
+            "Answer Q3 — five product examples",
+            "Reference AIAA lifecycle stages",
+            "Connect to antenna RUL project"
+          ],
+          "checklist": [
+            "AIAA paper skimmed/read",
+            "Three written answers complete",
+            "Antenna project mapped to AIAA",
+            "TRL 4–5 justified for project",
+            "Discussion-ready paragraphs"
           ],
           "youtube": [
             {
               "id": "9UpMeDO0A04",
               "title": "Digital Twin Use Cases Overview"
+            },
+            {
+              "id": "ObGhB9CCHP8",
+              "title": "Siemens — Digital Twin Value"
             }
           ],
           "resources": [
             {
-              "title": "DigitalTwin Exam Guidelines",
-              "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Exam_Guidelines.pdf",
-              "type": "doc"
+              "title": "AIAA Digital Twin: Definition & Value (Dec 2020)",
+              "url": "https://www.aiaa.org/docs/default-source/uploadedfiles/issues-and-advocacy/policy-papers/digital-twin-institute-position-paper-(december-2020).pdf",
+              "type": "paper"
             },
             {
               "title": "NASA TRL Scale",
@@ -570,12 +684,12 @@ export const day1: DayPlan =
               "type": "doc"
             },
             {
-              "title": "DigitalTwin Lectures Exercises PDF",
+              "title": "DigitalTwin Lectures PDF — Exercise 2",
               "url": "file:///Users/msv/Downloads/OneDrive_1_6-8-2026/DigitalTwin_Lectures_Exercises.pdf",
               "type": "doc"
             }
           ],
-          "xp": 55
+          "xp": 62
         }
       ]
     }

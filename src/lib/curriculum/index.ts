@@ -24,7 +24,7 @@ export function getTodayDayNum(): number {
   const start = new Date("2026-06-08");
   const now = new Date();
   const diff = Math.floor((now.getTime() - start.getTime()) / 86400000);
-  return Math.min(Math.max(diff + 1, 1), 3);
+  return Math.min(Math.max(diff + 1, 1), CAMP_DAYS.length);
 }
 
 export const CATEGORY_COLORS: Record<string, string> = {
@@ -38,6 +38,8 @@ export const CATEGORY_COLORS: Record<string, string> = {
   Functional: "#e879f9",
   Project: "#4ade80",
   Tools: "#94a3b8",
+  FEA: "#a3e635",
+  ML: "#c084fc",
 };
 
 export const CATEGORY_EMOJI: Record<string, string> = {
@@ -51,4 +53,6 @@ export const CATEGORY_EMOJI: Record<string, string> = {
   Functional: "📐",
   Project: "📡",
   Tools: "🔧",
+  FEA: "🔩",
+  ML: "🧠",
 };
