@@ -1,0 +1,19 @@
+node_modules
+.next
+data/*.db
+data/*.db-*
+data/twinblitz.db*
+.venv
+.env.local
+.env.*.local
+.DS_Store
+.vercel
+.env
+
+# Large local study materials (keep on disk, not in git)
+Class materials/
+Digital twin/
+*.pdf.txt
+PHOTO-*.jpg
+__pycache__/
+*.pyc
