@@ -12,16 +12,22 @@ export function DbStatusBanner() {
       .catch(() => setBackend("unknown"));
   }, []);
 
-  if (!backend || backend === "local" || backend === "redis" || backend === "turso") {
-    return null;
+  if (!backend) return null;
+
+  if (backend === "redis" || backend === "turso" || backend === "local") {
+    return (
+      <div className="w-full max-w-sm mb-4 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-2 text-xs text-green-300">
+        ✓ Data saves ({backend})
+      </div>
+    );
   }
 
   return (
-    <div className="w-full max-w-sm mb-6 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm">
-      <p className="font-medium text-amber-300">Ephemeral database</p>
-      <p className="text-[var(--muted)] mt-1">
-        Progress may reset on cold starts. Set TURSO_DATABASE_URL or Upstash Redis on Vercel for
-        persistence.
+    <div className="w-full max-w-sm mb-4 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm">
+      <p className="font-medium text-amber-300">⚠️ Create a new account</p>
+      <p className="text-[var(--muted)] mt-1 text-xs">
+        Server storage is temporary — use <strong>Register</strong>, not login, if
+        your old account stopped working.
       </p>
     </div>
   );

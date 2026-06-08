@@ -32,7 +32,9 @@ export default async function HomePage() {
       <header className="px-5 pt-12 pb-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-indigo-400 tracking-wide">TwinBlitz</p>
+            <p className="text-xs font-semibold text-indigo-400 tracking-wide">
+              Prof. Nasti · Digital Twin
+            </p>
             <p className="text-[var(--muted)] text-sm">Hey {user.name} 👋</p>
             <h1 className="text-xl font-bold mt-0.5">Day {todayNum} — {today.title}</h1>
           </div>
@@ -109,6 +111,15 @@ export default async function HomePage() {
           className="block text-center py-3 text-indigo-400 text-sm font-medium"
         >
           Full Day {todayNum} view →
+        </Link>
+      </section>
+
+      <section className="px-5 mb-4">
+        <Link
+          href="/materials"
+          className="block glass rounded-xl p-4 text-sm text-indigo-300"
+        >
+          📷 Your handwritten class notes (9 pages) →
         </Link>
       </section>
 

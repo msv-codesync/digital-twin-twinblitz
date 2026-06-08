@@ -10,17 +10,21 @@ export default async function RegisterPage() {
 
   return (
     <main className="min-h-dvh flex flex-col items-center justify-center px-6 pb-8">
-      <div className="text-center mb-8 animate-slide-up">
-        <div className="text-5xl mb-3">🚀</div>
-        <h1 className="text-2xl font-bold">Join TwinBlitz</h1>
-        <p className="text-[var(--muted)] text-sm mt-2">Learn embedded, NFC, AI, IoT from scratch</p>
+      <div className="text-center mb-6 animate-slide-up max-w-sm">
+        <div className="text-5xl mb-3">🔬</div>
+        <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+          Start Your Sprint
+        </h1>
+        <p className="text-[var(--muted)] text-sm mt-2">
+          Last attempt — let&apos;s get you exam-ready
+        </p>
       </div>
       <DbStatusBanner />
       <AuthForm mode="register" />
       <p className="text-sm text-[var(--muted)] mt-6">
-        Have account?{" "}
+        Already registered?{" "}
         <Link href="/login" className="text-indigo-400 font-medium">
-          Login
+          Sign in
         </Link>
       </p>
     </main>

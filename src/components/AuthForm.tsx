@@ -38,13 +38,19 @@ export function AuthForm({ mode }: { mode: Mode }) {
       if (!res.ok) {
         const msg = data.error || "Something went wrong";
         if (mode === "login" && msg.includes("Invalid email or password")) {
-          throw new Error("Invalid email or password. Try registering again if this is a new deploy.");
+          throw new Error(
+            "Account not found. Click Create account below — old accounts may have been wiped on deploy."
+          );
         }
         throw new Error(msg);
       }
 
+      if (!data.user) {
+        throw new Error("Server did not return user — try again");
+      }
+
       // Full page navigation ensures cookie is applied before dashboard loads
-      window.location.href = "/";
+      window.location.assign("/");
     } catch (err) {
       if ((err as Error).name === "AbortError") {
         setError("Request timed out. Check your connection and try again.");
