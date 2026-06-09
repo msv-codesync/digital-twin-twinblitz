@@ -1,13 +1,17 @@
 import { day1 } from "./day1";
 import { day2 } from "./day2";
 import { day3 } from "./day3";
+import { HEEDS_DAY, HEEDS_TASKS } from "./heeds-index";
 import type { DayPlan, Task } from "./types";
 
 export const CAMP_DAYS: DayPlan[] = [day1, day2, day3];
 
-export const ALL_TASKS: Task[] = CAMP_DAYS.flatMap((d) =>
-  d.blocks.flatMap((b) => b.tasks)
-);
+export { HEEDS_DAY, HEEDS_TASKS, HEEDS_TOTAL_TASKS, HEEDS_TOTAL_XP, getHeedsTask } from "./heeds-index";
+
+export const ALL_TASKS: Task[] = [
+  ...CAMP_DAYS.flatMap((d) => d.blocks.flatMap((b) => b.tasks)),
+  ...HEEDS_TASKS,
+];
 
 export const TOTAL_TASKS = ALL_TASKS.length;
 export const TOTAL_XP = ALL_TASKS.reduce((s, t) => s + t.xp, 0);
@@ -18,6 +22,10 @@ export function getDay(dayNum: number): DayPlan | undefined {
 
 export function getTask(taskId: string): Task | undefined {
   return ALL_TASKS.find((t) => t.id === taskId);
+}
+
+export function isHeedsTask(taskId: string): boolean {
+  return taskId.startsWith("heeds-");
 }
 
 export function getTodayDayNum(): number {

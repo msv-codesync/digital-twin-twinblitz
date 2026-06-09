@@ -2,7 +2,7 @@
 
 Mobile-first study app for **Prof. Dr. Adele Nasti**'s *Modeling, Simulation and Digital Twin* final exam.
 
-**3 days × 18 hours** · **42 tasks** · Full Prof. Nasti syllabus: all **12 official quiz questions**, **Exercises 1–12**, FEM Ch.31, HEEDS guide, Simcenter labs, + your **Antenna RUL** project.
+**3 days × 18 hours** · **42 tasks** + **HEEDS 18hr course** (16 tasks, all 8 guide examples) · Full Prof. Nasti syllabus: all **12 official quiz questions**, **Exercises 1–12**, FEM Ch.31, HEEDS guide, Simcenter labs, + your **Antenna RUL** project.
 
 ## Quick start (local)
 
@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) → Register → start Day 1.
+Open [http://localhost:3000](http://localhost:3000) → Register → **HEEDS tab** for the 18hr HEEDS-only course, or **Today** for the 3-day exam sprint.
 
 No env vars needed locally — SQLite at `data/twinblitz.db`.
 

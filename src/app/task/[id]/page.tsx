@@ -2,7 +2,14 @@ import Link from "next/link";
 import { redirect, notFound } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { getTaskProgress } from "@/lib/db";
-import { getTask, getDay, CATEGORY_COLORS, CATEGORY_EMOJI } from "@/lib/curriculum";
+import {
+  getTask,
+  getDay,
+  isHeedsTask,
+  HEEDS_DAY,
+  CATEGORY_COLORS,
+  CATEGORY_EMOJI,
+} from "@/lib/curriculum";
 import { TaskChecklist } from "@/components/TaskChecklist";
 import { NotesEditor } from "@/components/NotesEditor";
 import { PracticeLog } from "@/components/PracticeLog";
@@ -16,15 +23,19 @@ export default async function TaskPage({ params }: { params: Promise<{ id: strin
   const task = getTask(id);
   if (!task) notFound();
 
-  const day = getDay(task.day)!;
+  const heeds = isHeedsTask(task.id);
+  const day = heeds ? HEEDS_DAY : getDay(task.day);
   const progress = await getTaskProgress(user.id);
   const isDone = progress[task.id] ?? false;
 
   return (
     <main className="min-h-dvh pb-24 max-w-lg mx-auto">
       <header className="px-5 pt-12 pb-4">
-        <Link href={`/day/${task.day}`} className="text-sm text-indigo-400">
-          ← Day {task.day}
+        <Link
+          href={heeds ? "/heeds" : `/day/${task.day}`}
+          className="text-sm text-indigo-400"
+        >
+          {heeds ? "← HEEDS Sprint" : `← Day ${task.day}`}
         </Link>
         <div className="flex items-start gap-3 mt-3">
           <span className="text-3xl">{task.emoji}</span>

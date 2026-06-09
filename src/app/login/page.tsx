@@ -24,7 +24,8 @@ export default async function LoginPage() {
         <div className="mt-4 text-left text-xs text-[var(--muted)] space-y-1 glass rounded-xl p-4">
           <p>📘 3 days × 18 hrs · 42 tasks</p>
           <p>✅ All 12 official quiz questions</p>
-          <p>🧪 Exercises 1–12 + HEEDS + FEM</p>
+          <p>⚙️ HEEDS 18hr course (8 examples)</p>
+          <p>🧪 Exercises 1–12 + FEM + Antenna RUL</p>
           <p>📡 Your Antenna RUL project prep</p>
         </div>
       </div>

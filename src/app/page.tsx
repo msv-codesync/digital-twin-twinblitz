@@ -114,7 +114,13 @@ export default async function HomePage() {
         </Link>
       </section>
 
-      <section className="px-5 mb-4">
+      <section className="px-5 mb-4 space-y-2">
+        <Link
+          href="/heeds"
+          className="block glass rounded-xl p-4 text-sm text-orange-300 border border-orange-500/25"
+        >
+          ⚙️ HEEDS MDO — 18hr scratch-to-hero (all 8 examples) →
+        </Link>
         <Link
           href="/materials"
           className="block glass rounded-xl p-4 text-sm text-indigo-300"
