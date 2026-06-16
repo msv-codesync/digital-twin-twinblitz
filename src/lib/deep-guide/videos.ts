@@ -1,0 +1,21 @@
+/** Verified YouTube videos — one primary pick per topic (~8–15 min) */
+export const V = {
+  rollsRoyce: { id: "9CcbYQ5QA70", title: "Rolls-Royce — Intelligent Engine (digital twin in operation)" },
+  siemensDT: { id: "ObGhB9CCHP8", title: "Siemens — What is a Digital Twin?" },
+  dtOverview: { id: "9UpMeDO0A04", title: "Digital Twin Explained — Industry Overview" },
+  asmeCities: { id: "HftDI09LVI0", title: "ASME — Digital Twin Cities (coupled systems)" },
+  ansysSim: { id: "8u6dYTuBymA", title: "Ansys — Simulation-Driven Design" },
+  cfdVent: { id: "z_g-ov61DNw", title: "Building Ventilation / CFD Simulation" },
+  heatFEM: { id: "cHThndE20oI", title: "Heat Transfer Simulation (physics models)" },
+  jmpDoe: { id: "_Rgue-7KDww", title: "JMP — Design of Experiments Explained" },
+  minitab: { id: "PD_0QjEyQJk", title: "Minitab — Statistical Methods & DoE" },
+  isight: { id: "SwgtZp4Jcjs", title: "Isight — Process Automation Overview" },
+  heeds: { id: "HvF_3Rok8RY", title: "HEEDS — Multi-Disciplinary Design Exploration" },
+  simValidation: { id: "9x9LYvErnwk", title: "Simulation Model Validation" },
+  statquestLS: { id: "_UVHneBUBW0", title: "StatQuest — Least Squares & Linear Regression" },
+  statquestPCA: { id: "FgakZw6K1QQ", title: "StatQuest — PCA Step by Step" },
+  femOverview: { id: "pcLg6C_WlHg", title: "Structural FEM Simulation Overview" },
+  transient: { id: "64N2BY747Cw", title: "Transient Simulation Context" },
+  simcenter: { id: "V_yaMyLeJ1I", title: "Simcenter / Abaqus Integration" },
+  predictive: { id: "HMOI_lkzW08", title: "Predictive Maintenance & Digital Twin" },
+} as const;

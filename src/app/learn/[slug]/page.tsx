@@ -25,7 +25,13 @@ export default async function LearnTopicPage({ params }: Props) {
         <Link href="/learn" className="text-sm text-violet-400">
           ← All topics
         </Link>
-        <p className="text-xs text-[var(--muted)] mt-2 uppercase tracking-wide">{topic.group}</p>
+        <p className="text-xs text-[var(--muted)] mt-2 uppercase tracking-wide">
+          {topic.group === "course"
+            ? "Course topic"
+            : topic.group === "exercise"
+              ? "Exercise"
+              : "Your notes"}
+        </p>
         <h1 className="text-lg font-bold mt-1 leading-snug">{topic.title}</h1>
         <p className="text-sm text-[var(--muted)] mt-1">{topic.subtitle}</p>
       </header>

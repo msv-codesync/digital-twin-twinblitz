@@ -1,35 +1,18 @@
 import type { DeepTopic } from "./types";
+import { LECTURE_TOPICS } from "./lecture-topics";
+import { getPracticeForTopic } from "./topic-practice";
+import { V } from "./videos";
 
-/** Verified via YouTube oEmbed — all return HTTP 200 */
-export const V = {
-  rollsRoyce: { id: "9CcbYQ5QA70", title: "Rolls-Royce — Intelligent Engine (digital twin in real life)" },
-  siemensDT: { id: "ObGhB9CCHP8", title: "Siemens — What is a Digital Twin?" },
-  dtOverview: { id: "9UpMeDO0A04", title: "Digital Twin Explained — Industry Overview" },
-  asmeCities: { id: "HftDI09LVI0", title: "ASME — Digital Twin Cities (coupled systems)" },
-  ansysSim: { id: "8u6dYTuBymA", title: "Ansys — Simulation-Driven Design" },
-  cfdVent: { id: "z_g-ov61DNw", title: "Building Ventilation / CFD Simulation" },
-  heatFEM: { id: "cHThndE20oI", title: "Heat Transfer Simulation (physics models)" },
-  jmpDoe: { id: "_Rgue-7KDww", title: "JMP — Design of Experiments Explained" },
-  minitab: { id: "PD_0QjEyQJk", title: "Minitab — Statistical Methods & DoE" },
-  isight: { id: "SwgtZp4Jcjs", title: "Isight — Process Automation Overview" },
-  heeds: { id: "HvF_3Rok8RY", title: "HEEDS — Multi-Disciplinary Design Exploration" },
-  simValidation: { id: "9x9LYvErnwk", title: "Simulation Model Validation" },
-  statquestLS: { id: "_UVHneBUBW0", title: "StatQuest — Least Squares & Linear Regression" },
-  statquestPCA: { id: "FgakZw6K1QQ", title: "StatQuest — PCA Step by Step" },
-  femOverview: { id: "pcLg6C_WlHg", title: "Structural FEM Simulation Overview" },
-  transient: { id: "64N2BY747Cw", title: "Transient Simulation Context" },
-  simcenter: { id: "V_yaMyLeJ1I", title: "Simcenter / Abaqus Integration" },
-  predictive: { id: "HMOI_lkzW08", title: "Predictive Maintenance & Digital Twin" },
-} as const;
+export { V };
 
-export const DEEP_TOPICS: DeepTopic[] = [
+const COURSE_QUIZ_TOPICS: DeepTopic[] = [
   // ═══ QUIZ Q1–Q12 ═══════════════════════════════════════════════
   {
     slug: "quiz-q1-digital-twin",
     order: 1,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q1 — What is a Digital Twin?",
-    subtitle: "The one sentence Prof. Nasti will fail you if you get wrong",
+    subtitle: "Official Quiz Q1 — definition used in oral exam",
     source: "Exercises PDF · Quiz Q1 · Note p.1",
     remember: "Virtual copy that lives through the WHOLE life of the product — not just a 3D picture",
     analogy:
@@ -40,16 +23,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Companies use it to test ideas cheaply on the computer before spending money on real tests. But — and this is what Prof. Nasti stresses — the computer model never replaces real experiments. It reduces risk; it does not eliminate testing.",
     profSays:
       '"The digital twin is the digital representation of a physical product throughout its lifecycle — the virtual product."',
-    examTip: "Say 'throughout its lifecycle' and 'does NOT replace experimental testing' in the same breath.",
-    videos: [V.rollsRoyce, V.siemensDT, V.dtOverview],
+    sayInExam: "Say 'throughout its lifecycle' and that the twin supports — but does not replace — experimental testing.",
+    videos: [{ ...V.siemensDT, duration: "~9 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 7.jpg",
     noteLabel: "Your note p.1",
-    pdfPage: "Quiz Q1",
   },
   {
     slug: "quiz-q2-lifecycle",
     order: 2,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q2 — Product Lifecycle Steps",
     subtitle: "Five stages in order — do not mix with software dev phases",
     source: "Exercises PDF · Quiz Q2",
@@ -65,15 +48,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "5. Service — the product is in use; sensors and maintenance happen here\n\n" +
       "At each stage, the digital twin helps you ask 'what if?' before changing the real product. AIAA also talks about as-designed (on paper), as-built (after factory), and as-used (in operation) — your antenna project uses drone scan = as-built, RUL model = as-used.",
     profSays: "Five stages: Design & Analysis, Manufacture, Build & Assembly, Experimental Testing, Service.",
-    examTip: "Never confuse this with software phases (Planning, Analysis, Design...) — that is a different list from your notes p.5.",
-    videos: [V.siemensDT, V.asmeCities],
+    sayInExam: "List all five stages in order, then give one digital-twin use case at the Service stage.",
+    videos: [{ ...V.siemensDT, duration: "~9 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 7.jpg",
     noteLabel: "Your note p.1 — lifecycle",
   },
   {
     slug: "quiz-q3-parametric",
     order: 3,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q3 — Why Parametric Geometry?",
     subtitle: "Change one number → whole model updates automatically",
     source: "Exercises PDF · Quiz Q3",
@@ -85,13 +69,14 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Why does a digital twin need this? Because the real product changes over its life — manufacturing tolerances, wear, repairs. If your computer model is parametric, you change one number and the whole simulation updates. That lets you run DoE (try 40 combinations) and optimisation automatically.\n\n" +
       "Without parametric models you would redraw CAD by hand for every change — too slow for a real digital twin.",
     profSays: "Parametric geometry lets you simulate as-designed AND as-manufactured from one master model.",
-    examTip: "Trap answer to avoid: 'parametric just means 3D CAD' — wrong. It means parameters drive geometry AND linked simulation.",
-    videos: [V.ansysSim, V.cfdVent],
+    sayInExam: "Say parameters drive geometry and linked simulation automatically — needed for DoE on one master model.",
+    videos: [{ ...V.ansysSim, duration: "~10 min" }],
+    practice: [],
   },
   {
     slug: "quiz-q4-accuracy-fidelity",
     order: 4,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q4 — Accuracy vs Fidelity",
     subtitle: "Accuracy = how right; Fidelity = how detailed",
     source: "Exercises PDF · Quiz Q4 · Note p.1",
@@ -104,15 +89,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Trade-off: higher fidelity usually means longer computer time. You do not always need the fanciest model — you need the right level for the decision you are making.\n\n" +
       "When you see d = 35.0 (±0.1) mm in exercises, that is real-world uncertainty — the part might be slightly bigger or smaller. The twin must account for that.",
     profSays: "Accuracy = closeness to reality. Fidelity = level of detail. They are not the same.",
-    examTip: "If she asks 'is a fine mesh more accurate?' — answer: 'Not necessarily — finer mesh is higher fidelity; accuracy depends on whether the physics and boundary conditions match reality.'",
-    videos: [V.ansysSim, V.heatFEM],
+    sayInExam: "Define accuracy as closeness to reality; fidelity as level of detail — they are separate ideas.",
+    videos: [{ ...V.ansysSim, duration: "~10 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 7.jpg",
     noteLabel: "Your note p.1 — Accuracy VS Fidelity",
   },
   {
     slug: "quiz-q5-coupling",
     order: 5,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q5 — Model Coupling",
     subtitle: "When one system's output becomes another's input — in a loop",
     source: "Exercises PDF · Quiz Q5 · Note p.7",
@@ -125,15 +111,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Prof. Nasti's exam trap: coupling is NOT the same as 'process automation' (linking software tools with scripts). Coupling is physics — the temperature really depends on airflow. Automation is IT workflow.\n\n" +
       "For your antenna twin: structural stress, wind load, temperature, and RUL prediction would ideally be coupled.",
     profSays: '"Solving two or more models together in an iterative loop — interdependent, cannot be solved independently."',
-    examTip: "Draw four boxes with arrows in a circle for HVAC. Say the word 'interdependent'.",
-    videos: [V.asmeCities, V.rollsRoyce],
+    sayInExam: "Use the word interdependent and give the HVAC chain: occupancy → heat → cooling → energy.",
+    videos: [{ ...V.asmeCities, duration: "~12 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-19 8.jpg",
     noteLabel: "Your note p.7 — HVAC coupling chain",
   },
   {
     slug: "quiz-q6-empirical-physics",
     order: 6,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q6 — Physics vs Empirical Models",
     subtitle: "Laws of nature vs learning from measured data",
     source: "Exercises PDF · Quiz Q6 · Note p.2",
@@ -145,15 +132,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Empirical models start from data — you measure, plot points, fit a curve or train ML. You may not know the deep physics, but you capture the pattern.\n\n" +
       "Prof. Nasti: neither is 'better' in all cases. Even physics models need real tests to validate. Empirical models fail badly if you use them outside the range where you collected data (extrapolation).",
     profSays: "Physics exploits first principles; empirical starts from observations and statistics. In practice both matter.",
-    examTip: "Exercise 1 Hooke's law: F=kx is physics; fitting a line through 15 measured points is empirical application of least squares.",
-    videos: [V.heatFEM, V.statquestLS],
+    sayInExam: "Give Hooke's law as physics-based and fitting the 15 data points as empirical least squares.",
+    videos: [{ ...V.statquestLS, duration: "~14 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 8.jpg",
     noteLabel: "Your note p.2",
   },
   {
     slug: "quiz-q7-validation-calibration",
     order: 7,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q7 — Validation vs Calibration",
     subtitle: "Tuning knobs vs checking if the model matches reality",
     source: "Exercises PDF · Quiz Q7 · Note p.2",
@@ -165,15 +153,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "MODEL VALIDATION: you check whether the model predicts correctly against reality you did NOT use for tuning — different test, field data, higher-fidelity simulation.\n\n" +
       "Critical: calibration is NOT validation. You can calibrate first, then validate on separate data. Fitting a curve through spring points is calibration — proving the spring works at new forces is validation.",
     profSays: "Validation: 'Have I done the right maths?' Calibration: tune parameters to match experimental data.",
-    examTip: "She will ask this in oral exam. Answer in two complete sentences, one per term.",
-    videos: [V.simValidation],
+    sayInExam: "Two sentences: validation checks predictions vs reality; calibration tunes parameters to match test data.",
+    videos: [{ ...V.simValidation, duration: "~12 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 8.jpg",
     noteLabel: "Your note p.2 — V vs V definitions",
   },
   {
     slug: "quiz-q8-verification-validation",
     order: 8,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q8 — Verification vs Validation",
     subtitle: "The #1 exam trap — maths right vs right maths",
     source: "Exercises PDF · Quiz Q8",
@@ -185,13 +174,14 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "VALIDATION: 'Have I done the right maths?' — Does the model represent the real world? Compare CFD to wind tunnel, FEA to strain gauges. Goal: acceptable difference from reality.\n\n" +
       "Examples to memorise:\n• FEA vs analytical beam = verification\n• Simulation vs wind tunnel = validation\n• Exercise 9 (FEA vs test) = validation",
     profSays: "Verification checks implementation; validation checks agreement with physical reality.",
-    examTip: "Say both questions verbatim: 'Have I done the maths right?' and 'Have I done the right maths?'",
-    videos: [V.simValidation, V.femOverview],
+    sayInExam: "Say both questions: verification = maths right; validation = right maths. Give FEA vs analytical as verification example.",
+    videos: [{ ...V.simValidation, duration: "~12 min" }],
+    practice: [],
   },
   {
     slug: "quiz-q9-idealisation",
     order: 9,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q9 — Geometry Idealisation",
     subtitle: "Simplify the shape, keep the important physics",
     source: "Exercises PDF · Quiz Q9",
@@ -204,13 +194,14 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "It must stay linked to the master parametric model — not a disconnected sketch.\n\n" +
       "Wrong idealisation wastes time (too detailed) or gives wrong answers (too simple for stress concentrations).",
     profSays: "Idealisation is engineering judgement — not 'bad modelling'.",
-    examTip: "Exercise 7 PCB: you might simplify the board but keep chip detail for the hotspot.",
-    videos: [V.ansysSim, V.heatFEM],
+    sayInExam: "Explain 3D → 2D → 1D levels and that idealisation stays linked to the parametric master model.",
+    videos: [{ ...V.heatFEM, duration: "~11 min" }],
+    practice: [],
   },
   {
     slug: "quiz-q10-curve-fitting",
     order: 10,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q10 — Curve Fitting",
     subtitle: "Drawing the best line or curve through measured dots",
     source: "Exercises PDF · Quiz Q10 · Exercise 1",
@@ -222,15 +213,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Used for: finding spring constant k in Exercise 1, calibrating material models, building surrogate models.\n\n" +
       "Prof trap: completing a fit is NOT validation. You still must test whether the curve works on new data.",
     profSays: "Curve fitting generates an empirical model close to experimental observations.",
-    examTip: "Connect to Hooke's law lab: plot Force vs Displacement, fit line, slope = k.",
-    videos: [V.statquestLS],
+    sayInExam: "Connect to Exercise 1: plot F vs x, fit line, slope is k. Fitting is calibration, not validation.",
+    videos: [{ ...V.statquestLS, duration: "~14 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-18 2.jpg",
     noteLabel: "Your note p.4 — least squares",
   },
   {
     slug: "quiz-q11-least-squares",
     order: 11,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q11 — Least Squares Method",
     subtitle: "Minimise the total squared error — why square?",
     source: "Exercises PDF · Quiz Q11",
@@ -243,15 +235,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "For Exercise 1: convert displacement from mm to metres, fit F = kx, k comes out in N/m.\n\n" +
       "The line usually does NOT pass through every point — 15 measurements have noise (±0.5 mm). Least squares finds the best compromise.",
     profSays: "Minimise sum of squared residuals between data and model.",
-    examTip: "Write the formula on paper from memory before the exam.",
-    videos: [V.statquestLS],
+    sayInExam: "Write the formula Σ(yᵢ − f(xᵢ))² and mention mm→m conversion for spring constant.",
+    videos: [{ ...V.statquestLS, duration: "~14 min" }],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-18 2.jpg",
     noteLabel: "Your note p.4",
   },
   {
     slug: "quiz-q12-extrapolation",
     order: 12,
-    group: "quiz",
+    group: "course",
     title: "Quiz Q12 — Extrapolation",
     subtitle: "Guessing outside where you measured — dangerous",
     source: "Exercises PDF · Quiz Q12",
@@ -263,14 +256,16 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Extrapolation: predicting outside that range — uncertainty shoots up. The physics might change (spring goes plastic, antenna fails differently in hurricane).\n\n" +
       "Your antenna DoE runs from 5–35 m/s wind and 20–65°C. Recommending ops at wind ≤12 and temp ≤30 stays inside safe learned region. Predicting at 40 m/s is extrapolation.",
     profSays: "Extrapolation = prediction outside measured/calibrated range — higher uncertainty.",
-    examTip: "Link to operating envelope slide in your presentation.",
-    videos: [V.simValidation, V.predictive],
+    sayInExam: "Define extrapolation, then point to your safe operating envelope inside the DoE bounds.",
+    videos: [{ ...V.simValidation, duration: "~12 min" }],
+    practice: [],
   },
+];
 
-  // ═══ EXERCISES 1–12 ════════════════════════════════════════════
+const EXERCISE_TOPICS: DeepTopic[] = [
   {
     slug: "exercise-1-hooke",
-    order: 13,
+    order: 31,
     group: "exercise",
     title: "Exercise 1 — Hooke's Law Spring Lab",
     subtitle: "Plot force vs stretch → find spring constant k",
@@ -283,9 +278,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Physics-based: Hooke's law F = kx predicts linear behaviour.\nEmpirical: you fit the line to real noisy data.\n\n" +
       "Prof may ask your k value orally — have your notebook or calculation ready.",
     profSays: "Demonstrate physics via experiment; understand trends; fit curve to data.",
-    examTip: "Beyond 1.5 N prediction is extrapolation — spring may not stay linear.",
+    sayInExam: "Beyond 1.5 N prediction is extrapolation — spring may not stay linear.",
     videos: [V.statquestLS],
-    pdfPage: "Exercise 1",
+    practice: [],
   },
   {
     slug: "exercise-2-aiaa",
@@ -304,9 +299,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "(3) Products with digital twins? → Aero engines, smart buildings, motorcycles, centrifuges, injection molding, 5G antenna towers.\n\n" +
       "Map as-designed / as-built / as-used to your antenna project.",
     profSays: "Understand main ideas — language is technical but you need concepts, not every word memorised.",
-    examTip: "Have three short paragraphs written before exam day.",
+    sayInExam: "Have three short paragraphs written before exam day.",
     videos: [V.dtOverview, V.siemensDT],
-    pdfPage: "Exercise 2",
+    practice: [],
   },
   {
     slug: "exercise-4-functional",
@@ -324,11 +319,11 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "FUNCTIONAL FLOW (FFD): Monitor → Compare → Adjust → Predict → Feedback loop.\n\n" +
       "Compare to motorcycle traction diagram on your note p.6–8.",
     profSays: "Functional modelling is abstraction of the real problem — NOT software architecture.",
-    examTip: "Draw all three from memory the night before.",
+    sayInExam: "Draw all three from memory the night before.",
     videos: [V.siemensDT, V.asmeCities],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 5.jpg",
     noteLabel: "Your note p.8 — P-diagram traction",
-    pdfPage: "Exercise 4",
   },
   {
     slug: "exercise-5-heeds",
@@ -346,11 +341,11 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Map to antenna: wind_ms & temp_C = inputs; rul_days = output; 4×10 = 40 runs.\n\n" +
       "Example 10 = multi-objective optimisation → Pareto front lecture topic.",
     profSays: "Walk me through coil spring DoE in HEEDS — common oral question.",
-    examTip: "If no HEEDS license on exam day, explain workflow from guide PDF and show notebook equivalent.",
+    sayInExam: "If no HEEDS license on exam day, explain workflow from guide PDF and show notebook equivalent.",
     videos: [V.heeds, V.jmpDoe],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-19 6.jpg",
     noteLabel: "Your note p.5 — HEEDS + mesh",
-    pdfPage: "Exercise 5",
   },
   {
     slug: "exercise-6-matlab",
@@ -367,9 +362,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Antenna example: maximise RUL subject to wind ≤ 12 m/s, temp ≤ 30°C, structural safety.\n\n" +
       "HEEDS does this with a GUI; MATLAB does it with code — same maths.",
     profSays: "Swapping inputs & outputs — give target output, ask model for required inputs.",
-    examTip: "Pseudocode on paper is enough if MATLAB not installed.",
+    sayInExam: "Pseudocode on paper is enough if MATLAB not installed.",
     videos: [V.heeds, V.isight],
-    pdfPage: "Exercise 6",
+    practice: [],
   },
   {
     slug: "exercise-7-thermal",
@@ -385,9 +380,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Workflow:\n1. Import PCB CAD into Simcenter 3D\n2. Mesh board + chip\n3. Assign materials (copper, FR4, silicon)\n4. Boundary conditions: power dissipation at chip hotspot; cooling elsewhere\n5. Solve steady-state thermal\n6. Postprocess: temperature field, find max temp location\n\n" +
       "Verification: mesh convergence (refine until answer stops changing).\nValidation: compare hotspot temperature to thermocouple measurement.",
     profSays: "Links geometry idealisation (Quiz Q9) and validation (Quiz Q8).",
-    examTip: "Bookmark Simcenter tutorial xid1688538 even if you cannot run software before exam.",
+    sayInExam: "Bookmark Simcenter tutorial xid1688538 even if you cannot run software before exam.",
     videos: [V.heatFEM, V.cfdVent],
-    pdfPage: "Exercise 7",
+    practice: [],
   },
   {
     slug: "exercise-8-dynamics",
@@ -404,9 +399,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Contrast with heated rod (Chapter 31) which is steady-state thermal.\n\n" +
       "Your antenna RUL model is steady/system-level; transient FEA needed for gust loads or vibration peaks.",
     profSays: "Structural ↔ dynamic coupling example for Quiz Q5.",
-    examTip: "Outputs: time history graphs, peak response.",
+    sayInExam: "Outputs: time history graphs, peak response.",
     videos: [V.femOverview, V.transient],
-    pdfPage: "Exercise 8",
+    practice: [],
   },
   {
     slug: "exercise-9-correlation",
@@ -422,9 +417,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Workflow:\n1. Run structural FEA (modal or static)\n2. Run physical test (shaker, strain gauges, DIC)\n3. Overlay results\n4. Metrics: MAC (modes), strain error %, R²\n5. If gap too large → calibrate Young's modulus, damping, BCs\n6. Re-run validation on separate test case\n\n" +
       "This is Quiz Q8 validation in practice.",
     profSays: "Exercise 9 = 'Have I done the right maths?'",
-    examTip: "Mention ASME PTC 19.1 uncertainty on test data.",
+    sayInExam: "Mention ASME PTC 19.1 uncertainty on test data.",
     videos: [V.simValidation, V.femOverview],
-    pdfPage: "Exercise 9",
+    practice: [],
   },
   {
     slug: "exercise-10-ml",
@@ -441,9 +436,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Connection to course: ML is empirical modelling at scale. Surrogate: train on 40 antenna DoE runs to predict RUL faster — but you lose physics interpretability and MUST validate on held-out runs.\n\n" +
       "Contrast with PCA (Exercise path Day 3) which is UNSUPERVISED — no labels.",
     profSays: "Could ML replace RUL formula? Only with enough data + validation — physics formula is interpretable.",
-    examTip: "Know supervised vs unsupervised cold.",
+    sayInExam: "Know supervised vs unsupervised cold.",
     videos: [V.statquestLS, V.statquestPCA],
-    pdfPage: "Exercise 10",
+    practice: [],
   },
   {
     slug: "exercise-11-prognosis",
@@ -460,9 +455,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Your antenna project: physics-based RUL from wind & temperature instead of vibration ML — same question: 'How many days until maintenance?'\n\n" +
       "Compare: physics = interpretable laws; data-driven = needs lots of failure history.",
     profSays: "Prognostics = predicting remaining useful life — your project title.",
-    examTip: "She may ask you to compare approaches — prepare 3 sentences.",
+    sayInExam: "She may ask you to compare approaches — prepare 3 sentences.",
     videos: [V.predictive, V.dtOverview],
-    pdfPage: "Exercise 11",
+    practice: [],
   },
   {
     slug: "exercise-12-drl",
@@ -480,15 +475,17 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Links to PCA on centrifuge notes — many features → PCA reduces to few patterns.\n\n" +
       "Digital twin use: pick which sensors to install on tower; optimise maintenance schedule.",
     profSays: "Breadth topic — show you know how ML fits operation phase of lifecycle.",
-    examTip: "One sentence each on DRL and feature analysis is enough for oral.",
+    sayInExam: "One sentence each on DRL and feature analysis is enough for oral.",
     videos: [V.statquestPCA, V.predictive],
-    pdfPage: "Exercise 12",
+    practice: [],
   },
 
-  // ═══ HANDWRITTEN NOTES p.1–9 ═══════════════════════════════════
+];
+
+const NOTE_TOPICS: DeepTopic[] = [
   {
     slug: "notes-page-1",
-    order: 24,
+    order: 43,
     group: "notes",
     title: "Your Note p.1 — DT Definition & Lifecycle",
     subtitle: "The opening page — foundation of everything",
@@ -499,8 +496,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Your first note page captures:\n• Official digital twin definition through lifecycle\n• Product lifecycle stages diagram\n• Model coupling concept introduced\n• Accuracy vs fidelity circled — know the difference cold\n\n" +
       "When studying, cover the page and recite the definition aloud three times.",
     profSays: "Same as Quiz Q1–Q2 content.",
-    examTip: "Photo this page to your phone — read on the way to exam.",
+    sayInExam: "Photo this page to your phone — read on the way to exam.",
     videos: [V.rollsRoyce, V.siemensDT],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 7.jpg",
     noteLabel: "Your note p.1",
   },
@@ -517,8 +515,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Page 2 topics:\n• Verification vs validation definitions (memorise wording)\n• Model inputs and outputs listed\n• Surrogate model concept — approximate expensive runs\n• Least squares mentioned — connects to Quiz Q11\n\n" +
       "Draw a two-box diagram: Verification (code) vs Validation (reality).",
     profSays: "Most failed exam topic if confused.",
-    examTip: "Never swap the two questions.",
+    sayInExam: "Never swap the two questions.",
     videos: [V.simValidation],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 8.jpg",
     noteLabel: "Your note p.2",
   },
@@ -534,8 +533,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
     plainAnswer:
       "Key content:\n• DoE explores design space — multiple runs, design matrix\n• Four types: full factorial, fractional factorial, screening, Latin hypercube\n• Pareto chart ranks factor impact; Pareto front = trade-off curve\n• Injection molding: temp, pressure, cooling → weight, deviation, quality\n• Global vs local minimum in optimisation\n• Data matching = calibration",
     profSays: "Injection molding is her go-to DoE example besides your antenna.",
-    examTip: "Be able to name all four DoE types with one phrase each.",
+    sayInExam: "Be able to name all four DoE types with one phrase each.",
     videos: [V.jmpDoe, V.minitab, V.heeds],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-19 5.jpg",
     noteLabel: "Your note p.3",
   },
@@ -553,8 +553,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Six PCA steps from your notes:\n0. Normalize data\n1. Build covariance matrix (diagonal = variance)\n2. Eigenvalues & eigenvectors\n3. Sort eigenvalues descending\n4. Build projection matrix P\n5. Transform data to lower dimensions\n\n" +
       "Centrifuge: 20 vibration features → PCA1 energy, PCA2 imbalance, PCA3 bearing.\nSurrogate: wing geometry → AI predicts lift/drag without full CFD.",
     profSays: "PCA is UNSUPERVISED — no labels.",
-    examTip: "Recite six steps with eyes closed.",
+    sayInExam: "Recite six steps with eyes closed.",
     videos: [V.statquestPCA],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-18 2.jpg",
     noteLabel: "Your note p.4",
   },
@@ -570,8 +571,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
     plainAnswer:
       "Mesh convergence 4 steps.\nTools: NX, Ansys, Abaqus, Nastran, LS-Dyna, Simsolid, HEEDS+iSight, HyperMesh.\nFMEA table columns: failure mode, severity, occurrence, detection, RPN.\nAgile vs waterfall.\nSoftware cycle: Planning → Analysis → Design → Implementation → Testing → Maintenance. Verification in Testing.",
     profSays: "Map your notebook to all six dev stages orally.",
-    examTip: "FMEA one row for antenna wind fatigue.",
+    sayInExam: "FMEA one row for antenna wind fatigue.",
     videos: [V.heeds, V.femOverview, V.isight],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-19 6.jpg",
     noteLabel: "Your note p.5",
   },
@@ -589,8 +591,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "HVAC (p.7): Occupancy up → heat up → cooling demand up → energy up. Logistics DoE on same page — minimise time AND fuel, visit each customer once.\n\n" +
       "Both illustrate coupling and functional thinking for Exercise 4.",
     profSays: "FFD must show feedback loop arrow back to Monitor.",
-    examTip: "Sketch both from memory.",
+    sayInExam: "Sketch both from memory.",
     videos: [V.asmeCities],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-19 7.jpg",
     noteLabel: "Your note p.6 — motorcycle FFD",
   },
@@ -607,8 +610,9 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "P-diagram zones:\n• Ideal response: stable traction / controlled slip\n• Inputs: throttle, steering, brake, lean angle\n• Controls: TC sensitivity, slip target\n• Noise: road surface, tire wear, temperature\n• Error: too much slip → loss of control\n\n" +
       "Copy structure for antenna P-diagram in Exercise 4.",
     profSays: "Classic functional modelling example in course.",
-    examTip: "Label all five zones on exam paper if asked.",
+    sayInExam: "Label all five zones on exam paper if asked.",
     videos: [V.siemensDT],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 5.jpg",
     noteLabel: "Your note p.8",
   },
@@ -627,11 +631,30 @@ export const DEEP_TOPICS: DeepTopic[] = [
       "Swiss cheese: multiple safety layers — failure needs all holes to line up.\n\n" +
       "AI surrogate: wing shape in → lift/drag out without full CFD each time.\nAgile mentioned again — iterative delivery.",
     profSays: "Connect Monte Carlo to HEEDS Example 5 robustness.",
-    examTip: "Explain Swiss cheese in two plain sentences.",
+    sayInExam: "Explain Swiss cheese in two plain sentences.",
     videos: [V.minitab, V.heeds, V.statquestPCA],
+    practice: [],
     noteImage: "PHOTO-2026-04-27-12-02-20 6.jpg",
     noteLabel: "Your note p.9",
   },
+];
+
+function enrich(topic: DeepTopic): DeepTopic {
+  return {
+    ...topic,
+    practice: topic.practice.length ? topic.practice : getPracticeForTopic(topic.slug),
+  };
+}
+
+function withOrders(topics: DeepTopic[], start: number): DeepTopic[] {
+  return topics.map((t, i) => enrich({ ...t, order: start + i }));
+}
+
+export const DEEP_TOPICS: DeepTopic[] = [
+  ...COURSE_QUIZ_TOPICS.map(enrich),
+  ...LECTURE_TOPICS,
+  ...withOrders(EXERCISE_TOPICS, 31),
+  ...withOrders(NOTE_TOPICS, 43),
 ];
 
 export function getDeepTopic(slug: string): DeepTopic | undefined {
