@@ -18,3 +18,4 @@ _extracted_*
 PHOTO-*.jpg
 __pycache__/
 *.pyc
+project/outputs/

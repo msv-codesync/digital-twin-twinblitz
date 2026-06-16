@@ -122,6 +122,18 @@ export default async function HomePage() {
           ⚙️ HEEDS MDO — 18hr scratch-to-hero (all 8 examples) →
         </Link>
         <Link
+          href="/project"
+          className="block glass rounded-xl p-4 text-sm text-cyan-300 border border-cyan-500/25"
+        >
+          📡 Exam project + PowerPoint download →
+        </Link>
+        <Link
+          href="/prep"
+          className="block glass rounded-xl p-4 text-sm text-indigo-300 border border-indigo-500/25"
+        >
+          📚 Full exam prep guide — videos, notes, time estimates →
+        </Link>
+        <Link
           href="/materials"
           className="block glass rounded-xl p-4 text-sm text-indigo-300"
         >
