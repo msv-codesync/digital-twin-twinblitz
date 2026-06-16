@@ -67,10 +67,19 @@ export default async function PrepPage() {
 
       <section className="px-5 mb-4">
         <Link
+          href="/learn"
+          className="block glass rounded-xl p-4 text-sm font-medium text-violet-300 border border-violet-500/30"
+        >
+          📖 Deep study guide — exercises & notes in plain English →
+        </Link>
+      </section>
+
+      <section className="px-5 mb-4">
+        <Link
           href="/quiz"
           className="block glass rounded-xl p-4 text-sm font-medium text-violet-300 border border-violet-500/30"
         >
-          🎯 Theory quiz — 109 MCQs with saved scores →
+          🎯 Theory quiz — all MCQs with saved scores →
         </Link>
       </section>
 

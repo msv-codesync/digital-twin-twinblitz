@@ -1,5 +1,12 @@
 export const QUIZ_DECKS = [
   {
+    id: "deep",
+    title: "Deep Study — Exercises & Notes",
+    subtitle: "Plain-language answers · verified videos per topic",
+    emoji: "📖",
+    source: "All exercises + 9 note pages + quiz elaboration",
+  },
+  {
     id: "official",
     title: "Official Quiz Q1–12",
     subtitle: "Prof. Nasti exercises PDF — verbatim traps",
