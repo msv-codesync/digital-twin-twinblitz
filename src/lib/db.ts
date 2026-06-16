@@ -110,6 +110,13 @@ async function initSqlSchema() {
       answered_at TEXT NOT NULL,
       UNIQUE(user_id, question_id)
     )`,
+    `CREATE TABLE IF NOT EXISTS reel_views (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      reel_id TEXT NOT NULL,
+      viewed_at TEXT NOT NULL,
+      UNIQUE(user_id, reel_id)
+    )`,
   ]);
 }
 
@@ -144,6 +151,7 @@ export async function createUser(
     await r.set(`twinblitz:stats:${id}`, { xp: 0, streak: 0, last_active_date: null });
     await r.set(`twinblitz:progress:${id}`, {});
     await r.set(`twinblitz:quiz:${id}`, {});
+    await r.set(`twinblitz:reels:${id}`, {});
     return { id, email: normalizedEmail, name: normalizedName };
   }
 
@@ -547,5 +555,49 @@ export async function getQuizProgress(
         answeredAt: String(row.answered_at),
       },
     ])
+  );
+}
+
+export async function saveReelView(userId: number, reelId: string): Promise<void> {
+  const viewedAt = new Date().toISOString();
+  const r = getRedis();
+  if (r) {
+    const key = `twinblitz:reels:${userId}`;
+    const progress = (await r.get<Record<string, string>>(key)) ?? {};
+    if (progress[reelId]) return;
+    progress[reelId] = viewedAt;
+    await r.set(key, progress);
+    await addXp(userId, 3);
+    return;
+  }
+
+  await ensureSqlSchema();
+  const db = getSqlClient();
+  const existing = await db.execute({
+    sql: "SELECT id FROM reel_views WHERE user_id = ? AND reel_id = ?",
+    args: [userId, reelId],
+  });
+  if (existing.rows.length > 0) return;
+
+  await db.execute({
+    sql: "INSERT INTO reel_views (user_id, reel_id, viewed_at) VALUES (?, ?, ?)",
+    args: [userId, reelId, viewedAt],
+  });
+  await addXp(userId, 3);
+}
+
+export async function getReelProgress(userId: number): Promise<Record<string, string>> {
+  const r = getRedis();
+  if (r) {
+    return (await r.get<Record<string, string>>(`twinblitz:reels:${userId}`)) ?? {};
+  }
+
+  await ensureSqlSchema();
+  const result = await getSqlClient().execute({
+    sql: "SELECT reel_id, viewed_at FROM reel_views WHERE user_id = ?",
+    args: [userId],
+  });
+  return Object.fromEntries(
+    result.rows.map((row) => [String(row.reel_id), String(row.viewed_at)])
   );
 }

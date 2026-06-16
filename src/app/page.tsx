@@ -123,6 +123,12 @@ export default async function HomePage() {
           ⚙️ HEEDS MDO — 18hr scratch-to-hero (all 8 examples) →
         </Link>
         <Link
+          href="/reels"
+          className="block glass rounded-xl p-4 text-sm font-medium text-pink-300 border border-pink-500/30"
+        >
+          📱 Exam Reels — scroll & learn (gameplay loop) →
+        </Link>
+        <Link
           href="/learn"
           className="block glass rounded-xl p-4 text-sm font-medium text-violet-300 border border-violet-500/30"
         >
