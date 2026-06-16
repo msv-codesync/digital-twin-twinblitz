@@ -7,7 +7,7 @@ const tabs = [
   { href: "/exam", label: "Exam", icon: "🎓" },
   { href: "/write", label: "Write", icon: "✍️" },
   { href: "/heeds", label: "HEEDS", icon: "⚙️" },
-  { href: "/learn", label: "Learn", icon: "📖" },
+  { href: "/project", label: "Project", icon: "📡" },
   { href: "/", label: "More", icon: "⚡" },
 ];
 
