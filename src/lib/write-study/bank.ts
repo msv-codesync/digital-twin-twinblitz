@@ -1,6 +1,6 @@
 import { DEEP_TOPICS } from "@/lib/deep-guide";
 import { TOPIC_PRACTICE } from "@/lib/deep-guide/topic-practice";
-import type { WriteTopic } from "./types";
+import type { WriteAnswerRecord, WriteTopic } from "./types";
 
 const FALLBACKS = [
   "Explain this topic in your own words (2–3 sentences) as you would in the oral exam.",
@@ -56,6 +56,18 @@ export function getWriteTopic(slug: string): WriteTopic | undefined {
 
 export function answerKey(slug: string, questionIndex: number): string {
   return `${slug}::q${questionIndex}`;
+}
+
+export function topicProgress(
+  slug: string,
+  questionCount: number,
+  progress: Record<string, WriteAnswerRecord>
+): number {
+  let n = 0;
+  for (let i = 0; i < questionCount; i++) {
+    if (progress[answerKey(slug, i)]?.answer?.trim()) n++;
+  }
+  return n;
 }
 
 export function buildExportText(

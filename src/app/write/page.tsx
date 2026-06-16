@@ -2,9 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/auth";
 import { BottomNav } from "@/components/BottomNav";
-import { DownloadAllRecall, topicProgress } from "@/components/DownloadAllRecall";
+import { DownloadAllRecall } from "@/components/DownloadAllRecall";
 import { getWriteProgress } from "@/lib/db";
-import { WRITE_TOPICS } from "@/lib/write-study/bank";
+import { WRITE_TOPICS, topicProgress } from "@/lib/write-study/bank";
 
 const GROUPS = [
   { id: "course" as const, label: "Course topics", emoji: "📚" },

@@ -1,6 +1,6 @@
 "use client";
 
-import { buildExportText, WRITE_TOPICS, WRITE_TOTAL_QUESTIONS, answerKey } from "@/lib/write-study/bank";
+import { buildExportText, WRITE_TOPICS, WRITE_TOTAL_QUESTIONS } from "@/lib/write-study/bank";
 import type { WriteAnswerRecord } from "@/lib/write-study/types";
 
 type Props = {
@@ -48,16 +48,4 @@ export function DownloadAllRecall({ studentName, progress }: Props) {
       </button>
     </div>
   );
-}
-
-export function topicProgress(
-  slug: string,
-  questionCount: number,
-  progress: Record<string, WriteAnswerRecord>
-): number {
-  let n = 0;
-  for (let i = 0; i < questionCount; i++) {
-    if (progress[answerKey(slug, i)]?.answer?.trim()) n++;
-  }
-  return n;
 }
