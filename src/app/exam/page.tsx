@@ -66,7 +66,7 @@ export default async function ExamPage() {
               <p className="text-xs text-violet-400 font-bold">Q{item.n}</p>
               <p className="font-medium text-sm mt-1">{item.q}</p>
               <p className="text-sm mt-2 text-white/90 leading-relaxed">{item.a}</p>
-              <p className="text-xs mt-2 text-red-400/90">Trap: {item.trap}</p>
+              <p className="text-xs mt-2 text-violet-400/90">{item.keyPhrase}</p>
             </div>
           ))}
         </div>
