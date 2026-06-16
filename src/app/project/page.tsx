@@ -76,11 +76,26 @@ export default async function ProjectPage() {
 
       <section className="px-5 mb-5 space-y-2">
         <a
-          href="/project/Exam_Presentation_Antenna_RUL.pptx"
+          href="/project/Exam_Presentation_Antenna_RUL_SRH.pptx"
           download
           className="block glass rounded-xl p-4 text-sm font-medium text-emerald-300 border border-emerald-500/30"
         >
-          ⬇️ Download exam PowerPoint (15 slides) →
+          ⬇️ SRH exam PowerPoint (visual, 22 slides) — matches Exercises PDF format →
+        </a>
+        <a
+          href="/project/present/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block glass rounded-xl p-4 text-sm font-medium text-orange-300 border border-orange-500/30"
+        >
+          ▶️ Present in browser — fullscreen slide viewer →
+        </a>
+        <a
+          href="/project/Exam_Presentation_Antenna_RUL.pptx"
+          download
+          className="block glass rounded-xl p-4 text-sm text-indigo-300"
+        >
+          ⬇️ Classic PowerPoint (text version) →
         </a>
         <a
           href="/project/DigitalTwin_Antenna_RUL.ipynb"

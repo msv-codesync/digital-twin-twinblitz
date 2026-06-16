@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antenna RUL — SRH Exam Presentation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Calibri, "Segoe UI", Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      background: #DF4707;
+    }
+    header img { height: 28px; }
+    header a { color: #fff; font-size: 0.85rem; text-decoration: none; opacity: 0.95; }
+    .stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .slide {
+      width: min(100%, 1066px);
+      aspect-ratio: 16/9;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+    }
+    .slide.title img { object-fit: cover; }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: #0B1D35;
+    }
+    nav button {
+      background: #DF4707;
+      border: none;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    nav button:disabled { opacity: 0.4; cursor: default; }
+    #counter { font-size: 0.9rem; min-width: 4rem; text-align: center; color: #aaa; }
+    .dl {
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .dl a { color: #7dd3fc; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../ppt-assets/srh_logo_white.png" alt="SRH" />
+    <span>Antenna RUL · Exam Presentation</span>
+    <a href="../Exam_Presentation_Antenna_RUL_SRH.pptx" download>Download PPTX</a>
+  </header>
+  <div class="stage">
+    <div class="slide" id="slide"></div>
+  </div>
+  <nav>
+    <button id="prev">← Prev</button>
+    <span id="counter">1 / 1</span>
+    <button id="next">Next →</button>
+  </nav>
+  <p class="dl">
+    <a href="../Exam_Presentation_Antenna_RUL_SRH.pptx">PowerPoint</a>
+    · Prof. Dr. Adele Nasti · SRH format
+  </p>
+  <script>
+    const slides = [
+      { src: "../ppt-assets/bg_title_antenna.png", title: true },
+      { src: "../ppt-assets/section_01_problem.png" },
+      { src: "../ppt-assets/viz_problem.png" },
+      { src: "../ppt-assets/section_02_digital_twin.png" },
+      { src: "../ppt-assets/viz_lifecycle.png" },
+      { src: "../ppt-assets/section_03_approach.png" },
+      { src: "../ppt-assets/viz_workflow.png" },
+      { src: "../ppt-assets/section_04_rul_model.png" },
+      { src: "../ppt-assets/viz_formula.png" },
+      { src: "../ppt-assets/section_05_doe_results.png" },
+      { src: "../outputs/05_doe_heatmap.png" },
+      { src: "../outputs/01_rul_curves.png" },
+      { src: "../outputs/03_pareto_sensitivity.png" },
+      { src: "../outputs/02_response_surface_3d.png" },
+      { src: "../outputs/04_operating_envelope.png" },
+      { src: "../ppt-assets/section_06_heeds.png" },
+      { src: "../ppt-assets/viz_heeds_map.png" },
+      { src: "../ppt-assets/section_07_key_results.png" },
+      { src: "../ppt-assets/viz_key_results.png" },
+      { src: "../ppt-assets/section_08_v_and_v.png" },
+      { src: "../ppt-assets/viz_vv.png" },
+      { src: "../ppt-assets/bg_title_antenna.png", title: true },
+    ];
+    let i = 0;
+    const el = document.getElementById("slide");
+    const counter = document.getElementById("counter");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    function render() {
+      const s = slides[i];
+      el.className = "slide" + (s.title ? " title" : "");
+      el.innerHTML = `<img src="${s.src}" alt="Slide ${i + 1}" />`;
+      counter.textContent = `${i + 1} / ${slides.length}`;
+      prev.disabled = i === 0;
+      next.disabled = i === slides.length - 1;
+    }
+    prev.onclick = () => { if (i > 0) { i--; render(); } };
+    next.onclick = () => { if (i < slides.length - 1) { i++; render(); } };
+    document.onkeydown = (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") next.onclick();
+      if (e.key === "ArrowLeft") prev.onclick();
+    };
+    render();
+  </script>
+</body>
+</html>

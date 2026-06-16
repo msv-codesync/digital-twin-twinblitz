@@ -77,8 +77,10 @@ def main() -> None:
         print("\n[6] Building PowerPoint...")
         import subprocess
 
-        script = ROOT.parent / "scripts" / "generate_presentation.py"
-        subprocess.run([sys.executable, str(script)], check=True)
+        for script in ("generate_presentation.py", "generate_srh_presentation.py"):
+            p = ROOT.parent / "scripts" / script
+            if p.exists():
+                subprocess.run([sys.executable, str(p)], check=True)
 
     print("\nDone. Open public/project/ for web assets.")
 
