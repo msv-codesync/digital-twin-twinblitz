@@ -140,9 +140,9 @@ export default async function HomePage() {
         </Link>
         <Link
           href="/project"
-          className="block glass rounded-xl p-4 text-sm text-cyan-300 border border-cyan-500/25"
+          className="block glass rounded-xl p-4 text-sm font-medium text-cyan-300 border border-cyan-500/30"
         >
-          📡 SRH exam PPT + browser presenter →
+          📡 Project defense — every figure, term & why (Prof. asks why) →
         </Link>
         <Link
           href="/prep"
