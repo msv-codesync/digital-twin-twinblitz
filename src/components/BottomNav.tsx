@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const tabs = [
-  { href: "/", label: "Today", icon: "⚡" },
-  { href: "/reels", label: "Reels", icon: "📱" },
+  { href: "/exam", label: "Exam", icon: "🎓" },
   { href: "/quiz", label: "Quiz", icon: "🎯" },
   { href: "/learn", label: "Learn", icon: "📖" },
-  { href: "/heeds", label: "HEEDS", icon: "⚙️" },
+  { href: "/project", label: "PPT", icon: "📡" },
+  { href: "/", label: "More", icon: "⚡" },
 ];
 
 export function BottomNav() {

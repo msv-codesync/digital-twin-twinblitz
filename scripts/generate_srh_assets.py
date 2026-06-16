@@ -27,7 +27,7 @@ CYAN = "#00B5D8"
 def _save(fig, name: str) -> Path:
     OUT.mkdir(parents=True, exist_ok=True)
     p = OUT / name
-    fig.savefig(p, dpi=200, bbox_inches="tight", facecolor="white", edgecolor="none")
+    fig.savefig(p, dpi=180, bbox_inches="tight", pad_inches=0.35, facecolor="white", edgecolor="none")
     plt.close(fig)
     return p
 
@@ -80,9 +80,9 @@ def title_background() -> Path:
 
 
 def lifecycle_diagram() -> Path:
-    fig, ax = plt.subplots(figsize=(12, 5))
-    ax.set_xlim(0, 12)
-    ax.set_ylim(0, 5)
+    fig, ax = plt.subplots(figsize=(14, 5.5))
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 5.5)
     ax.axis("off")
     stages = [
         ("Design", "CAD model"),
@@ -93,22 +93,21 @@ def lifecycle_diagram() -> Path:
     ]
     colors = [SRH_ORANGE, "#E85D04", "#F97316", "#FB923C", CYAN]
     for i, (title, sub) in enumerate(stages):
-        x = 0.5 + i * 2.3
-        box = FancyBboxPatch((x, 1.5), 2, 2, boxstyle="round,pad=0.05", facecolor=colors[i], edgecolor="white", linewidth=2, alpha=0.92)
+        x = 0.6 + i * 2.65
+        box = FancyBboxPatch((x, 1.6), 2.2, 2.2, boxstyle="round,pad=0.08", facecolor=colors[i], edgecolor="white", linewidth=2, alpha=0.95)
         ax.add_patch(box)
-        ax.text(x + 1, 2.6, title, ha="center", va="center", color="white", fontsize=13, fontweight="bold")
-        ax.text(x + 1, 2.0, sub, ha="center", va="center", color="white", fontsize=9, alpha=0.95)
+        ax.text(x + 1.1, 2.85, title, ha="center", va="center", color="white", fontsize=15, fontweight="bold")
+        ax.text(x + 1.1, 2.15, sub, ha="center", va="center", color="white", fontsize=11, alpha=0.95)
         if i < len(stages) - 1:
-            ax.annotate("", xy=(x + 2.15, 2.5), xytext=(x + 2.05, 2.5),
-                        arrowprops=dict(arrowstyle="->", color=SRH_TEXT, lw=2))
-    ax.set_title("Digital Twin Across Product Lifecycle", fontsize=16, fontweight="bold", color=SRH_TEXT, pad=12)
+            ax.annotate("", xy=(x + 2.3, 2.7), xytext=(x + 2.2, 2.7),
+                        arrowprops=dict(arrowstyle="->", color=SRH_TEXT, lw=2.5))
     return _save(fig, "viz_lifecycle.png")
 
 
 def workflow_pipeline() -> Path:
-    fig, ax = plt.subplots(figsize=(12, 4))
-    ax.set_xlim(0, 12)
-    ax.set_ylim(0, 4)
+    fig, ax = plt.subplots(figsize=(14, 4.5))
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 4.5)
     ax.axis("off")
     steps = [
         ("DRONE", "2D→3D\nScan", SRH_NAVY),
@@ -118,14 +117,13 @@ def workflow_pipeline() -> Path:
         ("OPS", "Safe\nEnvelope", CYAN),
     ]
     for i, (icon, label, col) in enumerate(steps):
-        x = 0.4 + i * 2.35
-        c = FancyBboxPatch((x, 1), 2, 2, boxstyle="round,pad=0.08", facecolor=col, edgecolor="white", linewidth=2)
+        x = 0.5 + i * 2.7
+        c = FancyBboxPatch((x, 1.1), 2.3, 2.3, boxstyle="round,pad=0.1", facecolor=col, edgecolor="white", linewidth=2)
         ax.add_patch(c)
-        ax.text(x + 1, 2.55, icon, ha="center", fontsize=9, fontweight="bold", color="white", alpha=0.85)
-        ax.text(x + 1, 1.55, label, ha="center", va="center", color="white", fontsize=10, fontweight="bold", linespacing=1.3)
+        ax.text(x + 1.15, 2.85, icon, ha="center", fontsize=11, fontweight="bold", color="white", alpha=0.9)
+        ax.text(x + 1.15, 1.85, label, ha="center", va="center", color="white", fontsize=13, fontweight="bold", linespacing=1.4)
         if i < len(steps) - 1:
-            ax.annotate("", xy=(x + 2.1, 2), xytext=(x + 2.0, 2), arrowprops=dict(arrowstyle="-|>", color=SRH_ORANGE, lw=2.5))
-    ax.text(6, 3.5, "Industrial pipeline ≈ €220K  ·  USA telecom client", ha="center", fontsize=11, color=SRH_MUTED)
+            ax.annotate("", xy=(x + 2.4, 2.25), xytext=(x + 2.3, 2.25), arrowprops=dict(arrowstyle="-|>", color=SRH_ORANGE, lw=3))
     return _save(fig, "viz_workflow.png")
 
 
@@ -158,9 +156,9 @@ def sanity_cards() -> Path:
 
 
 def heeds_mapping() -> Path:
-    fig, ax = plt.subplots(figsize=(12, 5.5))
+    fig, ax = plt.subplots(figsize=(14, 6))
     ax.axis("off")
-    ax.text(0.5, 0.95, "HEEDS Example 4  ↔  Antenna RUL Project", fontsize=15, fontweight="bold", ha="center", color=SRH_TEXT, transform=ax.transAxes)
+    ax.text(0.5, 0.92, "HEEDS Coil Spring  ↔  Antenna RUL Project", fontsize=17, fontweight="bold", ha="center", color=SRH_TEXT, transform=ax.transAxes)
     rows = [
         ("Spring FEA exe", "Python rul_days()"),
         ("coil_diam, wire_diam", "wind_ms, temp_C"),
@@ -169,20 +167,18 @@ def heeds_mapping() -> Path:
         ("POST 3D surface", "Response surface plot"),
     ]
     for i, (left, right) in enumerate(rows):
-        y = 0.78 - i * 0.14
-        ax.add_patch(FancyBboxPatch((0.05, y - 0.04), 0.38, 0.1, transform=ax.transAxes, boxstyle="round", facecolor=SRH_NAVY, alpha=0.9))
-        ax.add_patch(FancyBboxPatch((0.55, y - 0.04), 0.38, 0.1, transform=ax.transAxes, boxstyle="round", facecolor=SRH_ORANGE, alpha=0.9))
-        ax.text(0.24, y + 0.01, left, ha="center", va="center", color="white", fontsize=10, transform=ax.transAxes)
-        ax.text(0.74, y + 0.01, right, ha="center", va="center", color="white", fontsize=10, transform=ax.transAxes)
-        ax.annotate("", xy=(0.53, y + 0.01), xytext=(0.45, y + 0.01), xycoords=ax.transAxes,
-                    arrowprops=dict(arrowstyle="-|>", color=SRH_TEXT, lw=2))
-    ax.text(0.24, 0.88, "HEEDS Coil Spring", ha="center", fontsize=11, fontweight="bold", color=SRH_NAVY, transform=ax.transAxes)
-    ax.text(0.74, 0.88, "Your Antenna Twin", ha="center", fontsize=11, fontweight="bold", color=SRH_ORANGE, transform=ax.transAxes)
+        y = 0.72 - i * 0.13
+        ax.add_patch(FancyBboxPatch((0.06, y - 0.045), 0.36, 0.09, transform=ax.transAxes, boxstyle="round,pad=0.02", facecolor=SRH_NAVY, alpha=0.92))
+        ax.add_patch(FancyBboxPatch((0.56, y - 0.045), 0.36, 0.09, transform=ax.transAxes, boxstyle="round,pad=0.02", facecolor=SRH_ORANGE, alpha=0.92))
+        ax.text(0.24, y, left, ha="center", va="center", color="white", fontsize=12, transform=ax.transAxes)
+        ax.text(0.74, y, right, ha="center", va="center", color="white", fontsize=12, transform=ax.transAxes)
+        ax.annotate("", xy=(0.54, y), xytext=(0.44, y), xycoords=ax.transAxes,
+                    arrowprops=dict(arrowstyle="-|>", color=SRH_TEXT, lw=2.5))
     return _save(fig, "viz_heeds_map.png")
 
 
 def key_results() -> Path:
-    fig, ax = plt.subplots(figsize=(12, 4))
+    fig, ax = plt.subplots(figsize=(14, 4.5))
     ax.axis("off")
     stats = [
         ("3.5×", "Wind dominates\ntemperature", SRH_ORANGE),
@@ -191,11 +187,10 @@ def key_results() -> Path:
         (">10 yr", "RUL in safe\nenvelope", SRH_NAVY),
     ]
     for i, (num, label, col) in enumerate(stats):
-        x = 0.08 + i * 0.23
-        ax.add_patch(FancyBboxPatch((x, 0.15), 0.2, 0.7, transform=ax.transAxes, boxstyle="round,pad=0.03", facecolor=col, alpha=0.15, edgecolor=col, linewidth=2.5))
-        ax.text(x + 0.1, 0.62, num, ha="center", fontsize=28, fontweight="bold", color=col, transform=ax.transAxes)
-        ax.text(x + 0.1, 0.32, label, ha="center", fontsize=11, color=SRH_TEXT, transform=ax.transAxes, linespacing=1.4)
-    ax.text(0.5, 0.92, "Key Results — Predictive Maintenance", ha="center", fontsize=16, fontweight="bold", color=SRH_TEXT, transform=ax.transAxes)
+        x = 0.06 + i * 0.23
+        ax.add_patch(FancyBboxPatch((x, 0.12), 0.2, 0.75, transform=ax.transAxes, boxstyle="round,pad=0.04", facecolor=col, alpha=0.12, edgecolor=col, linewidth=2.5))
+        ax.text(x + 0.1, 0.62, num, ha="center", fontsize=32, fontweight="bold", color=col, transform=ax.transAxes)
+        ax.text(x + 0.1, 0.3, label, ha="center", fontsize=13, color=SRH_TEXT, transform=ax.transAxes, linespacing=1.5)
     return _save(fig, "viz_key_results.png")
 
 
@@ -218,17 +213,16 @@ def problem_visual() -> Path:
 
 
 def vv_visual() -> Path:
-    fig, ax = plt.subplots(figsize=(12, 4.5))
+    fig, ax = plt.subplots(figsize=(10, 5))
     ax.axis("off")
-    ax.text(0.5, 0.9, "Verification & Validation", ha="center", fontsize=16, fontweight="bold", color=SRH_TEXT, transform=ax.transAxes)
     for x, title, q, ex, col in [
-        (0.15, "VERIFICATION", "Maths right?", "Sanity checks at 5/15/35 m/s", SRH_NAVY),
-        (0.55, "VALIDATION", "Right maths?", "Compare RUL vs field failures", SRH_ORANGE),
+        (0.08, "VERIFICATION", "Maths right?", "Sanity checks\n5 / 15 / 35 m/s", SRH_NAVY),
+        (0.54, "VALIDATION", "Right maths?", "Compare RUL vs\nfield failures", SRH_ORANGE),
     ]:
-        ax.add_patch(FancyBboxPatch((x, 0.15), 0.35, 0.6, transform=ax.transAxes, boxstyle="round", facecolor=col, alpha=0.12, edgecolor=col, linewidth=2))
-        ax.text(x + 0.175, 0.65, title, ha="center", fontsize=13, fontweight="bold", color=col, transform=ax.transAxes)
-        ax.text(x + 0.175, 0.5, q, ha="center", fontsize=14, style="italic", color=SRH_TEXT, transform=ax.transAxes)
-        ax.text(x + 0.175, 0.32, ex, ha="center", fontsize=10, color=SRH_MUTED, transform=ax.transAxes)
+        ax.add_patch(FancyBboxPatch((x, 0.12), 0.38, 0.72, transform=ax.transAxes, boxstyle="round,pad=0.04", facecolor=col, alpha=0.1, edgecolor=col, linewidth=2.5))
+        ax.text(x + 0.19, 0.72, title, ha="center", fontsize=15, fontweight="bold", color=col, transform=ax.transAxes)
+        ax.text(x + 0.19, 0.52, q, ha="center", fontsize=16, style="italic", color=SRH_TEXT, transform=ax.transAxes)
+        ax.text(x + 0.19, 0.32, ex, ha="center", fontsize=12, color=SRH_MUTED, transform=ax.transAxes, linespacing=1.4)
     return _save(fig, "viz_vv.png")
 
 

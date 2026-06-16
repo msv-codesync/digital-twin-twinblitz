@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
-SRH-format exam presentation — matches DigitalTwin_Lectures_Exercises.pdf style.
-Visual-first: minimal text, full-bleed charts, SRH logo, orange section dividers.
+SRH exam presentation — clean layout, readable spacing, official colour palette.
+Orange #DF4707 · Navy #0B1D35 · Cream accent · white content slides.
 """
 
 from __future__ import annotations
 
+import subprocess
+import sys
 from pathlib import Path
 
+from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
 from pptx.enum.text import MSO_ANCHOR, PP_ALIGN
@@ -18,24 +21,32 @@ ASSETS = ROOT / "public" / "project" / "ppt-assets"
 FIG = ROOT / "public" / "project" / "outputs"
 OUT = ROOT / "public" / "project"
 PPT_PATH = OUT / "Exam_Presentation_Antenna_RUL_SRH.pptx"
+DESKTOP = Path.home() / "Desktop" / "Exam_Presentation_Antenna_RUL_SRH_FINAL.pptx"
 
-# SRH brand (from Exercises PDF)
+# SRH brand (Exercises PDF)
 ORANGE = RGBColor(223, 71, 7)
 NAVY = RGBColor(11, 29, 53)
 WHITE = RGBColor(255, 255, 255)
 TEXT = RGBColor(45, 45, 45)
-MUTED = RGBColor(102, 102, 102)
+MUTED = RGBColor(90, 90, 90)
 CREAM = RGBColor(253, 217, 201)
+LIGHT = RGBColor(245, 247, 250)
 
-FONT_HEAD = "Calibri"
-FONT_BODY = "Calibri"
+FONT = "Calibri"
 FOOTER = "SRH University  ·  Prof. Dr. Adele Nasti"
 STUDENT = "Srivardhan Varma Mudunuri  ·  Matric. 100001259"
-COURSE = "Modeling, Simulation and Digital Twin"
 
-LOGO_WHITE = ASSETS / "srh_logo_white.png"
 SLIDE_W = Inches(13.333)
 SLIDE_H = Inches(7.5)
+ML = Inches(0.75)
+MR = Inches(0.75)
+HEADER_H = Inches(1.2)
+CONTENT_TOP = Inches(1.45)
+FOOTER_Y = Inches(7.08)
+CONTENT_BOTTOM = Inches(6.85)
+
+LOGO_ORANGE = ASSETS / "srh_logo_orange.png"
+LOGO_WHITE = ASSETS / "srh_logo_white.png"
 
 
 def _prs() -> Presentation:
@@ -45,233 +56,241 @@ def _prs() -> Presentation:
     return prs
 
 
-def _slide(prs: Presentation):
+def _blank(prs: Presentation):
     return prs.slides.add_slide(prs.slide_layouts[6])
 
 
-def _footer(slide, num: int, dark: bool = False) -> None:
-    color = WHITE if dark else MUTED
-    left = slide.shapes.add_textbox(Inches(0.45), Inches(7.05), Inches(8), Inches(0.35))
-    left.text_frame.paragraphs[0].text = FOOTER
-    left.text_frame.paragraphs[0].font.size = Pt(9)
-    left.text_frame.paragraphs[0].font.name = FONT_BODY
-    left.text_frame.paragraphs[0].font.color.rgb = color
+def _rect(slide, l, t, w, h, fill: RGBColor, line: bool = False):
+    s = slide.shapes.add_shape(1, l, t, w, h)
+    s.fill.solid()
+    s.fill.fore_color.rgb = fill
+    if not line:
+        s.line.fill.background()
+    return s
 
-    right = slide.shapes.add_textbox(Inches(12.2), Inches(7.05), Inches(0.8), Inches(0.35))
-    p = right.text_frame.paragraphs[0]
-    p.text = str(num)
+
+def _footer(slide, num: int) -> None:
+    tb = slide.shapes.add_textbox(ML, FOOTER_Y, Inches(10), Inches(0.3))
+    p = tb.text_frame.paragraphs[0]
+    p.text = FOOTER
     p.font.size = Pt(9)
-    p.font.name = FONT_BODY
-    p.font.color.rgb = color
-    p.alignment = PP_ALIGN.RIGHT
+    p.font.name = FONT
+    p.font.color.rgb = MUTED
+
+    nb = slide.shapes.add_textbox(Inches(12.1), FOOTER_Y, Inches(0.6), Inches(0.3))
+    np = nb.text_frame.paragraphs[0]
+    np.text = str(num)
+    np.font.size = Pt(9)
+    np.font.name = FONT
+    np.font.color.rgb = MUTED
+    np.alignment = PP_ALIGN.RIGHT
 
 
-def _logo_white_tl(slide, height=Inches(0.55)) -> None:
+def _logo_orange(slide, top=Inches(0.28)) -> None:
+    if LOGO_ORANGE.exists():
+        slide.shapes.add_picture(str(LOGO_ORANGE), Inches(11.85), top, height=Inches(0.55))
+
+
+def _header(slide, title: str, subtitle: str = "") -> None:
+    _rect(slide, 0, 0, SLIDE_W, HEADER_H, ORANGE)
+    _logo_orange(slide)
+
+    tb = slide.shapes.add_textbox(ML, Inches(0.22), Inches(10.5), Inches(0.55))
+    p = tb.text_frame.paragraphs[0]
+    p.text = title
+    p.font.size = Pt(30)
+    p.font.bold = True
+    p.font.name = FONT
+    p.font.color.rgb = WHITE
+
+    if subtitle:
+        sb = slide.shapes.add_textbox(ML, Inches(0.78), Inches(10.5), Inches(0.35))
+        sp = sb.text_frame.paragraphs[0]
+        sp.text = subtitle
+        sp.font.size = Pt(15)
+        sp.font.name = FONT
+        sp.font.color.rgb = CREAM
+
+
+def _white_bg(slide) -> None:
+    _rect(slide, 0, HEADER_H, SLIDE_W, SLIDE_H - HEADER_H, WHITE)
+
+
+def _bullets(
+    slide,
+    items: list[str],
+    top=CONTENT_TOP,
+    width=None,
+    font_size=20,
+    space_after=14,
+) -> None:
+    w = width or (SLIDE_W - ML - MR)
+    tb = slide.shapes.add_textbox(ML, top, w, CONTENT_BOTTOM - top)
+    tf = tb.text_frame
+    tf.word_wrap = True
+    tf.vertical_anchor = MSO_ANCHOR.TOP
+
+    for i, line in enumerate(items):
+        if not line:
+            para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+            para.text = ""
+            para.space_after = Pt(6)
+            continue
+        para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
+        para.text = line
+        para.font.size = Pt(font_size)
+        para.font.name = FONT
+        para.font.color.rgb = TEXT
+        para.space_after = Pt(space_after)
+        para.line_spacing = 1.25
+
+
+def _fit_image(slide, img_path: Path, top, max_w, max_h, left=None):
+    if not img_path.exists():
+        return
+    with Image.open(img_path) as im:
+        iw, ih = im.size
+    aspect = iw / ih
+    w = max_w
+    h = w / aspect
+    if h > max_h:
+        h = max_h
+        w = h * aspect
+    l = left if left is not None else ML + (max_w - w) / 2
+    slide.shapes.add_picture(str(img_path), l, top, width=w, height=h)
+
+
+def _slide_bullets(prs, num: int, title: str, subtitle: str, bullets: list[str]) -> None:
+    slide = _blank(prs)
+    _header(slide, title, subtitle)
+    _white_bg(slide)
+    _bullets(slide, bullets)
+    _footer(slide, num)
+
+
+def _slide_chart(prs, num: int, title: str, subtitle: str, img: Path, caption: str = "") -> None:
+    slide = _blank(prs)
+    _header(slide, title, subtitle)
+    _white_bg(slide)
+
+    max_w = SLIDE_W - ML - MR
+    cap_h = Inches(0.45) if caption else Inches(0)
+    max_h = CONTENT_BOTTOM - CONTENT_TOP - cap_h - Inches(0.15)
+    _fit_image(slide, img, CONTENT_TOP + Inches(0.1), max_w, max_h)
+
+    if caption:
+        cb = slide.shapes.add_textbox(ML, CONTENT_BOTTOM - Inches(0.42), max_w, Inches(0.4))
+        cp = cb.text_frame.paragraphs[0]
+        cp.text = caption
+        cp.font.size = Pt(13)
+        cp.font.italic = True
+        cp.font.color.rgb = MUTED
+        cp.font.name = FONT
+
+    _footer(slide, num)
+
+
+def _slide_split(
+    prs,
+    num: int,
+    title: str,
+    left_bullets: list[str],
+    img: Path,
+) -> None:
+    slide = _blank(prs)
+    _header(slide, title)
+    _white_bg(slide)
+
+    col_w = Inches(5.6)
+    _bullets(slide, left_bullets, top=CONTENT_TOP, width=col_w, font_size=18, space_after=12)
+
+    max_w = Inches(6.2)
+    max_h = CONTENT_BOTTOM - CONTENT_TOP
+    _fit_image(slide, img, CONTENT_TOP, max_w, max_h, left=Inches(6.85))
+
+    _footer(slide, num)
+
+
+def _title_slide(prs) -> None:
+    slide = _blank(prs)
+    _rect(slide, 0, 0, SLIDE_W, SLIDE_H, NAVY)
+    _rect(slide, 0, Inches(6.55), SLIDE_W, Inches(0.95), ORANGE)
+
     if LOGO_WHITE.exists():
-        slide.shapes.add_picture(str(LOGO_WHITE), Inches(0.45), Inches(0.35), height=height)
+        slide.shapes.add_picture(str(LOGO_WHITE), ML, Inches(0.45), height=Inches(0.7))
 
-
-def _logo_white_tr(slide, height=Inches(0.5)) -> None:
-    if LOGO_WHITE.exists():
-        slide.shapes.add_picture(str(LOGO_WHITE), Inches(12.0), Inches(0.35), height=height)
-
-
-def _logo_orange_tr(slide) -> None:
-    orange_logo = ASSETS / "srh_logo_orange.png"
-    if orange_logo.exists():
-        slide.shapes.add_picture(str(orange_logo), Inches(11.7), Inches(0.28), height=Inches(0.42))
-
-
-def _full_bg(slide, img: Path) -> None:
-    if img.exists():
-        slide.shapes.add_picture(str(img), 0, 0, width=SLIDE_W, height=SLIDE_H)
-
-
-def _title_slide(prs: Presentation) -> None:
-    slide = _slide(prs)
-    bg = ASSETS / "bg_title_antenna.png"
-    if bg.exists():
-        _full_bg(slide, bg)
-    else:
-        rect = slide.shapes.add_shape(1, 0, 0, SLIDE_W, SLIDE_H)
-        rect.fill.solid()
-        rect.fill.fore_color.rgb = NAVY
-        rect.line.fill.background()
-
-    _logo_white_tl(slide, Inches(0.65))
-
-    tb = slide.shapes.add_textbox(Inches(0.55), Inches(2.4), Inches(7.5), Inches(2.5))
+    tb = slide.shapes.add_textbox(ML, Inches(1.85), Inches(11), Inches(2.2))
     tf = tb.text_frame
     tf.word_wrap = True
     p = tf.paragraphs[0]
     p.text = "DoE-Based Remaining Useful Life Prediction"
-    p.font.name = FONT_HEAD
-    p.font.size = Pt(32)
+    p.font.size = Pt(36)
     p.font.bold = True
+    p.font.name = FONT
     p.font.color.rgb = WHITE
 
     p2 = tf.add_paragraph()
     p2.text = "5G/6G Telecom Tower Antenna Digital Twin"
-    p2.font.name = FONT_HEAD
-    p2.font.size = Pt(22)
-    p2.font.color.rgb = WHITE
-    p2.space_before = Pt(8)
+    p2.font.size = Pt(24)
+    p2.font.name = FONT
+    p2.font.color.rgb = CREAM
+    p2.space_before = Pt(14)
 
-
-def _section_slide(prs: Presentation, num: str, title: str) -> None:
-    slide = _slide(prs)
-    img = ASSETS / f"section_{num}_{title.lower().replace(' ', '_')}.png"
-    if title == "V and V":
-        img = ASSETS / "section_08_v_and_v.png"
-    _full_bg(slide, img)
-    _logo_white_tr(slide, Inches(0.55))
-
-
-def _white_content(
-    prs: Presentation,
-    title: str,
-    subtitle: str,
-    img: Path,
-    slide_num: int,
-    caption: str = "",
-) -> None:
-    slide = _slide(prs)
-    # white bg
-    bg = slide.shapes.add_shape(1, 0, 0, SLIDE_W, SLIDE_H)
-    bg.fill.solid()
-    bg.fill.fore_color.rgb = WHITE
-    bg.line.fill.background()
-
-    _logo_orange_tr(slide)
-
-    h = slide.shapes.add_textbox(Inches(0.55), Inches(0.35), Inches(10), Inches(0.55))
-    hp = h.text_frame.paragraphs[0]
-    hp.text = title
-    hp.font.name = FONT_HEAD
-    hp.font.size = Pt(26)
-    hp.font.bold = True
-    hp.font.color.rgb = TEXT
-
-    if subtitle:
-        st = slide.shapes.add_textbox(Inches(0.55), Inches(0.95), Inches(10), Inches(0.4))
-        sp = st.text_frame.paragraphs[0]
-        sp.text = subtitle
-        sp.font.name = FONT_BODY
-        sp.font.size = Pt(14)
-        sp.font.color.rgb = MUTED
-
-    top = Inches(1.35) if subtitle else Inches(1.1)
-    if img.exists():
-        # image right or full width depending on aspect
-        if img.stat().st_size > 200000:  # large chart = full width
-            slide.shapes.add_picture(str(img), Inches(0.5), top, width=Inches(12.3))
-        else:
-            slide.shapes.add_picture(str(img), Inches(0.55), top, width=Inches(12.2))
-
-    if caption:
-        cap = slide.shapes.add_textbox(Inches(0.55), Inches(6.75), Inches(12), Inches(0.3))
-        cp = cap.text_frame.paragraphs[0]
-        cp.text = caption
-        cp.font.size = Pt(10)
-        cp.font.italic = True
-        cp.font.color.rgb = MUTED
-        cp.font.name = FONT_BODY
-
-    _footer(slide, slide_num)
-
-
-def _visual_only(prs: Presentation, img: Path, slide_num: int, caption: str = "") -> None:
-    """Chart-forward slide — title in caption only."""
-    slide = _slide(prs)
-    bg = slide.shapes.add_shape(1, 0, 0, SLIDE_W, SLIDE_H)
-    bg.fill.solid()
-    bg.fill.fore_color.rgb = WHITE
-    bg.line.fill.background()
-    _logo_orange_tr(slide)
-    if img.exists():
-        slide.shapes.add_picture(str(img), Inches(0.4), Inches(0.85), width=Inches(12.5))
-    if caption:
-        cap = slide.shapes.add_textbox(Inches(0.55), Inches(0.35), Inches(11), Inches(0.45))
-        cap.text_frame.paragraphs[0].text = caption
-        cap.text_frame.paragraphs[0].font.size = Pt(18)
-        cap.text_frame.paragraphs[0].font.bold = True
-        cap.text_frame.paragraphs[0].font.color.rgb = TEXT
-        cap.text_frame.paragraphs[0].font.name = FONT_HEAD
-    _footer(slide, slide_num)
-
-
-def _references(prs: Presentation, num: int) -> None:
-    slide = _slide(prs)
-    bg = slide.shapes.add_shape(1, 0, 0, SLIDE_W, SLIDE_H)
-    bg.fill.solid()
-    bg.fill.fore_color.rgb = WHITE
-    bg.line.fill.background()
-    _logo_orange_tr(slide)
-
-    h = slide.shapes.add_textbox(Inches(0.55), Inches(0.4), Inches(5), Inches(0.5))
-    h.text_frame.paragraphs[0].text = "References"
-    h.text_frame.paragraphs[0].font.size = Pt(26)
-    h.text_frame.paragraphs[0].font.bold = True
-    h.text_frame.paragraphs[0].font.color.rgb = TEXT
-
-    refs = [
-        "AIAA (2020). Digital Twin: Definition & Value",
-        "Grieves & Vickers (2017). Digital Twin: Mitigating Unpredictable Behavior",
-        "Tao et al. (2019). Digital Twin in Industry. IEEE TII",
-        "Montgomery (2017). Design and Analysis of Experiments",
-        "Jardine et al. (2006). Machinery diagnostics review",
-        "Liu et al. (2021). UAV photogrammetry for telecom towers",
-        "Kapteyn et al. (2021). Predictive digital twins. Nature Comp Sci",
-        "ISO/IEC 30173:2023 — Digital twin terminology",
-        "Siemens (2024). HEEDS Multi-Disciplinary Design Exploration",
-    ]
-    body = slide.shapes.add_textbox(Inches(0.55), Inches(1.1), Inches(12), Inches(5.5))
-    tf = body.text_frame
-    for i, r in enumerate(refs):
-        para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        para.text = f"{i + 1}. {r}"
-        para.font.size = Pt(13)
-        para.font.color.rgb = TEXT
-        para.font.name = FONT_BODY
+    meta = slide.shapes.add_textbox(ML, Inches(4.35), Inches(9), Inches(1.8))
+    mf = meta.text_frame
+    for i, line in enumerate(
+        [
+            "Modeling, Simulation & Digital Twin",
+            "Prof. Dr. Adele Nasti",
+            STUDENT,
+            "Final Exam · 10–15 minutes",
+        ]
+    ):
+        para = mf.paragraphs[0] if i == 0 else mf.add_paragraph()
+        para.text = line
+        para.font.size = Pt(15)
+        para.font.name = FONT
+        para.font.color.rgb = RGBColor(210, 220, 230)
         para.space_after = Pt(6)
-    _footer(slide, num)
+
+    sb = slide.shapes.add_textbox(ML, Inches(6.72), Inches(11), Inches(0.5))
+    sp = sb.text_frame.paragraphs[0]
+    sp.text = STUDENT
+    sp.font.size = Pt(13)
+    sp.font.name = FONT
+    sp.font.color.rgb = WHITE
 
 
-def _thankyou(prs: Presentation) -> None:
-    slide = _slide(prs)
-    bg = ASSETS / "bg_title_antenna.png"
-    if bg.exists():
-        _full_bg(slide, bg)
-    else:
-        r = slide.shapes.add_shape(1, 0, 0, SLIDE_W, SLIDE_H)
-        r.fill.solid()
-        r.fill.fore_color.rgb = NAVY
-        r.line.fill.background()
-    _logo_white_tl(slide)
-    tb = slide.shapes.add_textbox(Inches(0.55), Inches(3.0), Inches(10), Inches(1.5))
+def _thankyou(prs) -> None:
+    slide = _blank(prs)
+    _rect(slide, 0, 0, SLIDE_W, SLIDE_H, NAVY)
+    _rect(slide, 0, 0, SLIDE_W, Inches(0.12), ORANGE)
+
+    if LOGO_WHITE.exists():
+        slide.shapes.add_picture(str(LOGO_WHITE), ML, Inches(0.45), height=Inches(0.65))
+
+    tb = slide.shapes.add_textbox(ML, Inches(2.8), Inches(10), Inches(1.8))
     p = tb.text_frame.paragraphs[0]
     p.text = "Thank you"
-    p.font.size = Pt(44)
+    p.font.size = Pt(48)
     p.font.bold = True
+    p.font.name = FONT
     p.font.color.rgb = WHITE
-    p.font.name = FONT_HEAD
+
     p2 = tb.text_frame.add_paragraph()
     p2.text = "Questions welcome"
-    p2.font.size = Pt(20)
-    p2.font.color.rgb = WHITE
-    p2.font.name = FONT_BODY
+    p2.font.size = Pt(22)
+    p2.font.name = FONT
+    p2.font.color.rgb = CREAM
+    p2.space_before = Pt(12)
 
 
 def build() -> Path:
-    # Ensure assets exist
-    import subprocess
-    import sys
-
     assets_script = ROOT / "scripts" / "generate_srh_assets.py"
     run_script = ROOT / "project" / "run_project.py"
     if assets_script.exists():
         subprocess.run([sys.executable, str(assets_script)], check=True)
-    if run_script.exists() and not (FIG / "01_rul_curves.png").exists():
+    if run_script.exists():
         subprocess.run([sys.executable, str(run_script)], check=True)
 
     prs = _prs()
@@ -280,69 +299,196 @@ def build() -> Path:
     _title_slide(prs)
     n += 1
 
-    _section_slide(prs, "01", "Problem")
-    n += 1
-    _white_content(prs, "The Problem", "Predictive maintenance for telecom infrastructure", ASSETS / "viz_problem.png", n)
-    n += 1
-
-    _section_slide(prs, "02", "Digital Twin")
-    n += 1
-    _white_content(
+    _slide_bullets(
         prs,
-        "Digital Twin Definition",
-        '"Digital representation throughout its lifecycle — does NOT replace testing"',
-        ASSETS / "viz_lifecycle.png",
         n,
+        "1 · Problem",
+        "Predictive maintenance for 5G/6G telecom towers",
+        [
+            "Tower failures cause outages and revenue loss",
+            "Climber inspections are costly, slow, and risky",
+            "Drone 2D→3D scan gives geometry — but geometry alone is NOT a digital twin",
+            "Goal: predict Remaining Useful Life (RUL) from wind + temperature",
+        ],
     )
     n += 1
 
-    _section_slide(prs, "03", "Approach")
-    n += 1
-    _white_content(prs, "End-to-End Approach", "Drone geometry + physics-based RUL + DoE", ASSETS / "viz_workflow.png", n)
-    n += 1
-
-    _section_slide(prs, "04", "RUL Model")
-    n += 1
-    _white_content(prs, "Physics-Based RUL Model", "Wind fatigue × thermal aging", ASSETS / "viz_formula.png", n)
-    n += 1
-
-    _section_slide(prs, "05", "DoE Results")
-    n += 1
-    _visual_only(prs, FIG / "05_doe_heatmap.png", n, "Full factorial DoE — 4 wind × 10 temp = 40 runs")
-    n += 1
-    _visual_only(prs, FIG / "01_rul_curves.png", n, "RUL vs temperature at each wind level")
-    n += 1
-    _visual_only(prs, FIG / "03_pareto_sensitivity.png", n, "Sensitivity — wind dominates ~3.5× temperature")
-    n += 1
-    _visual_only(prs, FIG / "02_response_surface_3d.png", n, "DoE response surface across design space")
-    n += 1
-    _visual_only(prs, FIG / "04_operating_envelope.png", n, "Operating envelope — safe: wind ≤12 m/s, temp ≤30°C")
+    _slide_split(
+        prs,
+        n,
+        "2 · Digital Twin Definition",
+        [
+            "Digital representation throughout its lifecycle",
+            "",
+            "NOT a static CAD copy",
+            "",
+            "Stages: Design → Manufacture → Build → Test → Service",
+            "",
+            "Twin does NOT replace experimental testing",
+        ],
+        ASSETS / "viz_lifecycle.png",
+    )
     n += 1
 
-    _section_slide(prs, "06", "HEEDS")
-    n += 1
-    _white_content(prs, "HEEDS Workflow Mapping", "Example 4 Coil Spring DoE ≡ Antenna factorial", ASSETS / "viz_heeds_map.png", n)
-    n += 1
-
-    _section_slide(prs, "07", "Key Results")
-    n += 1
-    _white_content(prs, "Key Results & Business Value", "Predictive maintenance · TRL 4–5", ASSETS / "viz_key_results.png", n)
-    n += 1
-
-    _section_slide(prs, "08", "V and V")
-    n += 1
-    _white_content(prs, "Verification & Validation", "Sanity checks + future field correlation", ASSETS / "viz_vv.png", n)
+    _slide_chart(
+        prs,
+        n,
+        "3 · End-to-End Approach",
+        "Drone geometry + physics RUL + Design of Experiments",
+        ASSETS / "viz_workflow.png",
+        "Pipeline extends real industrial drone inspection into predictive maintenance",
+    )
     n += 1
 
-    _references(prs, n)
+    _slide_bullets(
+        prs,
+        n,
+        "4 · Physics-Based RUL Model",
+        "Wind fatigue × thermal aging",
+        [
+            "RUL (days) = 175,200 / (f_wind × f_temp × 24)",
+            "",
+            "f_wind(v) = (v / 5)^1.6        f_temp(T) = 2^((T − 20) / 15)",
+            "",
+            "Verification sanity checks:",
+            "   •  5 m/s, 20 °C  →  ~20 years",
+            "   • 15 m/s, 35 °C  →  ~1.7 years",
+            "   • 35 m/s, 65 °C  →  ~41 days",
+        ],
+    )
     n += 1
+
+    _slide_bullets(
+        prs,
+        n,
+        "5 · Design of Experiments",
+        "Full factorial — same workflow as HEEDS Example 5 (Coil Spring)",
+        [
+            "Factor A: Wind speed — 4 levels [5, 15, 25, 35] m/s",
+            "Factor B: Temperature — 10 levels [20…65] °C",
+            "Design: 4 × 10 = 40 simulation runs",
+            "",
+            "HEEDS workflow: Process → Parameters → Tagging → Study → Run → POST",
+        ],
+    )
+    n += 1
+
+    _slide_chart(
+        prs,
+        n,
+        "6 · DoE Results — Design Space",
+        "40-run factorial heatmap",
+        FIG / "05_doe_heatmap.png",
+        "RUL (years) across wind × temperature",
+    )
+    n += 1
+
+    _slide_chart(
+        prs,
+        n,
+        "7 · RUL vs Temperature",
+        "Separate curve for each wind level",
+        FIG / "01_rul_curves.png",
+        "Higher wind collapses remaining life — dominant degradation driver",
+    )
+    n += 1
+
+    _slide_chart(
+        prs,
+        n,
+        "8 · Sensitivity Analysis",
+        "Pareto ranking of factors",
+        FIG / "03_pareto_sensitivity.png",
+        "Wind impact ≈ 3.5× temperature",
+    )
+    n += 1
+
+    _slide_chart(
+        prs,
+        n,
+        "9 · Operating Envelope",
+        "Safe operating recommendation",
+        FIG / "04_operating_envelope.png",
+        "Safe ops: wind ≤ 12 m/s and temp ≤ 30 °C → RUL > 10 years",
+    )
+    n += 1
+
+    _slide_chart(
+        prs,
+        n,
+        "10 · HEEDS Mapping",
+        "Coil Spring DoE ≡ Antenna factorial study",
+        ASSETS / "viz_heeds_map.png",
+    )
+    n += 1
+
+    _slide_chart(
+        prs,
+        n,
+        "11 · Key Results",
+        "Predictive maintenance value · TRL 4–5",
+        ASSETS / "viz_key_results.png",
+    )
+    n += 1
+
+    _slide_split(
+        prs,
+        n,
+        "12 · Verification & Validation",
+        [
+            "Verification — maths right?",
+            "Sanity checks at anchor points",
+            "",
+            "Validation — right maths?",
+            "Compare RUL vs field failures",
+            "",
+            "Calibration ≠ validation",
+        ],
+        ASSETS / "viz_vv.png",
+    )
+    n += 1
+
+    _slide_bullets(
+        prs,
+        n,
+        "13 · Live Demo & Value",
+        "Reproducible Python pipeline",
+        [
+            "Run: python project/run_project.py",
+            "Notebook: DigitalTwin_Antenna_RUL.ipynb",
+            "",
+            "Value: fewer outages, safer crews, data-driven maintenance",
+            "Creative: telecom-specific RUL physics + DoE envelope",
+        ],
+    )
+    n += 1
+
+    _slide_bullets(
+        prs,
+        n,
+        "14 · References",
+        "",
+        [
+            "1. AIAA (2020). Digital Twin: Definition & Value",
+            "2. Grieves & Vickers (2017). Digital Twin: Mitigating Unpredictable Behavior",
+            "3. Tao et al. (2019). Digital Twin in Industry. IEEE TII",
+            "4. Montgomery (2017). Design and Analysis of Experiments",
+            "5. Liu et al. (2021). UAV photogrammetry for telecom towers",
+            "6. Kapteyn et al. (2021). Predictive digital twins. Nature Comp Sci",
+            "7. Siemens (2024). HEEDS Multi-Disciplinary Design Exploration",
+        ],
+    )
+    n += 1
+
     _thankyou(prs)
 
     OUT.mkdir(parents=True, exist_ok=True)
     prs.save(str(PPT_PATH))
+    prs.save(str(DESKTOP))
     return PPT_PATH
 
 
 if __name__ == "__main__":
     path = build()
     print(f"Saved: {path}")
+    print(f"Desktop: {DESKTOP}")
