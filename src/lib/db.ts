@@ -117,6 +117,14 @@ async function initSqlSchema() {
       viewed_at TEXT NOT NULL,
       UNIQUE(user_id, reel_id)
     )`,
+    `CREATE TABLE IF NOT EXISTS write_answers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      answer_key TEXT NOT NULL,
+      answer_text TEXT NOT NULL DEFAULT '',
+      updated_at TEXT NOT NULL,
+      UNIQUE(user_id, answer_key)
+    )`,
   ]);
 }
 
@@ -599,5 +607,68 @@ export async function getReelProgress(userId: number): Promise<Record<string, st
   });
   return Object.fromEntries(
     result.rows.map((row) => [String(row.reel_id), String(row.viewed_at)])
+  );
+}
+
+// ─── Written recall answers (free-text, per topic) ────────────────
+
+export type WriteAnswerRow = {
+  answer: string;
+  updatedAt: string;
+};
+
+export async function saveWriteAnswer(
+  userId: number,
+  answerKey: string,
+  answer: string
+): Promise<void> {
+  const updatedAt = new Date().toISOString();
+  const r = getRedis();
+  if (r) {
+    const key = `twinblitz:write:${userId}`;
+    const progress = (await r.get<Record<string, WriteAnswerRow>>(key)) ?? {};
+    progress[answerKey] = { answer, updatedAt };
+    await r.set(key, progress);
+    return;
+  }
+
+  await ensureSqlSchema();
+  const db = getSqlClient();
+  const existing = await db.execute({
+    sql: "SELECT id FROM write_answers WHERE user_id = ? AND answer_key = ?",
+    args: [userId, answerKey],
+  });
+
+  if (existing.rows.length > 0) {
+    await db.execute({
+      sql: "UPDATE write_answers SET answer_text = ?, updated_at = ? WHERE user_id = ? AND answer_key = ?",
+      args: [answer, updatedAt, userId, answerKey],
+    });
+  } else {
+    await db.execute({
+      sql: "INSERT INTO write_answers (user_id, answer_key, answer_text, updated_at) VALUES (?, ?, ?, ?)",
+      args: [userId, answerKey, answer, updatedAt],
+    });
+  }
+}
+
+export async function getWriteProgress(
+  userId: number
+): Promise<Record<string, WriteAnswerRow>> {
+  const r = getRedis();
+  if (r) {
+    return (await r.get<Record<string, WriteAnswerRow>>(`twinblitz:write:${userId}`)) ?? {};
+  }
+
+  await ensureSqlSchema();
+  const result = await getSqlClient().execute({
+    sql: "SELECT answer_key, answer_text, updated_at FROM write_answers WHERE user_id = ?",
+    args: [userId],
+  });
+  return Object.fromEntries(
+    result.rows.map((row) => [
+      String(row.answer_key),
+      { answer: String(row.answer_text), updatedAt: String(row.updated_at) },
+    ])
   );
 }

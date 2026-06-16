@@ -42,6 +42,12 @@ export default async function LearnPage() {
         >
           Full Lecture PDF ↗
         </a>
+        <Link
+          href="/write"
+          className="block glass rounded-xl p-4 text-sm text-emerald-300 border border-emerald-500/25"
+        >
+          ✍️ Written recall — 5 questions per topic, type your own answers →
+        </Link>
       </section>
 
       <section className="px-5 mb-6">

@@ -144,8 +144,8 @@ export default async function ExamPage() {
             {l.label} →
           </a>
         ))}
-        <Link href="/quiz/official" className="block glass rounded-xl p-3 text-sm text-violet-300 mt-2">
-          Test Quiz Q1–12 (saved scores) →
+        <Link href="/write" className="block glass rounded-xl p-3 text-sm text-emerald-300 mt-2">
+          ✍️ Written recall — type answers, download .txt for review →
         </Link>
       </section>
     </main>

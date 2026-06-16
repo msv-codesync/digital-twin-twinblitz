@@ -13,8 +13,6 @@ import {
 } from "@/lib/curriculum";
 import { BottomNav } from "@/components/BottomNav";
 import { LogoutButton } from "@/components/LogoutButton";
-import { QUIZ_TOTAL } from "@/lib/quiz";
-
 export default async function HomePage() {
   const user = await getSession();
   if (!user) redirect("/login");
@@ -135,10 +133,10 @@ export default async function HomePage() {
           📖 Deep study — every exercise & note explained plainly →
         </Link>
         <Link
-          href="/quiz"
-          className="block glass rounded-xl p-4 text-sm font-medium text-violet-300 border border-violet-500/30"
+          href="/write"
+          className="block glass rounded-xl p-4 text-sm font-medium text-emerald-300 border border-emerald-500/30"
         >
-          🎯 Theory quiz — {QUIZ_TOTAL} MCQs, saved progress →
+          ✍️ Written recall — type answers from memory (5 per topic) →
         </Link>
         <Link
           href="/project"
