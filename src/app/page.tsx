@@ -118,7 +118,7 @@ export default async function HomePage() {
           href="/heeds"
           className="block glass rounded-xl p-4 text-sm text-orange-300 border border-orange-500/25"
         >
-          ⚙️ HEEDS MDO — 18hr scratch-to-hero (all 8 examples) →
+          ⚙️ HEEDS practice — run examples + defend your project →
         </Link>
         <Link
           href="/exam"
