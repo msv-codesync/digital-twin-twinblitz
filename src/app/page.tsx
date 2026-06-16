@@ -13,6 +13,7 @@ import {
 } from "@/lib/curriculum";
 import { BottomNav } from "@/components/BottomNav";
 import { LogoutButton } from "@/components/LogoutButton";
+import { QUIZ_TOTAL } from "@/lib/quiz";
 
 export default async function HomePage() {
   const user = await getSession();
@@ -120,6 +121,12 @@ export default async function HomePage() {
           className="block glass rounded-xl p-4 text-sm text-orange-300 border border-orange-500/25"
         >
           ⚙️ HEEDS MDO — 18hr scratch-to-hero (all 8 examples) →
+        </Link>
+        <Link
+          href="/quiz"
+          className="block glass rounded-xl p-4 text-sm font-medium text-violet-300 border border-violet-500/30"
+        >
+          🎯 Theory quiz — {QUIZ_TOTAL} MCQs, saved progress →
         </Link>
         <Link
           href="/project"

@@ -65,6 +65,15 @@ export default async function PrepPage() {
         </div>
       </section>
 
+      <section className="px-5 mb-4">
+        <Link
+          href="/quiz"
+          className="block glass rounded-xl p-4 text-sm font-medium text-violet-300 border border-violet-500/30"
+        >
+          🎯 Theory quiz — 109 MCQs with saved scores →
+        </Link>
+      </section>
+
       <section className="px-5 mb-4 space-y-1">
         <a
           href="/heeds/DigitalTwin_Lectures_ProfAdeleNasti.pdf"

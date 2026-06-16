@@ -101,6 +101,15 @@ async function initSqlSchema() {
       streak INTEGER DEFAULT 0,
       last_active_date TEXT
     )`,
+    `CREATE TABLE IF NOT EXISTS quiz_answers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      question_id TEXT NOT NULL,
+      selected_index INTEGER NOT NULL,
+      correct INTEGER NOT NULL,
+      answered_at TEXT NOT NULL,
+      UNIQUE(user_id, question_id)
+    )`,
   ]);
 }
 
@@ -134,6 +143,7 @@ export async function createUser(
     await r.set(`twinblitz:user:id:${id}`, row);
     await r.set(`twinblitz:stats:${id}`, { xp: 0, streak: 0, last_active_date: null });
     await r.set(`twinblitz:progress:${id}`, {});
+    await r.set(`twinblitz:quiz:${id}`, {});
     return { id, email: normalizedEmail, name: normalizedName };
   }
 
@@ -465,4 +475,77 @@ export function getDbBackend(): "redis" | "turso" | "local" | "ephemeral" {
   if (process.env.TURSO_DATABASE_URL) return "turso";
   if (!process.env.VERCEL) return "local";
   return "ephemeral";
+}
+
+// ─── Quiz progress (persisted per user, survives sessions) ───────
+
+export type QuizAnswerRow = {
+  selectedIndex: number;
+  correct: boolean;
+  answeredAt: string;
+};
+
+export async function saveQuizAnswer(
+  userId: number,
+  questionId: string,
+  selectedIndex: number,
+  correct: boolean
+): Promise<void> {
+  const answeredAt = new Date().toISOString();
+  const r = getRedis();
+  if (r) {
+    const key = `twinblitz:quiz:${userId}`;
+    const progress = (await r.get<Record<string, QuizAnswerRow>>(key)) ?? {};
+    progress[questionId] = { selectedIndex, correct, answeredAt };
+    await r.set(key, progress);
+    if (correct) await addXp(userId, 5);
+    return;
+  }
+
+  await ensureSqlSchema();
+  const db = getSqlClient();
+  const existing = await db.execute({
+    sql: "SELECT id FROM quiz_answers WHERE user_id = ? AND question_id = ?",
+    args: [userId, questionId],
+  });
+
+  if (existing.rows.length > 0) {
+    await db.execute({
+      sql: `UPDATE quiz_answers SET selected_index = ?, correct = ?, answered_at = ?
+            WHERE user_id = ? AND question_id = ?`,
+      args: [selectedIndex, correct ? 1 : 0, answeredAt, userId, questionId],
+    });
+  } else {
+    await db.execute({
+      sql: `INSERT INTO quiz_answers (user_id, question_id, selected_index, correct, answered_at)
+            VALUES (?, ?, ?, ?, ?)`,
+      args: [userId, questionId, selectedIndex, correct ? 1 : 0, answeredAt],
+    });
+  }
+  if (correct) await addXp(userId, 5);
+}
+
+export async function getQuizProgress(
+  userId: number
+): Promise<Record<string, QuizAnswerRow>> {
+  const r = getRedis();
+  if (r) {
+    return (await r.get<Record<string, QuizAnswerRow>>(`twinblitz:quiz:${userId}`)) ?? {};
+  }
+
+  await ensureSqlSchema();
+  const result = await getSqlClient().execute({
+    sql: "SELECT question_id, selected_index, correct, answered_at FROM quiz_answers WHERE user_id = ?",
+    args: [userId],
+  });
+  return Object.fromEntries(
+    result.rows.map((row) => [
+      String(row.question_id),
+      {
+        selectedIndex: Number(row.selected_index),
+        correct: Number(row.correct) === 1,
+        answeredAt: String(row.answered_at),
+      },
+    ])
+  );
 }
